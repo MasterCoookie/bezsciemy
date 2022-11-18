@@ -23,3 +23,26 @@ app.listen(port, () => {
 app.get('/', (req, res) => {
 	res.send('<h1>Witamy na B E Z Ś C I E M Y</h1>');
 });
+
+app.post('/login', (req, res) => {
+	const { username, password } = req.body;
+
+	if(username && password) {
+		if(req.session.authenticated) {
+			res.json( { redirect: '/' } );
+		} else {
+			//TODO: authorize
+			if(username === "JK" && password === "warum") {
+				req.session.authenticated = true;
+				req.session.user = { username };
+				res.json(req.session);
+			} else {
+				res.status(403).json({ msg: "Invalid credentials" });
+				res.end();
+			}
+		}
+	} else {
+		res.status(403).json({ msg: "Invalid credentials" });
+		res.end();
+	}	
+});
