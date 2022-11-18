@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+// const store = new session.MemoryStore();
 
 const app = express();
 
@@ -11,8 +12,19 @@ app.use(session({
 	resave: false,
 	//change last number to specify session max age in hours
 	cookie: { maxAge: 1000 * 3600 * 1 },
-	saveUninitialized: true
+	saveUninitialized: false,
+	// store
 }));
+
+app.use("/protected/", (req, res, next) => {
+	console.log(req.session);
+	// console.log(store);
+	if(req.session.authenticated) {
+		next();
+	} else {
+		res.redirect('login');
+	}
+});
 
 const port = 3000;
 
@@ -45,4 +57,9 @@ app.post('/login', (req, res) => {
 		res.status(403).json({ msg: "Invalid credentials" });
 		res.end();
 	}	
+});
+
+//TMP, for auth tests
+app.get('/protected/page', (req, res) => {
+	res.send("Welcome to bezsciemy protected page");
 });
