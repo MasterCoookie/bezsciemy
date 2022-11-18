@@ -63,3 +63,8 @@ app.post('/login', (req, res) => {
 app.get('/protected/page', (req, res) => {
 	res.send("Welcome to bezsciemy protected page");
 });
+
+app.post('/logout', (req, res) => {
+	req.session.destroy();
+	res.json({ redirect: '/' });
+})
