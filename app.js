@@ -36,6 +36,10 @@ app.get('/', (req, res) => {
 	res.send('<h1>Witamy na B E Z Ś C I E M Y</h1>');
 });
 
+app.get('/login', (req, res) => {
+	//TODO TZ: create view
+});
+
 app.post('/login', (req, res) => {
 	const { username, password } = req.body;
 
@@ -43,7 +47,7 @@ app.post('/login', (req, res) => {
 		if(req.session.authenticated) {
 			res.json( { redirect: '/' } );
 		} else {
-			//TODO: authorize
+			//TODO MB: authorize
 			if(username === "JK" && password === "warum") {
 				req.session.authenticated = true;
 				req.session.user = { username };
@@ -66,5 +70,5 @@ app.get('/protected/page', (req, res) => {
 
 app.post('/logout', (req, res) => {
 	req.session.destroy();
-	res.json({ redirect: '/' });
+	res.json({ redirect: '/login' });
 })
