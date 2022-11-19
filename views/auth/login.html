@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+    <div>
+        <h3>Please login into your account</h3>
+        <form id="loginForm">
+            <div class="login">
+                <input type="login" placeholder="Login" id="loginInput" name="username">
+            </div>
+            <div class="password">
+                <input type="password" placeholder="Password" id="passwordInput" name="password">
+            </div>
+            <button id="btn" type="submit">Login</button>
+        </form>
+    </div>
+</body>
+
+</html>
+<script>
+    window.addEventListener("load", () => {
+        function sendData() {
+            const request = new XMLHttpRequest();
+            const formData = new FormData(loginForm)
+            console.log(formData)
+
+            request.addEventListener("load", (event) => {
+                alert(event.target.responseText);
+            });
+
+            request.addEventListener("error", (event) => {
+                alert('An unexpected error occured.');
+            });
+
+            request.open("POST", "http://localhost:3000/login");
+            request.send(formData);
+        }
+        const loginForm = document.getElementById("loginForm");
+        loginForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            sendData();
+        });
+    });
+</script>
