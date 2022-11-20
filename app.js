@@ -1,8 +1,10 @@
 const express = require('express');
 const session = require('express-session');
+const multer  = require('multer')
 // const store = new session.MemoryStore();
 
 const app = express();
+const upload = multer();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -42,7 +44,7 @@ app.get('/login', (req, res) => {
 	//TODO TZ: create view
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', upload.none(), (req, res) => {
 	console.log(req.body);
 	const { username, password } = req.body;
 
