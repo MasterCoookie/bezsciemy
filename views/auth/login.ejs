@@ -1,51 +1,61 @@
 <%- include('../partials/head.ejs') %>
 
-    <body>
-        <div>
+
+<body>
+    
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+        <form id="loginForm" method="post">
             <h3>Please login into your account</h3>
-            <form id="loginForm" method="post">
-                <div class="login">
-                    <input type="login" placeholder="Login" id="loginInput" name="username">
-                </div>
-                <div class="password">
-                    <input type="password" placeholder="Password" id="passwordInput" name="password">
-                </div>
-                <button id="btn" type="submit">Login</button>
-            </form>
+            <label for="Username">Username</label>
+            <div class="login">
+                <input type="login" placeholder="Login" id="loginInput" name="username">
+            </div>
+            <label for="Password">Password</label>
+            <div class="password">
+                <input type="password" placeholder="Password" id="passwordInput" name="password">
+            </div>
             <h2 id="message"></h2>
-        </div>
-    </body>
+            <button id="btn" type="submit">Log in</button>
+            
+        </form>
+    
+</body>
 
-    </html>
-    <script>
-        window.addEventListener("load", () => {
-            function sendData() {
-                const request = new XMLHttpRequest();
-                const formData = new FormData(loginForm);
-                console.log(Array.from(formData.entries()));
 
-                request.addEventListener("load", (event) => {
-                    const response = JSON.parse(event.target.responseText);
-                    console.log(response);
-                    if (response.authenticated) {
-                        window.location.href = ("../protected/page");
-                    }
-                    else {
-                        document.getElementById("message").innerHTML = "Login failed.";
-                    }
-                });
 
-                request.addEventListener("error", (event) => {
-                    document.getElementById("message").innerHTML = "An error occured."
-                });
+</html>
+<script>
+    window.addEventListener("load", () => {
+        function sendData() {
+            const request = new XMLHttpRequest();
+            const formData = new FormData(loginForm);
+            console.log(Array.from(formData.entries()));
 
-                request.open("POST", "http://localhost:3000/login", true);
-                request.send(formData);
-            }
-            const loginForm = document.getElementById("loginForm");
-            loginForm.addEventListener("submit", (event) => {
-                event.preventDefault();
-                sendData();
+            request.addEventListener("load", (event) => {
+                const response = JSON.parse(event.target.responseText);
+                console.log(response);
+                if (response.authenticated) {
+                    window.location.href = ("../protected/page");
+                }
+                else {
+                    document.getElementById("message").innerHTML = "Login failed.";
+                }
             });
+
+            request.addEventListener("error", (event) => {
+                document.getElementById("message").innerHTML = "An error occured."
+            });
+
+            request.open("POST", "http://localhost:3000/login", true);
+            request.send(formData);
+        }
+        const loginForm = document.getElementById("loginForm");
+        loginForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            sendData();
         });
-    </script>
+    });
+</script>
