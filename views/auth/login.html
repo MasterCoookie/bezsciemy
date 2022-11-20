@@ -11,7 +11,7 @@
 <body>
     <div>
         <h3>Please login into your account</h3>
-        <form id="loginForm">
+        <form id="loginForm" method="post">
             <div class="login">
                 <input type="login" placeholder="Login" id="loginInput" name="username">
             </div>
@@ -28,8 +28,13 @@
     window.addEventListener("load", () => {
         function sendData() {
             const request = new XMLHttpRequest();
-            const formData = new FormData(loginForm)
-            console.log(formData)
+            const formData = new FormData();
+            const username = document.getElementById("loginInput").value;
+            const password = document.getElementById("passwordInput").value;
+            console.log(username);
+            formData.append("username", username);
+            formData.append("password", password);
+            console.log(Array.from(formData.entries()));
 
             request.addEventListener("load", (event) => {
                 alert(event.target.responseText);
@@ -39,7 +44,8 @@
                 alert('An unexpected error occured.');
             });
 
-            request.open("POST", "http://localhost:3000/login");
+            request.open("POST", "http://localhost:3000/login", true);
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             request.send(formData);
         }
         const loginForm = document.getElementById("loginForm");

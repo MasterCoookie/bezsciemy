@@ -7,19 +7,21 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(session({
-	secret: 'ZMiTAC',
-	resave: false,
-	//change last number to specify session max age in hours
-	cookie: { maxAge: 1000 * 3600 * 1 },
-	saveUninitialized: false,
-	// store
-}));
+app.use(
+	session({
+		secret: 'ZMiTAC',
+		resave: false,
+		//change last number to specify session max age in hours
+		cookie: { maxAge: 1000 * 3600 * 1 },
+		saveUninitialized: false,
+		// store
+	})
+);
 
-app.use("/protected/", (req, res, next) => {
+app.use('/protected/', (req, res, next) => {
 	console.log(req.session);
 	// console.log(store);
-	if(req.session.authenticated) {
+	if (req.session.authenticated) {
 		next();
 	} else {
 		res.redirect('login');
@@ -41,34 +43,35 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
+	console.log(req.body);
 	const { username, password } = req.body;
 
-	if(username && password) {
-		if(req.session.authenticated) {
-			res.json( { redirect: '/' } );
+	if (username && password) {
+		if (req.session.authenticated) {
+			res.json({ redirect: '/' });
 		} else {
 			//TODO MB: authorize
-			if(username === "JK" && password === "warum") {
+			if (username === 'JK' && password === 'warum') {
 				req.session.authenticated = true;
 				req.session.user = { username };
 				res.json(req.session);
 			} else {
-				res.status(403).json({ msg: "Invalid credentials" });
+				res.status(403).json({ msg: 'Invalid credentials' });
 				res.end();
 			}
 		}
 	} else {
-		res.status(403).json({ msg: "Invalid credentials" });
+		res.status(403).json({ msg: 'Invalid credentials' });
 		res.end();
-	}	
+	}
 });
 
 //TMP, for auth tests
 app.get('/protected/page', (req, res) => {
-	res.send("Welcome to bezsciemy protected page");
+	res.send('Welcome to bezsciemy protected page');
 });
 
 app.post('/logout', (req, res) => {
 	req.session.destroy();
 	res.json({ redirect: '/login' });
-})
+});
