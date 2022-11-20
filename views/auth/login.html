@@ -20,6 +20,7 @@
             </div>
             <button id="btn" type="submit">Login</button>
         </form>
+        <h2 id="message"></h2>
     </div>
 </body>
 
@@ -28,20 +29,22 @@
     window.addEventListener("load", () => {
         function sendData() {
             const request = new XMLHttpRequest();
-            const formData = new FormData();
-            const username = document.getElementById("loginInput").value;
-            const password = document.getElementById("passwordInput").value;
-            console.log(username);
-            formData.append("username", username);
-            formData.append("password", password);
+            const formData = new FormData(loginForm);
             console.log(Array.from(formData.entries()));
 
             request.addEventListener("load", (event) => {
-                alert(event.target.responseText);
+                const response = JSON.parse(event.target.responseText);
+                console.log(response);
+                if (response.authenticated) {
+                    window.location.href = ("../protected/page");
+                }
+                else {
+                    document.getElementById("message").innerHTML = "Login failed.";
+                }
             });
 
             request.addEventListener("error", (event) => {
-                alert('An unexpected error occured.');
+                document.getElementById("message").innerHTML = "An error occured."
             });
 
             request.open("POST", "http://localhost:3000/login", true);

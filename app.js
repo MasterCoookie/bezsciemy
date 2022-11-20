@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const multer  = require('multer')
+const multer = require('multer');
 // const store = new session.MemoryStore();
 
 const app = express();
@@ -45,7 +45,7 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', upload.none(), (req, res) => {
-	console.log(req.body);
+	//console.log(req.body);
 	const { username, password } = req.body;
 
 	if (username && password) {
