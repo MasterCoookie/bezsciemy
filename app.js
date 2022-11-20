@@ -59,13 +59,15 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
 	if (!req.session.authenticated) {
+		console.log("unauth..ed");
 		res.render('auth/login');
 	} else {
 		res.redirect('./protected/page');
+		console.log("auth..ed");
 	}
 });
 
-app.post('/login', upload.none(), (req, res) => {
+app.post('/login', upload.none(), async (req, res) => {
 	//console.log(req.body);
 	const { username, password } = req.body;
 
@@ -74,7 +76,9 @@ app.post('/login', upload.none(), (req, res) => {
 			res.json({ redirect: '/' });
 		} else {
 			try{
-				if (username === 'JK' && password === 'warum') {
+				const user = await User.login(username, password);
+				if (user) {
+					console.log("OK");
 					req.session.authenticated = true;
 					req.session.user = { username };
 					res.json(req.session);

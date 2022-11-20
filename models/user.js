@@ -18,12 +18,15 @@ const userSchema = new Schema(
     }
 )
 
-userSchema.statics.login = function (_username, _password)
+userSchema.statics.login = async function (_username, _password)
 {
-    const user = this.findOne({username : _username});
+    const user = await this.findOne({username : _username});
     if (user)
     {
         //todo: add bcrypt
+        //console.log(user)
+        console.log(user.password)
+        console.log(_password)
         if (user.password === _password)
         {
             return user;
