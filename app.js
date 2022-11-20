@@ -9,7 +9,8 @@ const User = require('./models/user');
 const app = express();
 const upload = multer();
 
-const dbURI = "mongodb+srv://bezsciemy-dev:gabrys@bezsciemy-main.ydqazk8.mongodb.net/?retryWrites=true&w=majority"
+const dbURI =
+	'mongodb+srv://bezsciemy-dev:gabrys@bezsciemy-main.ydqazk8.mongodb.net/?retryWrites=true&w=majority';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -41,17 +42,17 @@ app.use('/protected/', (req, res, next) => {
 
 const port = 3000;
 
-mongoose.connect(dbURI, {}).then(result => {
-	console.log("db connection established");
-	app.listen(port, () => {
-		console.log('B E Z Ś C I E M Y listeining to requests on %s', port);
+mongoose
+	.connect(dbURI, {})
+	.then((result) => {
+		console.log('db connection established');
+		app.listen(port, () => {
+			console.log('B E Z Ś C I E M Y listeining to requests on %s', port);
+		});
+	})
+	.catch((err) => {
+		console.log(err);
 	});
-
-}).catch(err =>{
-	console.log(err);
-});
-
-
 
 app.get('/', (req, res) => {
 	res.send('<h1>Witamy na B E Z Ś C I E M Y</h1>');
@@ -59,11 +60,11 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
 	if (!req.session.authenticated) {
-		console.log("unauth..ed");
+		console.log('unauth..ed');
 		res.render('auth/login');
 	} else {
 		res.redirect('./protected/page');
-		console.log("auth..ed");
+		console.log('auth..ed');
 	}
 });
 
@@ -75,10 +76,10 @@ app.post('/login', upload.none(), async (req, res) => {
 		if (req.session.authenticated) {
 			res.json({ redirect: '/' });
 		} else {
-			try{
+			try {
 				const user = await User.login(username, password);
 				if (user) {
-					console.log("OK");
+					console.log('OK');
 					req.session.authenticated = true;
 					req.session.user = { username };
 					res.json(req.session);
@@ -86,7 +87,7 @@ app.post('/login', upload.none(), async (req, res) => {
 					res.status(403).json({ msg: 'Invalid credentials' });
 					res.end();
 				}
-			}catch (err){
+			} catch (err) {
 				console.log(err);
 			}
 		}
@@ -106,10 +107,10 @@ app.post('/logout', (req, res) => {
 	res.json({ redirect: '/login' });
 });
 
-app.put('/register', upload.none(), async(req, res) => {
+app.put('/register', upload.none(), async (req, res) => {
 	try {
-		const {username, password} = req.body;
-		const user = await User.create({username, password});
+		const { username, password } = req.body;
+		const user = await User.create({ username, password });
 		res.status(201);
 		res.end();
 	} catch (err) {
@@ -117,5 +118,4 @@ app.put('/register', upload.none(), async(req, res) => {
 		res.status(500);
 		res.end();
 	}
-
-})
+});
