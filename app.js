@@ -9,6 +9,8 @@ const upload = multer();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.set('view engine', 'ejs');
+
 app.use(
 	session({
 		secret: 'ZMiTAC',
@@ -41,7 +43,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-	//TODO TZ: create view
+	res.render('auth/login');
 });
 
 app.post('/login', upload.none(), (req, res) => {
