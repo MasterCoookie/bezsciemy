@@ -1,0 +1,109 @@
+.cotainer {
+    padding: 10px;
+}
+body{
+    background-color: #242323;
+
+}
+h3{
+    text-align: center;
+    color : white;
+    font-family: 'Poppins',sans-serif;
+    margin: -10%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+form{
+    text-align: center;
+    background-color:rgba(255,255,255,0.13);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 5%;
+    padding: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+}
+
+input[type=login],input[type=password]{
+    width: 80%;
+  padding: 10px 10px;
+  margin: 8px 10px;
+  display: block;
+  background-color: #797878;
+  border: none;
+  box-sizing: border-box;
+  transition: width 0.4s ease-in-out;
+  
+  
+}
+input[type=login]:focus,input[type=password]:focus{
+    width: 85%;
+}
+button {
+    background-color: white;
+    color: black;
+    padding: 15px 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    margin-top: 40px;
+    border-radius: 5px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    transition: width 0.2s ease-in-out;
+  }
+  button:hover{
+    opacity: 0.8;
+    width: 82%;
+ 
+    
+  }
+  label{
+    display: block;
+    text-align: left;
+    color: White;
+    margin-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Poppins',sans-serif;
+  }
+
+.shape {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+.shape:first-child{
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    left: 50%;
+    top: 60%;
+}
+.shape:last-child{
+    background: linear-gradient(
+        to left,
+        #ad4218,
+        #f6f323
+    );
+    right: 50%;
+    bottom: 60%;
+}
+#message{
+    font-family: 'Poppins',sans-serif;
+    font-size: 14px;
+    color: tomato;
+    text-shadow: 0 0 2px rgba(8,7,16,0.6);
+    
+}
+
