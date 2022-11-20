@@ -45,7 +45,6 @@
             });
 
             request.open("POST", "http://localhost:3000/login", true);
-            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             request.send(formData);
         }
         const loginForm = document.getElementById("loginForm");
