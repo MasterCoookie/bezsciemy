@@ -28,7 +28,7 @@ app.use('/protected/', (req, res, next) => {
 	if (req.session.authenticated) {
 		next();
 	} else {
-		res.redirect('login');
+		res.redirect('../login');
 	}
 });
 
@@ -72,7 +72,7 @@ app.post('/login', upload.none(), (req, res) => {
 
 //TMP, for auth tests
 app.get('/protected/page', (req, res) => {
-	res.send('Welcome to bezsciemy protected page');
+	res.render('protected/page');
 });
 
 app.post('/logout', (req, res) => {
