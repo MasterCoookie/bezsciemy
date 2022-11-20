@@ -1,3 +1,4 @@
+const { request } = require('express');
 const express = require('express');
 const session = require('express-session');
 const multer = require('multer');
@@ -43,7 +44,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-	res.render('auth/login');
+	if (!req.session.authenticated) {
+		res.render('auth/login');
+	} else {
+		res.redirect('./protected/page');
+	}
 });
 
 app.post('/login', upload.none(), (req, res) => {
