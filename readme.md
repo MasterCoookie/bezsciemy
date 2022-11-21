@@ -5,4 +5,4 @@ This is bezsciemy.pl - fake news debunking web app made as Software Engineering 
 We
 
 ## License
-Beerware / weedware
+Beerware
