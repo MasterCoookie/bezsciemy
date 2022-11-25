@@ -1,0 +1,29 @@
+<%- include('../partials/head.ejs') %>
+
+
+<body>
+    
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+        <form id="registerForm" method="post">
+            <h3>Please create your account</h3>
+            <label for="Username">Username</label>
+            <div class="login">
+                <input type="text" placeholder="Login" id="loginInput" name="username">
+            </div>
+            <label for="Password">Password</label>
+            <div class="password">
+                <input type="password" placeholder="Password" id="passwordInput" name="password">
+            </div>
+            <label for="Password">Repeat your password</label>
+            <div class="password">
+                <input type="password" placeholder="RepeatPassword" id="RepeatPasswordInput" name="RepeatPassword">
+            </div>
+            <h2 id="message"></h2>
+            <button id="btn" type="submit">Sign in</button>
+            
+        </form>
+    
+</body>
