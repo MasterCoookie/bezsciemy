@@ -1,14 +1,12 @@
 const { request } = require('express');
 const express = require('express');
 const session = require('express-session');
-const multer = require('multer');
 const mongoose = require('mongoose'); ///
 const User = require('./models/user');
 const authRoutes = require('./routes/authRoutes');
 // const store = new session.MemoryStore();
 
 const app = express();
-const upload = multer();
 
 const dbURI =
 	'mongodb+srv://bezsciemy-dev:gabrys@bezsciemy-main.ydqazk8.mongodb.net/?retryWrites=true&w=majority';
@@ -61,13 +59,7 @@ app.get('/', (req, res) => {
 	res.send('<h1>Witamy na B E Z Ś C I E M Y</h1>');
 });
 
-app.post('/login', upload.none(), );
-
 //TMP, for auth tests
 app.get('/protected/page', (req, res) => {
 	res.render('protected/page');
 });
-
-app.post('/logout', );
-
-app.put('/register', upload.none(), );
