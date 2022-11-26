@@ -8,7 +8,7 @@ const login_get = (req, res) => {
 		res.redirect('./protected/page');
 		console.log('auth..ed');
 	}
-}
+};
 
 const login_post = async (req, res) => {
 	//console.log(req.body);
@@ -31,20 +31,20 @@ const login_post = async (req, res) => {
 				}
 			} catch (err) {
 				console.log(err);
-                res.status(403).json({ msg: 'Invalid credentials' });
-                res.end();
+				res.status(403).json({ msg: 'Invalid credentials' });
+				res.end();
 			}
 		}
 	} else {
 		res.status(403).json({ msg: 'Invalid credentials' });
 		res.end();
 	}
-}
+};
 
 const logout_post = (req, res) => {
 	req.session.destroy();
 	res.json({ redirect: '/login' });
-}
+};
 
 const register_get = (req, res) => {
 	if (!req.session.authenticated) {
@@ -53,25 +53,26 @@ const register_get = (req, res) => {
 		console.log('auth..ed');
 		res.redirect('./protected/page');
 	}
-}
+};
 
 const register_put = async (req, res) => {
 	try {
 		const { username, password, email } = req.body;
 		const user = await User.create({ username, password });
 		res.status(201);
+		res.json({ redirect: 'login' });
 		res.end();
 	} catch (err) {
 		console.log(err);
 		res.json({ msg: 'blad' });
 		res.end();
 	}
-}
+};
 
 module.exports = {
-    login_get,
-    login_post,
-    logout_post,
-    register_put,
-	register_get
-}
+	login_get,
+	login_post,
+	logout_post,
+	register_put,
+	register_get,
+};

@@ -35,10 +35,12 @@
                 const formData = new FormData(registerForm);
                 console.log(Array.from(formData.entries()));
 
-                var firstPassword = formData.get("passwordInput");
-                var repeatedPassword = formData.get("repetPasswordInput");
-                if (!firstPassword === repeatedPassword) {
-                    document.getElementById("message").innerHTML = "Passwords do not match. Please try again."
+                var firstPassword = formData.get("password");
+                var repeatedPassword = formData.get("repeatPassword");
+                console.log(firstPassword);
+                console.log(repeatedPassword);
+                if (firstPassword !== repeatedPassword) {
+                    document.getElementById("message").innerHTML = "Passwords do not match.<br>Please try again."
                 }
                 else {
                     request.addEventListener("load", (event) => {
@@ -61,7 +63,7 @@
                 }
             }
             const registerForm = document.getElementById("registerForm");
-            loginForm.addEventListener("submit", (event) => {
+            registerForm.addEventListener("submit", (event) => {
                 event.preventDefault();
                 sendData();
             });
