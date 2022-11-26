@@ -46,15 +46,24 @@ const logout_post = (req, res) => {
 	res.json({ redirect: '/login' });
 }
 
+const register_get = (req, res) => {
+	if (!req.session.authenticated) {
+		res.render('auth/register');
+	} else {
+		console.log('auth..ed');
+		res.redirect('./protected/page');
+	}
+}
+
 const register_put = async (req, res) => {
 	try {
-		const { username, password } = req.body;
+		const { username, password, email } = req.body;
 		const user = await User.create({ username, password });
 		res.status(201);
 		res.end();
 	} catch (err) {
 		console.log(err);
-		res.status(500);
+		res.json({ msg: 'blad' });
 		res.end();
 	}
 }
@@ -63,5 +72,6 @@ module.exports = {
     login_get,
     login_post,
     logout_post,
-    register_put
+    register_put,
+	register_get
 }
