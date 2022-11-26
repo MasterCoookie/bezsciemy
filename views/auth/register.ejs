@@ -1,14 +1,18 @@
 <%- include('../partials/head.ejs') %>
 
 
-    <body>
-
-        <div class="background">
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
+<body>
+    
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
         <form id="registerForm" method="post">
             <h3>Please create your account</h3>
+            <label for="emailInput">E-mail adress</label>
+            <div class="email">
+                <input type="email" placeholder="E-mail" id="emailInput" name="email">
+            </div>
             <label for="loginInput">Username</label>
             <div class="login">
                 <input type="text" placeholder="Login" id="loginInput" name="username">
@@ -22,11 +26,11 @@
                 <input type="password" placeholder="repeatPassword" id="repeatPasswordInput" name="repeatPassword">
             </div>
             <h2 id="message"></h2>
-            <button id="btn" type="submit">Sign in</button>
-
+            <button id="btn" type="submit">Sign up</button>
+            
         </form>
-
-    </body>
+    
+</body>
 
     <script>
         window.addEventListener("load", () => {
