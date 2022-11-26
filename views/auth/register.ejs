@@ -44,11 +44,11 @@
                     request.addEventListener("load", (event) => {
                         const response = JSON.parse(event.target.responseText);
                         console.log(response);
-                        if (response.authenticated) {
-                            window.location.href = ("../protected/page");
+                        if (!response.message) {
+                            window.location.href = ("login");
                         }
                         else {
-                            document.getElementById("message").innerHTML = "Login failed.";
+                            document.getElementById("message").innerHTML = response.message;
                         }
                     });
 
@@ -56,7 +56,7 @@
                         document.getElementById("message").innerHTML = "An error occured."
                     });
 
-                    request.open("POST", "http://localhost:3000/login", true);
+                    request.open("PUT", "http://localhost:3000/register", true);
                     request.send(formData);
                 }
             }
