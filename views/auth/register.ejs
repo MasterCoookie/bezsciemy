@@ -1,12 +1,12 @@
 <%- include('../partials/head.ejs') %>
 
 
-<body>
-    
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
+    <body>
+
+        <div class="background">
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
         <form id="registerForm" method="post">
             <h3>Please create your account</h3>
             <label for="emailInput">E-mail adress</label>
@@ -27,49 +27,9 @@
             </div>
             <h2 id="message"></h2>
             <button id="btn" type="submit">Sign up</button>
-            
+
         </form>
-    
-</body>
 
-    <script>
-        window.addEventListener("load", () => {
-            function sendData() {
-                const request = new XMLHttpRequest();
-                const formData = new FormData(registerForm);
-                console.log(Array.from(formData.entries()));
+    </body>
 
-                var firstPassword = formData.get("password");
-                var repeatedPassword = formData.get("repeatPassword");
-                console.log(firstPassword);
-                console.log(repeatedPassword);
-                if (firstPassword !== repeatedPassword) {
-                    document.getElementById("message").innerHTML = "Passwords do not match.<br>Please try again."
-                }
-                else {
-                    request.addEventListener("load", (event) => {
-                        const response = JSON.parse(event.target.responseText);
-                        console.log(response);
-                        if (!response.message) {
-                            window.location.href = ("login");
-                        }
-                        else {
-                            document.getElementById("message").innerHTML = response.message;
-                        }
-                    });
-
-                    request.addEventListener("error", (event) => {
-                        document.getElementById("message").innerHTML = "An error occured."
-                    });
-
-                    request.open("PUT", "http://localhost:3000/register", true);
-                    request.send(formData);
-                }
-            }
-            const registerForm = document.getElementById("registerForm");
-            registerForm.addEventListener("submit", (event) => {
-                event.preventDefault();
-                sendData();
-            });
-        });
-    </script>
+    <script src="../../scripts/register-script.js"></script>
