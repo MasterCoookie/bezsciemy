@@ -2,7 +2,6 @@ const { request } = require('express');
 const express = require('express');
 const session = require('express-session');
 const mongoose = require('mongoose'); ///
-const User = require('./models/user');
 const authRoutes = require('./routes/authRoutes');
 // const store = new session.MemoryStore();
 

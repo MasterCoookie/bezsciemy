@@ -1,3 +1,5 @@
+const User = require('../models/user');
+
 const login_get = (req, res) => {
 	if (!req.session.authenticated) {
 		console.log('unauth..ed');
@@ -29,6 +31,8 @@ const login_post = async (req, res) => {
 				}
 			} catch (err) {
 				console.log(err);
+                res.status(403).json({ msg: 'Invalid credentials' });
+                res.end();
 			}
 		}
 	} else {
