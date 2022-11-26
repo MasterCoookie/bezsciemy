@@ -4,6 +4,7 @@ const session = require('express-session');
 const multer = require('multer');
 const mongoose = require('mongoose'); ///
 const User = require('./models/user');
+const authRoutes = require('./routes/authRoutes');
 // const store = new session.MemoryStore();
 
 const app = express();
@@ -11,6 +12,20 @@ const upload = multer();
 
 const dbURI =
 	'mongodb+srv://bezsciemy-dev:gabrys@bezsciemy-main.ydqazk8.mongodb.net/?retryWrites=true&w=majority';
+
+const port = 3000;
+
+mongoose
+	.connect(dbURI, {})
+	.then((result) => {
+		console.log('db connection established');
+		app.listen(port, () => {
+			console.log('B E Z Ś C I E M Y listeining to requests on %s', port);
+		});
+	})
+	.catch((err) => {
+		console.log(err);
+	});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -40,82 +55,19 @@ app.use('/protected/', (req, res, next) => {
 	}
 });
 
-const port = 3000;
-
-mongoose
-	.connect(dbURI, {})
-	.then((result) => {
-		console.log('db connection established');
-		app.listen(port, () => {
-			console.log('B E Z Ś C I E M Y listeining to requests on %s', port);
-		});
-	})
-	.catch((err) => {
-		console.log(err);
-	});
+app.use('/', authRoutes);
 
 app.get('/', (req, res) => {
 	res.send('<h1>Witamy na B E Z Ś C I E M Y</h1>');
 });
 
-app.get('/login', (req, res) => {
-	if (!req.session.authenticated) {
-		console.log('unauth..ed');
-		res.render('auth/login');
-	} else {
-		res.redirect('./protected/page');
-		console.log('auth..ed');
-	}
-});
-
-app.post('/login', upload.none(), async (req, res) => {
-	//console.log(req.body);
-	const { username, password } = req.body;
-
-	if (username && password) {
-		if (req.session.authenticated) {
-			res.json({ redirect: '/' });
-		} else {
-			try {
-				const user = await User.login(username, password);
-				if (user) {
-					console.log('OK');
-					req.session.authenticated = true;
-					req.session.user = { username };
-					res.json(req.session);
-				} else {
-					res.status(403).json({ msg: 'Invalid credentials' });
-					res.end();
-				}
-			} catch (err) {
-				console.log(err);
-			}
-		}
-	} else {
-		res.status(403).json({ msg: 'Invalid credentials' });
-		res.end();
-	}
-});
+app.post('/login', upload.none(), );
 
 //TMP, for auth tests
 app.get('/protected/page', (req, res) => {
 	res.render('protected/page');
 });
 
-app.post('/logout', (req, res) => {
-	req.session.destroy();
-	res.json({ redirect: '/login' });
-});
+app.post('/logout', );
 
-app.put('/register', upload.none(), async (req, res) => {
-	try {
-		const { username, password } = req.body;
-		const user = await User.create({ username, password });
-		res.status(201);
-		res.end();
-	} catch (err) {
-		console.log(err);
-		res.status(500);
-		res.end();
-	}
-});
+app.put('/register', upload.none(), );
