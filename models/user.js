@@ -37,12 +37,18 @@ const userSchema = new Schema({
 	},
 });
 
+userSchema.pre('save', async function(next) {
+    const salt = await bcrypt.genSalt();
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+})
+
 userSchema.statics.login = async function (_username, _password) {
 	const user = await this.findOne({ username: _username });
 	if (user) {
 		//todo: add bcrypt
 
-		if (user.password === _password) {
+		if (await bcrypt.compare(_password, user.password)) {
 			return user;
 		}
 		throw Error('Incorrect password');
