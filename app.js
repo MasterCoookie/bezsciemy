@@ -2,12 +2,13 @@ const express = require('express');
 const session = require('express-session');
 const mongoose = require('mongoose'); ///
 const authRoutes = require('./routes/authRoutes');
+const secret = require('./secret');
 // const store = new session.MemoryStore();
 
 const app = express();
 
 const dbURI =
-	'mongodb+srv://bezsciemy-dev:gabrys@bezsciemy-main.ydqazk8.mongodb.net/?retryWrites=true&w=majority';
+	'mongodb+srv://bezsciemy-express:' + secret.dbPWD + '@bezsciemy-main.ydqazk8.mongodb.net/?retryWrites=true&w=majority';
 
 const port = 3000;
 
@@ -32,7 +33,7 @@ app.use(express.static('public'));
 
 app.use(
 	session({
-		secret: 'ZMiTAC',
+		secret: secret.cookieSecret,
 		resave: false,
 		//change last number to specify session max age in hours
 		cookie: { maxAge: 1000 * 3600 * 1 },
