@@ -15,10 +15,10 @@ window.addEventListener('load', () => {
 			request.addEventListener('load', (event) => {
 				const response = JSON.parse(event.target.responseText);
 				console.log(response);
-				if (!response.message) {
+				if (!response.msg) {
 					window.location.href = 'http://localhost:3000/login';
 				} else {
-					document.getElementById('message').innerHTML = response.message;
+					document.getElementById('message').innerHTML = response.msg;
 				}
 			});
 

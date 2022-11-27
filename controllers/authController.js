@@ -2,11 +2,11 @@ const User = require('../models/user');
 
 const login_get = (req, res) => {
 	if (!req.session.authenticated) {
-		console.log('unauth..ed');
+		// console.log('unauth..ed');
 		res.render('auth/login');
 	} else {
 		res.redirect('./protected/page');
-		console.log('auth..ed');
+		// console.log('auth..ed');
 	}
 };
 
@@ -50,7 +50,7 @@ const register_get = (req, res) => {
 	if (!req.session.authenticated) {
 		res.render('auth/register');
 	} else {
-		console.log('auth..ed');
+		// console.log('auth..ed');
 		res.redirect('./protected/page');
 	}
 };
@@ -58,13 +58,23 @@ const register_get = (req, res) => {
 const register_put = async (req, res) => {
 	try {
 		const { username, password, email } = req.body;
-		const user = await User.create({ username, password });
+		const user = await User.create({ username, password, email });
+
+		console.log("New user %s created", username);
 		res.status(201);
 		res.json({ redirect: 'login' });
 		res.end();
 	} catch (err) {
-		console.log(err);
-		res.json({ msg: 'blad' });
+		// console.log(err);
+		let error;
+		Object.values(err.errors).forEach(({ properties }) => {
+			// console.log(properties.message);
+			if(properties.message) {
+				error = properties.message;
+			}
+		});
+
+		res.json({ msg: error });
 		res.end();
 	}
 };

@@ -31,7 +31,7 @@ const userSchema = new Schema({
 	password: {
 		type: String,
 		required: [true, 'Please enter a password'],
-		minlength: [8, 'Your password must be at least 3 characters long'],
+		minlength: [8, 'Your password must be at least 8 characters long'],
 		maxlength: [24, 'Your password must be shorter than 24 characters'],
 		validate: [pwdValid, 'Your password must contain both letters (lowercase and uppercase) and numbers']
 	},
