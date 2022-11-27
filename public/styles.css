@@ -109,6 +109,7 @@ label{
 }
 
 #link.login{
+    padding-block: 10px;
     text-decoration: none;
     color: rgb(0, 247, 255);
     font-family: 'Poppins',sans-serif;
