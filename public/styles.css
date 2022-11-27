@@ -28,9 +28,23 @@ form{
     left: 50%;
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
 }
-
-input[type=login],input[type=password]{
+.textbox{
     width: 80%;
+    padding: 10px 10px;
+    margin: 8px 10px;
+    display: block;
+    background-color: #797878;
+    border: none;
+    box-sizing: border-box;
+    transition: width 0.4s ease-in-out;
+}
+
+.textbox:focus{
+    width: 85%;
+}
+
+input[type=login],input[type=password],input[type=text],input[type=email]{
+  width: 80%;
   padding: 10px 10px;
   margin: 8px 10px;
   display: block;
@@ -105,5 +119,13 @@ button {
     color: tomato;
     text-shadow: 0 0 2px rgba(8,7,16,0.6);
     
+}
+.link{
+    text-decoration: none;
+    color: rgb(0, 247, 255);
+    font-family: 'Poppins',sans-serif;
+}
+.link:hover{
+    text-decoration: underline;
 }
 
