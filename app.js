@@ -13,7 +13,9 @@ const dbURI =
 const port = 3000;
 
 mongoose
-	.connect(dbURI, {})
+	.connect(dbURI, {
+		autoIndex: true
+	})
 	.then((result) => {
 		console.log('db connection established');
 		app.listen(port, () => {

@@ -56,27 +56,38 @@ const register_get = (req, res) => {
 };
 
 const register_put = async (req, res) => {
-	try {
-		const { username, password, email } = req.body;
-		const user = await User.create({ username, password, email });
 
-		console.log("New user %s created", username);
-		res.status(201);
-		res.json({ redirect: 'login' });
-		res.end();
-	} catch (err) {
-		// console.log(err);
-		let error;
-		Object.values(err.errors).forEach(({ properties }) => {
-			// console.log(properties.message);
-			if(properties.message) {
-				error = properties.message;
-			}
-		});
+	const { username, password, email } = req.body;
+	User.init().then(async() => {
+		try {
+			const user = await User.create({ username, password, email });
+			console.log("New user %s created", username);
+			res.status(201);
+			res.json({ redirect: 'login' });
+			res.end();
+		} catch (err) {
+			let error;
+			console.log(err);
+			if (err.code === 11000){
+				if (err.keyPattern.email){
+					error = 'Email already in use'
+				}
+				else if (err.keyPattern.username){
+					error = 'Username already in use'
+				}
+			} else {
+				Object.values(err.errors).forEach(({ properties }) => {
+				// console.log(properties.message);
+				if(properties.message) {
+					error = properties.message;
+				}});
+			}	
+			res.json({ msg: error });
+			res.end();
+		}
+	})
 
-		res.json({ msg: error });
-		res.end();
-	}
+
 };
 
 module.exports = {
