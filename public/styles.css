@@ -1,10 +1,7 @@
-.cotainer {
-    padding: 10px;
-}
 body{
     background-color: #242323;
-
 }
+
 h3{
     text-align: center;
     color : white;
@@ -13,6 +10,7 @@ h3{
     padding-top: 40px;
     padding-bottom: 40px;
 }
+
 form{
     text-align: center;
     background-color:rgba(255,255,255,0.13);
@@ -43,22 +41,8 @@ form{
     width: 85%;
 }
 
-input[type=login],input[type=password],input[type=text],input[type=email]{
-  width: 80%;
-  padding: 10px 10px;
-  margin: 8px 10px;
-  display: block;
-  background-color: #797878;
-  border: none;
-  box-sizing: border-box;
-  transition: width 0.4s ease-in-out;
-  
-  
-}
-input[type=login]:focus,input[type=password]:focus{
-    width: 85%;
-}
-button {
+
+button{
     background-color: white;
     color: black;
     padding: 15px 0;
@@ -71,14 +55,14 @@ button {
     font-weight: 600;
     font-size: 18px;
     transition: width 0.2s ease-in-out;
-  }
-  button:hover{
+}
+
+button:hover{
     opacity: 0.8;
     width: 82%;
- 
-    
-  }
-  label{
+}
+
+label{
     display: block;
     text-align: left;
     color: White;
@@ -88,7 +72,7 @@ button {
     font-size: 16px;
     font-weight: 500;
     font-family: 'Poppins',sans-serif;
-  }
+}
 
 .shape {
     height: 200px;
@@ -96,6 +80,7 @@ button {
     position: absolute;
     border-radius: 50%;
 }
+
 .shape:first-child{
     background: linear-gradient(
         #1845ad,
@@ -104,6 +89,7 @@ button {
     left: 50%;
     top: 60%;
 }
+
 .shape:last-child{
     background: linear-gradient(
         to left,
@@ -113,6 +99,7 @@ button {
     right: 50%;
     bottom: 60%;
 }
+
 #message{
     font-family: 'Poppins',sans-serif;
     font-size: 14px;
@@ -120,12 +107,29 @@ button {
     text-shadow: 0 0 2px rgba(8,7,16,0.6);
     
 }
-.link{
+
+#link.login{
     text-decoration: none;
     color: rgb(0, 247, 255);
     font-family: 'Poppins',sans-serif;
 }
-.link:hover{
+
+#link.login:hover{
     text-decoration: underline;
+}
+
+#logout-btn{
+    background-color: white;
+    color: black;
+    padding: 15px 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    margin-top: 40px;
+    border-radius: 5px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    transition: width 0.2s ease-in-out;
 }
 
