@@ -1,7 +1,8 @@
 const express = require('express');
 const session = require('express-session');
-const mongoose = require('mongoose'); ///
+const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const postRoutes = require('./routes/postRoutes');
 const secret = require('./secret');
 // const store = new session.MemoryStore();
 
@@ -55,6 +56,7 @@ app.use('/protected/', (req, res, next) => {
 });
 
 app.use('/', authRoutes);
+app.use('/', postRoutes);
 
 app.get('/', (req, res) => {
 	res.send('<h1>Witamy na B E Z Ś C I E M Y</h1>');
