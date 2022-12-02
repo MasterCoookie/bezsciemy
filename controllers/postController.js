@@ -1,17 +1,19 @@
-const post_get = (req, res) => {
+const view_get = (req, res) => {
+	//TODO: Implement view render using ejs
+	res.send(req.query.id);
+};
 
-}
+const create_get = (req, res) => {
+	//TODO: Implement view render
+	res.send("create");
+};
 
-const post_editor_get = (req, res) => {
+const create_post = (req, res) => {
 
-}
-
-const post_editor_post = (req, res) => {
-
-}
+};
 
 module.exports = {
-	post_get,
-	post_editor_get,
-	post_editor_post
+	view_get,
+	create_get,
+	create_post
 };

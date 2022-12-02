@@ -56,7 +56,7 @@ app.use('/protected/', (req, res, next) => {
 });
 
 app.use('/', authRoutes);
-app.use('/', postRoutes);
+app.use('/post', postRoutes);
 
 app.get('/', (req, res) => {
 	res.send('<h1>Witamy na B E Z Ś C I E M Y</h1>');
