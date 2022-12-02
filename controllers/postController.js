@@ -8,7 +8,7 @@ const create_get = (req, res) => {
 	res.send("create");
 };
 
-const create_post = (req, res) => {
+const create_post = (req, res, next) => {
 	const {
 		title,
 		debunk_desc,
@@ -20,6 +20,9 @@ const create_post = (req, res) => {
 		fake_images,
 		fake_iframes,
 	} = req.body;
+
+
+	res.send("done");
 };
 
 module.exports = {
