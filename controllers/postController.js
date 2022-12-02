@@ -9,7 +9,17 @@ const create_get = (req, res) => {
 };
 
 const create_post = (req, res) => {
-
+	const {
+		title,
+		debunk_desc,
+		debunk_links,
+		debunk_images,
+		debunk_iframes,
+		fake_desc,
+		fake_links,
+		fake_images,
+		fake_iframes,
+	} = req.body;
 };
 
 module.exports = {
