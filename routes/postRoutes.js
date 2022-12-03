@@ -5,7 +5,7 @@ const postRoutes = require('../controllers/postController');
 
 const router = express.Router();
 
-let storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads')
     },
@@ -16,7 +16,7 @@ let storage = multer.diskStorage({
     }
 })
 
-let upload = multer({
+const upload = multer({
     storage: storage,
     limits: {
         fileSize: 1000000
@@ -41,8 +41,6 @@ router.post("/create", (req, res, next) => {
             console.log("dupa err");
 			return res.send(err);
 		}
-        console.log("dupa");
-        res.send("all done");
 	});
 });
 
