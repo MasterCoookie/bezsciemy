@@ -45,24 +45,9 @@ app.use(
 	})
 );
 
-app.use('/protected/', (req, res, next) => {
-	// console.log(req.session);
-	// console.log(store);
-	if (req.session.authenticated) {
-		next();
-	} else {
-		res.redirect('login');
-	}
-});
-
 app.use('/', authRoutes);
 app.use('/post', postRoutes);
 
 app.get('/', (req, res) => {
 	res.send('<h1>Witamy na B E Z Ś C I E M Y</h1>');
-});
-
-//TMP, for auth tests
-app.get('/protected/page', (req, res) => {
-	res.render('protected/page');
 });
