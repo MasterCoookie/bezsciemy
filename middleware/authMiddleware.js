@@ -4,10 +4,10 @@ const require_login = (req, res, next) => {
 	if (req.session.authenticated) {
 		next();
 	} else {
-		res.redirect('login');
+		res.redirect('../login');
 	}
 }
 
-moudle.exports = {
+module.exports = {
     require_login
 }

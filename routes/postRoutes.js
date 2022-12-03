@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const fs = require('fs');
 const postRoutes = require('../controllers/postController');
+const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
@@ -42,8 +43,8 @@ const debunk_images_upload = (req, res, next) => {
 
 router.get('/view', postRoutes.view_get);
 //TODO - middleware
-router.get('/create', postRoutes.create_get);
+router.get('/create', authMiddleware.require_login, postRoutes.create_get);
 //TODO - middleware, tmp
-router.post("/create", debunk_images_upload, postRoutes.create_post);
+router.post("/create", [debunk_images_upload, authMiddleware.require_login], postRoutes.create_post);
 
 module.exports = router;
