@@ -4,8 +4,7 @@ const view_get = (req, res) => {
 };
 
 const create_get = (req, res) => {
-	//TODO: Implement view render
-	res.send("create");
+	res.render('post/postEditor');
 };
 
 const create_post = (req, res, next) => {
