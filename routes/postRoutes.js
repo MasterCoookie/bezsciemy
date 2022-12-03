@@ -30,18 +30,21 @@ const upload = multer({
     }
 }).array("debunk_images", 8);
 
-router.get('/view', postRoutes.view_get);
-//TODO - middleware
-router.get('/create', postRoutes.create_get);
-//TODO - middleware, tmp
-router.post("/create", (req, res, next) => {
+const debunk_images_upload = (req, res, next) => {
     console.log(req.file);
     upload(req, res, (err) => {
 		if(err) {
             console.log("dupa err");
 			return res.send(err);
 		}
+        next();
 	});
-});
+}
+
+router.get('/view', postRoutes.view_get);
+//TODO - middleware
+router.get('/create', postRoutes.create_get);
+//TODO - middleware, tmp
+router.post("/create", debunk_images_upload, postRoutes.create_post);
 
 module.exports = router;
