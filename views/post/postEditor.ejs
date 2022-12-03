@@ -1,8 +1,8 @@
 <%- include('../partials/head.ejs') %>
     <body>
-        <form method="post" action="/create" enctype="multipart/form-data">
-            <input type="file" name="debunk_images" />
+        <form method="post" action="./create" enctype="multipart/form-data">
+            <input type="file" name="debunk_images" multiple/>
             <input type="submit" />
-            </form>
+        </form>
     </body>
 </html>
