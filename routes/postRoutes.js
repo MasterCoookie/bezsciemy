@@ -10,6 +10,7 @@ let storage = multer.diskStorage({
         cb(null, './uploads')
     },
     filename: (req, file, cb) => {
+        //TODO - not random, make reasonable way to name file
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
         cb(null, file.fieldname + '-' + uniqueSuffix + file.originalname)
     }
@@ -27,7 +28,7 @@ let upload = multer({
         }
         cb(undefined, true);
     }
-}).single("debunk_images");
+}).array("debunk_images", 8);
 
 router.get('/view', postRoutes.view_get);
 //TODO - middleware
