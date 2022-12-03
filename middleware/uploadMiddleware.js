@@ -5,9 +5,8 @@ const storage = multer.diskStorage({
         cb(null, './uploads')
     },
     filename: (req, file, cb) => {
-        //TODO - not random, make reasonable way to name file
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, file.fieldname + '-' + uniqueSuffix + file.originalname)
+        //naming convention: debunk_images/fake_images + '-' + userID + '-' + postTitle + '-' + originalFileName
+        cb(null, file.fieldname + '-' + req.session.user.id + '-' + req.body.title + '-' + file.originalname)
     }
 })
 
