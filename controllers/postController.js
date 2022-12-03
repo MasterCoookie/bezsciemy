@@ -1,7 +1,7 @@
 const view_get = (req, res) => {
 	//TODO: Implement view render using ejs
 	console.log(req.query.id);
-	res.render('post/postEditor');
+	res.render('post/postView');
 };
 
 const create_get = (req, res) => {
