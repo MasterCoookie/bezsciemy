@@ -1,11 +1,11 @@
 const view_get = (req, res) => {
 	//TODO: Implement view render using ejs
-	res.send(req.query.id);
+	console.log(req.query.id);
+	res.render('post/postEditor');
 };
 
 const create_get = (req, res) => {
-	//TODO: Implement view render
-	res.send("create");
+	res.render('post/postEditor');
 };
 
 const create_post = (req, res, next) => {
