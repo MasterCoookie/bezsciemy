@@ -9,6 +9,7 @@ const create_get = (req, res) => {
 };
 
 const create_post = (req, res, next) => {
+	//image uploading is handled via middleware
 	const {
 		title,
 		debunk_desc,
@@ -21,6 +22,7 @@ const create_post = (req, res, next) => {
 		fake_iframes,
 	} = req.body;
 
+	//TODO create new post object and save it to db
 
 	res.send("done");
 };

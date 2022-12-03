@@ -31,7 +31,6 @@ const upload = multer({
 }).array("debunk_images", 8);
 
 const debunk_images_upload = (req, res, next) => {
-    console.log(req.file);
     upload(req, res, (err) => {
 		if(err) {
             console.log("dupa err");
