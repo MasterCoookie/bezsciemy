@@ -1,50 +1,61 @@
 <%- include('../partials/head.ejs') %>
+
     <body>
-        <h1 name="title">Interesting title</h1>
+        <h1 name="title">
+            <%= post.title %>
+        </h1>
         <h3>Debunk part</h3>
-        <p name="debunk_desc">Description of the debunk part
-            W tym roku zestawienie Spotify spotkało się z wyjątkową presją.
-            Może jeszcze zeszłe lata dało się ograć na zapętlaniu muzyki klasycznej miesiąc przed muzycznym podsumowaniem w aplikacji,
-            ale w tym roku 25-letnia Wiktoria postanowiła być stanowcza i nie bawić się w gierki.
-             Dała Spotify ultimatum – albo całkowicie zmieni statystyki słuchanej przez nią muzyki, albo kobieta odinstaluje aplikację.
+        <p name="debunk_desc">
+            <%= post.debunk.description %>
         </p>
         <ul class="debunkLinks-list">
-            <li><a href="https://macibol.ga/">macibol</a></li>
-            <li><a href="https://platforma.polsl.pl/rau2/">Rau2</a></li>
+            <% post.debunk.links.forEach(element=> { %>
+                <li><a href="<%= element %> ">
+                        <%= element %>
+                    </a></li>
+                <% }); %>
         </ul>
 
         <ul class="debunkImage-list">
-            <li><img src="//upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/220px-Cat03.jpg"></li>
-            <li><img src="https://www.w3schools.com/images/w3schools_green.jpg"></li>
+            <% post.debunk.debunk_images.forEach(element=> { %>
+                <li><img src="/uploads/<%= element %>"></li>
+                <% }); %>
         </ul>
 
         <ul class="debunkIframe-list">
-            <li><iframe width="560" height="315" src="https://www.youtube.com/embed/FQS-i8TTUZs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>
-            <li><iframe width="560" height="315" src="https://www.youtube.com/embed/m5T7rWzP6dU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>
+            <li>
+                <% post.debunk.iframes.forEach(element=> { %>
+                    <%- element %>
+                        <% }); %>
+            </li>
         </ul>
 
         <h3>Fake part</h3>
-        <p name="fake_desc">Description of the fake part
-            W tym roku zestawienie Spotify spotkało się z wyjątkową presją.
-            Może jeszcze zeszłe lata dało się ograć na zapętlaniu muzyki klasycznej miesiąc przed muzycznym podsumowaniem w aplikacji,
-            ale w tym roku 25-letnia Wiktoria postanowiła być stanowcza i nie bawić się w gierki.
-             Dała Spotify ultimatum – albo całkowicie zmieni statystyki słuchanej przez nią muzyki, albo kobieta odinstaluje aplikację.
+        <p name="fake_desc">
+            <%= post.fake.description %>
         </p>
         <ul class="fakeLink-list">
-            <li><a href="http://en.wikipedia.org/wiki/Football">Football</a></li>
-            <li><a href="http://en.wikipedia.org/wiki/Tennis">Tennis</a></li>
+            <% post.fake.links.forEach(element=> { %>
+                <li><a href="<%= element %> ">
+                        <%= element %>
+                    </a></li>
+                <% }); %>
         </ul>
 
         <ul class="fakeImage-list">
-            <li><img src="https://www.w3schools.com/images/w3schools_green.jpg"></li>
-            <li><img src="https://www.w3schools.com/images/w3schools_green.jpg"></li>
+            <% post.fake.fake_images.forEach(element=> { %>
+                <li><img src="/uploads/<%= element %>"></li>
+                <% }); %>
         </ul>
 
         <ul class="fakeIframe-list">
-            <li><iframe width="560" height="315" src="https://www.youtube.com/embed/FQS-i8TTUZs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>
-            <li><iframe width="560" height="315" src="https://www.youtube.com/embed/m5T7rWzP6dU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>
+            <li>
+                <% post.fake.iframes.forEach(element=> { %>
+                    <%- element %>
+                        <% }); %>
+            </li>
         </ul>
 
     </body>
-</html>
 
+    </html>
