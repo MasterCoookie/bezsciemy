@@ -27,10 +27,24 @@ const postSchema = new Schema({
     downVotes: [Schema.Types.ObjectId]
 });
 
-postSchema.methods.acceptPost = async function(_user){
+postSchema.methods.acceptPostAndSave = async function(_user){
     this.accepted_by = _user;
     await this.save();
 }
+
+postSchema.methods.toggleUpVoteAndSave = async function (_user){
+    if (this.upVotes.includes(_user)) { //remove upvote
+        this.upVotes.splice(this.upVotes.indexOf(_user), 1);
+    } else if (this.downVotes.includes(_user)) { // remove down, add up
+        this.downVotes.splice(this.downVotes.indexOf(_user), 1);
+        this.upVotes.push(_user)
+    } else { // add upvote
+        this.upVotes.push(_user)
+    }
+    await this.save();
+}
+
+//add toggle down vote
 
 const Post = mongoose.model('Post', postSchema);
 
