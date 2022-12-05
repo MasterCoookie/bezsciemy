@@ -27,6 +27,10 @@ const postSchema = new Schema({
     downVotes: [Schema.Types.ObjectId]
 });
 
+postSchema.methods.acceptPost = async function(_user){
+    this.accepted_by = _user;
+    await this.save();
+}
 
 const Post = mongoose.model('Post', postSchema);
 
