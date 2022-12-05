@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../models/userModel');
 
 const view_get = async (req, res) => {
 	//TODO find post by given id
