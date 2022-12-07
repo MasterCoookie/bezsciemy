@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const Post = require('../models/postModel');
 
 const view_get = async (req, res) => {
 	//TODO find post by given id
@@ -68,7 +69,7 @@ const create_get = (req, res) => {
 	res.render('post/postEditor');
 };
 
-const create_post = (req, res, next) => {
+const create_post = async (req, res, next) => {
 	//image uploading is handled via middleware
 	const {
 		title,
@@ -81,6 +82,24 @@ const create_post = (req, res, next) => {
 		fake_images,
 		fake_iframes,
 	} = req.body;
+
+	console.log(req.files);
+
+	try {
+		// const post = new Post({
+		// 	title,
+		// 	debunk_desc,
+		// 	debunk_links,
+		// 	debunk_images,
+		// 	debunk_iframes,
+		// 	fake_desc,
+		// 	fake_links,
+		// 	fake_images,
+		// 	fake_iframes
+		// });
+	} catch (e) {
+		console.log(e);
+	}
 
 	//TODO create new post object and save it to db
 
