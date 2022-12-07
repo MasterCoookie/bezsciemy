@@ -4,7 +4,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 const uploadMiddleware = require('../middleware/uploadMiddleware');
 
 const router = express.Router();
-const upload_debunk_images = uploadMiddleware.upload.array("debunk_images", 8);
+const upload_debunk_images = uploadMiddleware.upload.fields([{name: "debunk_images",maxCount: 8}, {name: "fake_images",maxCount:8}]);
 
 const upload_debunk_images_middleware = (req, res, next) => {
     upload_debunk_images(req, res, (err) => {

@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         //naming convention: debunk_images/fake_images + '-' + userID + '-' + postTitle + '-' + originalFileName
-        cb(null, file.fieldname + '-' + req.session.user.id + '-' + req.body.title + '-' + file.originalname)
+        cb(null, file.fieldname + '-' + req.session.user.id + '-' + req.body.title + '-' + file.originalname);
     }
 })
 

@@ -75,15 +75,17 @@ const create_post = async (req, res, next) => {
 		title,
 		debunk_desc,
 		debunk_links,
-		debunk_images,
 		debunk_iframes,
 		fake_desc,
 		fake_links,
-		fake_images,
 		fake_iframes,
 	} = req.body;
 
-	console.log(req.files);
+	let { debunk_images, fake_images } = req.files;
+
+	debunk_images = debunk_images.map(image => image.filename);
+	fake_images = fake_images.map(image => image.filename);
+	// console.log(debunk_images);
 
 	try {
 		// const post = new Post({
