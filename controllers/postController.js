@@ -88,24 +88,31 @@ const create_post = async (req, res, next) => {
 	// console.log(debunk_images);
 
 	try {
-		// const post = new Post({
-		// 	title,
-		// 	debunk_desc,
-		// 	debunk_links,
-		// 	debunk_images,
-		// 	debunk_iframes,
-		// 	fake_desc,
-		// 	fake_links,
-		// 	fake_images,
-		// 	fake_iframes
-		// });
+		const post = await Post.create({
+			title,
+			author_id: req.session.user.id,
+			debunk_desc,
+			debunk_links,
+			debunk_images,
+			debunk_iframes,
+			fake_desc,
+			fake_links,
+			fake_images,
+			fake_iframes
+		});
+		if(post) {
+			res.send('done');
+		} else {
+			res.send("dupa");
+		}
 	} catch (e) {
 		console.log(e);
+		res.send("dupa e");
 	}
 
 	//TODO create new post object and save it to db
 
-	res.send('done');
+	
 };
 
 module.exports = {
