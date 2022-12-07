@@ -2,11 +2,20 @@ const User = require('../models/userModel');
 const Post = require('../models/postModel');
 
 const view_get = async (req, res) => {
-	//TODO find post by given id
-	console.log(req.query.id);
+	const post_id = req.query.id;
+
+	if(!post_id) {
+		return res.send(404);
+	}
+
+	const post = await Post.findById(post_id);
+
+	if(!post) {
+		return res.send(404);
+	}
 
 	//tmp dummy data starts
-	let today = new Date();
+	/*let today = new Date();
 	const dd = String(today.getDate()).padStart(2, '0');
 	const mm = String(today.getMonth() + 1).padStart(2, '0');
 	const yyyy = today.getFullYear();
@@ -50,8 +59,10 @@ const view_get = async (req, res) => {
 		},
 		author_id: '638b33296557bb5f840c6bd7',
 		accepted_by: '638b33296557bb5f840c6bd7',
-	};
+	};*/
 	//tmp dummy data ends
+
+	
 
 	const author_user = await User.findOne({ _id: post.author_id });
 	const accepted_user = await User.findOne({ _id: post.accepted_by });
