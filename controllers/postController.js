@@ -4,13 +4,13 @@ const Post = require('../models/postModel');
 const view_get = async (req, res) => {
 	const post_id = req.query.id;
 
-	if(!post_id) {
+	if (!post_id) {
 		return res.send(404);
 	}
 
 	const post = await Post.findById(post_id);
 
-	if(!post) {
+	if (!post) {
 		return res.send(404);
 	}
 
@@ -62,15 +62,13 @@ const view_get = async (req, res) => {
 	};*/
 	//tmp dummy data ends
 
-	
-
 	const author_user = await User.findOne({ _id: post.author_id });
 	const accepted_user = await User.findOne({ _id: post.accepted_by });
 
 	//TODO - unaccepted post technically should be visible too
-	if (!author_user || !accepted_user) {
+	/*if (!author_user || !accepted_user) {
 		res.send('Invalid post!');
-	}
+	}*/
 
 	res.render('post/postView', { post, author_user, accepted_user });
 };
@@ -93,8 +91,8 @@ const create_post = async (req, res, next) => {
 
 	let { debunk_images, fake_images } = req.files;
 
-	debunk_images = debunk_images.map(image => image.filename);
-	fake_images = fake_images.map(image => image.filename);
+	debunk_images = debunk_images.map((image) => image.filename);
+	fake_images = fake_images.map((image) => image.filename);
 	// console.log(debunk_images);
 
 	try {
@@ -108,19 +106,17 @@ const create_post = async (req, res, next) => {
 			fake_desc,
 			fake_links,
 			fake_images,
-			fake_iframes
+			fake_iframes,
 		});
-		if(post) {
+		if (post) {
 			res.send('done');
 		} else {
-			res.send("dupa");
+			res.send('dupa');
 		}
 	} catch (e) {
 		console.log(e);
-		res.send("dupa e");
+		res.send('dupa e');
 	}
-
-	
 };
 
 module.exports = {

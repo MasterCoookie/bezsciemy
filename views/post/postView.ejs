@@ -6,10 +6,10 @@
         </h1>
         <h3>Debunk part</h3>
         <p name="debunk_desc">
-            <%= post.debunk.description %>
+            <%= post.debunk_desc %>
         </p>
         <ul class="debunkLinks-list">
-            <% post.debunk.links.forEach(element=> { %>
+            <% post.debunk_links.forEach(element=> { %>
                 <li><a href="<%= element %> ">
                         <%= element %>
                     </a></li>
@@ -17,14 +17,14 @@
         </ul>
 
         <ul class="debunkImage-list">
-            <% post.debunk.debunk_images.forEach(element=> { %>
+            <% post.debunk_images.forEach(element=> { %>
                 <li><img src="/uploads/<%= element %>"></li>
                 <% }); %>
         </ul>
 
         <ul class="debunkIframe-list">
             <li>
-                <% post.debunk.iframes.forEach(element=> { %>
+                <% post.debunk_iframes.forEach(element=> { %>
                     <%- element %> <br>
                         <% }); %>
             </li>
@@ -32,10 +32,10 @@
 
         <h3>Fake part</h3>
         <p name="fake_desc">
-            <%= post.fake.description %>
+            <%= post.fake_desc %>
         </p>
         <ul class="fakeLink-list">
-            <% post.fake.links.forEach(element=> { %>
+            <% post.fake_links.forEach(element=> { %>
                 <li><a href="<%= element %> ">
                         <%= element %>
                     </a></li>
@@ -43,14 +43,14 @@
         </ul>
 
         <ul class="fakeImage-list">
-            <% post.fake.fake_images.forEach(element=> { %>
+            <% post.fake_images.forEach(element=> { %>
                 <li><img src="/uploads/<%= element %>"></li>
                 <% }); %>
         </ul>
 
         <ul class="fakeIframe-list">
             <li>
-                <% post.fake.iframes.forEach(element=> { %>
+                <% post.fake_iframes.forEach(element=> { %>
                     <%- element %> <br>
                         <% }); %>
             </li>
