@@ -61,7 +61,6 @@ const view_get = async (req, res) => {
 		res.send('Invalid post!');
 	}
 
-	//TODO: Implement view render using ejs
 	res.render('post/postView', { post, author_user, accepted_user });
 };
 
@@ -109,8 +108,6 @@ const create_post = async (req, res, next) => {
 		console.log(e);
 		res.send("dupa e");
 	}
-
-	//TODO create new post object and save it to db
 
 	
 };
