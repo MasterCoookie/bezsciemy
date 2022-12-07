@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
 			const response = JSON.parse(event.target.responseText);
 			console.log(response);
 			if (response.authenticated) {
-				window.location.href = 'http://localhost:3000/protected/page';
+				window.location.href = 'http://localhost:3000/post/create';
 			} else {
 				document.getElementById('message').innerHTML = 'Login failed.';
 			}
