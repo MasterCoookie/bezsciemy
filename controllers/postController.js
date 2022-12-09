@@ -37,9 +37,10 @@ const view_get = async (req, res) => {
 				'<iframe width="560" height="315" src="https://www.youtube.com/embed/7VBg7BXj1U0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
 			],
 			fake_images: [
-				'fake_images-638b33296557bb5f840c6bd7-Test Title-mb.jpg',
-				'fake_images-638b33296557bb5f840c6bd7-Test Title-tranzistor.png',
-				'fake_images-638b33296557bb5f840c6bd7-Test Title-wp.png',
+				'debunk_images-638b33296557bb5f840c6bd7-Test Title-jajo.png',
+				'debunk_images-638b33296557bb5f840c6bd7-Test Title-me.png',
+				'fake_images-638b33296557bb5f840c6bd7-test title-MACIBOL.png',
+				'fake_images-638b33296557bb5f840c6bd7-test title-macibol1.png'
 			],
 		},
 		debunk: {
@@ -55,6 +56,8 @@ const view_get = async (req, res) => {
 			debunk_images: [
 				'debunk_images-638b33296557bb5f840c6bd7-Test Title-jajo.png',
 				'debunk_images-638b33296557bb5f840c6bd7-Test Title-me.png',
+				'fake_images-638b33296557bb5f840c6bd7-test title-MACIBOL.png',
+				'fake_images-638b33296557bb5f840c6bd7-test title-macibol1.png'
 			],
 		},
 		author_id: '638b33296557bb5f840c6bd7',

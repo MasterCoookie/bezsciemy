@@ -2,14 +2,26 @@ body{
     background-color: #242323;
 }
 
-h3{
+.loginTitle{
     text-align: center;
-    color : white;
-    font-family: 'Poppins',sans-serif;
     margin: -10%;
     padding-top: 40px;
     padding-bottom: 40px;
 }
+.login{
+    display: block;
+    text-align: left;
+}
+.text{
+    color : white;
+    font-family: 'Poppins',sans-serif;
+}
+
+.textbox-label{
+    text-align: left;
+    padding-left: 13px;
+}
+
 
 form{
     text-align: center;
@@ -62,16 +74,14 @@ button:hover{
     width: 82%;
 }
 
-label{
+.registerLabel{
     display: block;
     text-align: left;
-    color: White;
     margin-left: 10px;
     margin-top: 20px;
     margin-bottom: 8px;
     font-size: 16px;
     font-weight: 500;
-    font-family: 'Poppins',sans-serif;
 }
 
 .shape {
@@ -108,14 +118,13 @@ label{
     
 }
 
-#link.login{
+#link.forward{
     padding-block: 10px;
     text-decoration: none;
     color: rgb(0, 247, 255);
-    font-family: 'Poppins',sans-serif;
 }
 
-#link.login:hover{
+#link.forward:hover{
     text-decoration: underline;
 }
 
@@ -134,3 +143,164 @@ label{
     transition: width 0.2s ease-in-out;
 }
 
+@keyframes colorTransition {
+    from {border: 2px solid black;}
+    to {border:2px solid rgba(255, 255, 255, 0.212);}
+}
+
+.title{
+    
+}
+
+.posted-by{
+    font-size: 12px;
+    font-weight: 100;
+}
+
+
+.postTitle{
+    color: white;
+}
+
+.post{
+
+    text-align: left;
+    background-color:rgba(255,255,255,0.13);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    padding-top: 0px;
+    padding-bottom: 40px;
+    position: absolute;
+    max-width: 70%;
+    left: 15%;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    overflow: auto;
+}
+
+.debunk_part{
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: border 0.3s ease-in-out;
+    margin-bottom: 10px;
+
+}
+.debunk_part:hover{
+    border:2px solid rgba(255, 255, 255, 0.212);
+    background-color:rgba(255,255,255,0.02) ;
+}
+
+
+.debunkTitle{
+
+}
+
+.debunk_desc{
+   font-weight: 100;
+}
+
+.debunkLinks-list{
+   font-weight: 100;
+   color: #3366CC;
+   font-family: 'Poppins',sans-serif; 
+}
+
+
+
+a:visited{
+    color: #3366CC;
+}
+
+.debunkImage-list{
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+div.grid-container {
+    column-gap: 30px;
+    overflow-y: auto;
+    white-space: nowrap;
+    scrollbar-width:none;
+}
+div.grid-item{
+    display: inline-block;
+}
+
+
+.debunkIframe-list{
+    text-align:center;
+}
+
+.fake-part{
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: border 0.3s ease-in-out;
+}
+
+.fake-part:hover{
+    border:2px solid rgba(0, 0, 0, 0.295);
+    background-color:rgba(0,0,0,0.2) ;
+}
+.fake-title{
+    
+}
+
+.fake-desc{
+    font-weight: 100;
+}
+
+.fakeImage-list{
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.fakeIframe-list{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.fake{
+    margin: 20px;
+    text-align: left;
+    font-family: 'Poppins',sans-serif;
+}
+.fakeTitle{
+    margin: 20px;
+}
+
+ul{
+    list-style-type:none;
+    margin: 0;
+    padding: 0;
+    
+}
+
+
+.ext-link[href^="http"] {
+    background: url("icons8-external-link-30.png") no-repeat 100% 0;
+    background-size: 20px;
+    padding-right: 20px;
+}
+img.content-image {
+    height: 360px;
+    width: auto;
+    padding-right: 20px;
+}
+
+body{
+    height: auto;
+    width: auto;
+    background-image: url('bezsciemy.png');
+    background-repeat: repeat-x;
+    background-size: 300px;
+    
+}

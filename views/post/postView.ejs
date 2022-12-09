@@ -1,60 +1,81 @@
 <%- include('../partials/head.ejs') %>
-
     <body>
-        <h1 name="title">
-            <%= post.title %>
-        </h1>
-        <h3>Debunk part</h3>
-        <p name="debunk_desc">
-            <%= post.debunk_desc %>
-        </p>
-        <ul class="debunkLinks-list">
-            <% post.debunk_links.forEach(element=> { %>
-                <li><a href="<%= element %> ">
-                        <%= element %>
-                    </a></li>
-                <% }); %>
-        </ul>
+        <div class="post" class>
+            <p class="text posted-by">Posted <%=post.created%> by: <%=post.author_id%></p>
 
-        <ul class="debunkImage-list">
-            <% post.debunk_images.forEach(element=> { %>
-                <li><img src="/uploads/<%= element %>"></li>
-                <% }); %>
-        </ul>
+            <h1 name="title" class="text title postTitle">
+                <%= post.title %>
+            </h1>
+            <div class="debunk_part">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <h3 class="text debunkTitle">Debunk part</h3>
+                <p class="text debunk_desc">
+                    <%= post.debunk.description %>
+                </p>
+                <ul class="debunkLinks-list ">
+                    <% post.debunk.links.forEach(element=> { %>
+                        <li>
+                            <a class="ext-link" href="<%= element %> ">
+                                <%= element %>
+                            </a>
+                        </li>
+                    <% }); %>
+                </ul>
+                
 
-        <ul class="debunkIframe-list">
-            <li>
-                <% post.debunk_iframes.forEach(element=> { %>
-                    <%- element %> <br>
-                        <% }); %>
-            </li>
-        </ul>
+                <div class="grid-container debunkImage-list">
+                    <% post.debunk.debunk_images.forEach(element=> { %>
+            
+                    <div class="grid-item">
+                        <img class="content-image" src="/uploads/<%= element %>">
+                    </div>
+                    <% }); %>
+                </div>
 
-        <h3>Fake part</h3>
-        <p name="fake_desc">
-            <%= post.fake_desc %>
-        </p>
-        <ul class="fakeLink-list">
-            <% post.fake_links.forEach(element=> { %>
-                <li><a href="<%= element %> ">
-                        <%= element %>
-                    </a></li>
-                <% }); %>
-        </ul>
+                <ul class="debunkIframe-list">
+                    <li>
+                        <% post.debunk.iframes.forEach(element=> { %>
+                            <%- element %> 
+                                <% }); %>
+                    </li>
+                </ul>
+            </div>
 
-        <ul class="fakeImage-list">
-            <% post.fake_images.forEach(element=> { %>
-                <li><img src="/uploads/<%= element %>"></li>
-                <% }); %>
-        </ul>
+            <div class="fake-part">
+                <h3 class="text fake-title">Fake part</h3>
+                <p name="text" class="text fake-desc">
+                    <%= post.fake.description %>
+                </p>
+                <ul class="text fakeLink-list">
+                    <% post.fake.links.forEach(element=> { %>
+                        <li>
+                            <a class="ext-link" href="<%= element %> ">
+                                <%= element %>
+                            </a>
+                        </li>
+                    <% }); %>
+                </ul>
+        
+                <div class="grid-container fakeImage-list">
+                    <% post.fake.fake_images.forEach(element=> { %>
+                        <div class="grid-item">
+                            <img class="content-image" src="/uploads/<%= element %>">
+                        </div>
+                    <% }); %>
+                    </div>
+        
+                <ul class="fakeIframe-list">
+                    <li>
+                        <% post.fake.iframes.forEach(element=> { %>
+                            <%- element %> <br>
+                                <% }); %>
+                    </li>
+                </ul>
 
-        <ul class="fakeIframe-list">
-            <li>
-                <% post.fake_iframes.forEach(element=> { %>
-                    <%- element %> <br>
-                        <% }); %>
-            </li>
-        </ul>
+            </div>
+            <p class="text posted-by">Accepted <%=post.created%> by: <%=post.accepted_by%></p>
+
+        </div>
 
     </body>
 
