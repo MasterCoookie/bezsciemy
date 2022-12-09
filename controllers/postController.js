@@ -45,6 +45,8 @@ const view_get = async (req, res) => {
 			debunk_images: [
 				'debunk_images-638b33296557bb5f840c6bd7-Test Title-jajo.png',
 				'debunk_images-638b33296557bb5f840c6bd7-Test Title-me.png',
+				'fake_images-638b33296557bb5f840c6bd7-test title-MACIBOL.png',
+				'fake_images-638b33296557bb5f840c6bd7-test title-macibol1.png',
 			],
 		},
 		author_id: '638b33296557bb5f840c6bd7',

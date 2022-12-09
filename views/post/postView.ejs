@@ -1,60 +1,71 @@
 <%- include('../partials/head.ejs') %>
-
     <body>
-        <h1 name="title">
-            <%= post.title %>
-        </h1>
-        <h3>Debunk part</h3>
-        <p name="debunk_desc">
-            <%= post.debunk.description %>
-        </p>
-        <ul class="debunkLinks-list">
-            <% post.debunk.links.forEach(element=> { %>
-                <li><a href="<%= element %> ">
-                        <%= element %>
-                    </a></li>
-                <% }); %>
-        </ul>
 
-        <ul class="debunkImage-list">
-            <% post.debunk.debunk_images.forEach(element=> { %>
-                <li><img src="/uploads/<%= element %>"></li>
-                <% }); %>
-        </ul>
+        <div class="post" class>
 
-        <ul class="debunkIframe-list">
-            <li>
-                <% post.debunk.iframes.forEach(element=> { %>
-                    <%- element %> <br>
+            <h1 name="title" class="text title postTitle">
+                <%= post.title %>
+            </h1>
+            <div class="debunk_part">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <h3 class="text debunkTitle">Debunk part</h3>
+                <p class="text debunk_desc">
+                    <%= post.debunk.description %>
+                </p>
+                <ul class="debunkLinks-list ">
+                    <% post.debunk.links.forEach(element=> { %>
+                        <li>
+                            <a class="ext-link" href="<%= element %> ">
+                                <%= element %>
+                            </a></li>
+
                         <% }); %>
-            </li>
-        </ul>
+                </ul>
 
-        <h3>Fake part</h3>
-        <p name="fake_desc">
-            <%= post.fake.description %>
-        </p>
-        <ul class="fakeLink-list">
-            <% post.fake.links.forEach(element=> { %>
-                <li><a href="<%= element %> ">
-                        <%= element %>
-                    </a></li>
-                <% }); %>
-        </ul>
+                <div class="grid-container debunkImage-list">
+                    <% post.debunk.debunk_images.forEach(element=> { %>
+            
+                    <div class="grid-item">
+                        <img class="content-image" src="/uploads/<%= element %>">
+                    </div>
+                    <% }); %>
+                </div>
 
-        <ul class="fakeImage-list">
-            <% post.fake.fake_images.forEach(element=> { %>
-                <li><img src="/uploads/<%= element %>"></li>
-                <% }); %>
-        </ul>
-
-        <ul class="fakeIframe-list">
-            <li>
-                <% post.fake.iframes.forEach(element=> { %>
-                    <%- element %> <br>
-                        <% }); %>
-            </li>
-        </ul>
+                <ul class="debunkIframe-list">
+                    <li>
+                        <% post.debunk.iframes.forEach(element=> { %>
+                            <%- element %> 
+                                <% }); %>
+                    </li>
+                </ul>
+            </div>
+    
+            <h3 class="fakeTitle">Fake part</h3>
+            <p name="fake_desc" class="fake">
+                <%= post.fake.description %>
+            </p>
+            <ul class="fakeLink-list">
+                <% post.fake.links.forEach(element=> { %>
+                    <li><a href="<%= element %> ">
+                            <%= element %>
+                        </a></li>
+                    <% }); %>
+            </ul>
+    
+            <ul class="fakeImage-list">
+                <% post.fake.fake_images.forEach(element=> { %>
+                    <li><img src="/uploads/<%= element %>"></li>
+                    <% }); %>
+            </ul>
+    
+            <ul class="fakeIframe-list">
+                <li>
+                    <% post.fake.iframes.forEach(element=> { %>
+                        <%- element %> <br>
+                            <% }); %>
+                </li>
+            </ul>
+        </div>
 
     </body>
 
