@@ -152,6 +152,12 @@ button:hover{
     
 }
 
+.posted-by{
+    font-size: 12px;
+    font-weight: 100;
+}
+
+
 .postTitle{
     color: white;
 }
@@ -180,10 +186,12 @@ button:hover{
     padding-top: 10px;
     padding-bottom: 10px;
     transition: border 0.3s ease-in-out;
+    margin-bottom: 10px;
 
 }
 .debunk_part:hover{
     border:2px solid rgba(255, 255, 255, 0.212);
+    background-color:rgba(255,255,255,0.02) ;
 }
 
 
@@ -201,6 +209,8 @@ button:hover{
    font-family: 'Poppins',sans-serif; 
 }
 
+
+
 a:visited{
     color: #3366CC;
 }
@@ -215,6 +225,7 @@ div.grid-container {
     column-gap: 30px;
     overflow-y: auto;
     white-space: nowrap;
+    scrollbar-width:none;
 }
 div.grid-item{
     display: inline-block;
@@ -222,7 +233,39 @@ div.grid-item{
 
 
 .debunkIframe-list{
-    background-color: #1565a0;
+    text-align:center;
+}
+
+.fake-part{
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: border 0.3s ease-in-out;
+}
+
+.fake-part:hover{
+    border:2px solid rgba(0, 0, 0, 0.295);
+    background-color:rgba(0,0,0,0.2) ;
+}
+.fake-title{
+    
+}
+
+.fake-desc{
+    font-weight: 100;
+}
+
+.fakeImage-list{
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.fakeIframe-list{
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 .fake{
@@ -250,4 +293,14 @@ ul{
 img.content-image {
     height: 360px;
     width: auto;
+    padding-right: 20px;
+}
+
+body{
+    height: auto;
+    width: auto;
+    background-image: url('bezsciemy.png');
+    background-repeat: repeat-x;
+    background-size: 300px;
+    
 }
