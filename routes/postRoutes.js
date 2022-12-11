@@ -1,5 +1,5 @@
 const express = require('express');
-const postRoutes = require('../controllers/postController');
+const postController = require('../controllers/postController');
 const authMiddleware = require('../middleware/authMiddleware');
 const uploadMiddleware = require('../middleware/uploadMiddleware');
 
@@ -16,8 +16,10 @@ const upload_debunk_images_middleware = (req, res, next) => {
 	});
 }
 
-router.get('/view', postRoutes.view_get);
-router.get('/create', authMiddleware.require_login, postRoutes.create_get);
-router.post("/create", [upload_debunk_images_middleware, authMiddleware.require_login], postRoutes.create_post);
+router.get('/view', postController.view_get);
+router.get('/create', authMiddleware.require_login, postController.create_get);
+router.post("/create", [upload_debunk_images_middleware, authMiddleware.require_login], postController.create_post);
+router.post("/upvote", authMiddleware.require_login, postController.upvote_post);
+router.post("/downvote", authMiddleware.require_login, postController.downvote_post);
 
 module.exports = router;

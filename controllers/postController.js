@@ -122,8 +122,18 @@ const create_post = async (req, res, next) => {
 	}
 };
 
+const upvote_post = async (req, res) => {
+
+}
+
+const downvote_post = async (req, res) => {
+	
+}
+
 module.exports = {
 	view_get,
 	create_get,
 	create_post,
+	upvote_post,
+	downvote_post
 };
