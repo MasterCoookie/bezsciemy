@@ -36,7 +36,23 @@ const view_get = async (req, res) => {
 	}
 
 	//TODO: read from db
-	const comments = [comment_dummy_1, comment_dummy_2, comment_dummy_3];
+	let comments = [comment_dummy_1, comment_dummy_2, comment_dummy_3];
+
+	const comments_filled = await Promise.all(comments.map(async (comment) => {
+		let author = await User.findById(comment.authorID);
+		if(author) {
+			author.password = undefined;
+			author._id = null;
+			comment.author = author;
+		} else {
+			comment.author = "deleted";
+		}
+		
+		comment._id = undefined;
+		return comment;
+	}));
+
+	console.log(comments_filled);
 
 	//tmp dummy data starts
 	/*let today = new Date();
@@ -97,7 +113,7 @@ const view_get = async (req, res) => {
 		res.send('Invalid post!');
 	}*/
 
-	res.render('post/postView', { post, author_user, accepted_user, comments });
+	res.render('post/postView', { post, author_user, accepted_user, comments: comments_filled });
 };
 
 const create_get = (req, res) => {
