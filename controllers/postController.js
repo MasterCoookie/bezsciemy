@@ -7,7 +7,7 @@ const view_get = async (req, res) => {
 	const post = await Post.findById(post_id);
 
 	if (!post) {
-		return res.send(404);
+		return res.sendStatus(404);
 	}
 
 	//tmp dummy data starts
@@ -119,16 +119,25 @@ const create_post = async (req, res, next) => {
 };
 
 const upvote_post = async (req, res) => {
-	const post_id = req.query.id;
+	console.log(req.body.postID);
+	const post_id = req.body.postID;
 	const post = await Post.findById(post_id);
 
 	if (!post) {
-		return res.send(404);
+		return res.sendStatus(404);
 	}
+
+	post.toggleUpVoteAndSave(req.session.user.id).then(() => {
+		res.sendStatus(200);
+	}).catch(err => {
+		console.log(err);
+		res.sendStatus(500);
+	});
 }
 
 const downvote_post = async (req, res) => {
-	
+	//TODO implement
+	res.sendStatus(501);
 }
 
 module.exports = {
