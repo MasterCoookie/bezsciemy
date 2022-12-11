@@ -10,6 +10,31 @@ const view_get = async (req, res) => {
 		return res.sendStatus(404);
 	}
 
+	//dummy comment
+	const comment_dummy_1 = {
+		_id: "asdfasdf",
+		authorID: "6394aea53ef9e6a269925f82",
+		postID: "6390eb28d94478039870ce56",
+		father: null,
+		content: "Nie zgadzam się z panem, bo pan je gupi jak paczka gwoździ"
+	}
+
+	const comment_dummy_2 = {
+		_id: "asdfasdf2",
+		authorID: "6383b318e4c5926e80db2d6f",
+		postID: "6390eb28d94478039870ce56",
+		father: "asdfasdf",
+		content: "A ja z panem, bo gwoździe to nie ludzie, nie mogą być gupie więc co pan"
+	}
+
+	const comment_dummy_3 = {
+		_id: "asdfasdf3",
+		authorID: "6383b318e4c5926e80db2d6f",
+		postID: "6390eb28d94478039870ce56",
+		father: null,
+		content: "Fajny post, pozdrawiam z całą rodzinką"
+	}
+
 	//tmp dummy data starts
 	/*let today = new Date();
 	const dd = String(today.getDate()).padStart(2, '0');
