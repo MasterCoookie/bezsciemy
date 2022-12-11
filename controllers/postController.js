@@ -4,10 +4,6 @@ const Post = require('../models/postModel');
 const view_get = async (req, res) => {
 	const post_id = req.query.id;
 
-	if (!post_id) {
-		return res.send(404);
-	}
-
 	const post = await Post.findById(post_id);
 
 	if (!post) {
@@ -123,7 +119,12 @@ const create_post = async (req, res, next) => {
 };
 
 const upvote_post = async (req, res) => {
+	const post_id = req.query.id;
+	const post = await Post.findById(post_id);
 
+	if (!post) {
+		return res.send(404);
+	}
 }
 
 const downvote_post = async (req, res) => {
