@@ -81,8 +81,8 @@
             <script> let postID = "<%= post._id %>";
                 console.log(postID);
             </script>
-            <button onclick='sendUpVote(postID)' id="upvote" type="button">Upvote</button>
-            <button id="downvote" type="button">Downvote</button>
+            <button onclick='sendUpVote(postID, "upvote")' id="upvote" type="button">Upvote</button>
+            <button onclick='sendUpVote(postID, "downvote")' id="downvote" type="button">Downvote</button>
 
         </div>
 
