@@ -32,20 +32,39 @@ postSchema.methods.acceptPostAndSave = async function(_user){
     await this.save();
 }
 
-//TODO - chage _user to _userID?
-postSchema.methods.toggleUpVoteAndSave = async function (_user){
-    if (this.upVotes.includes(_user)) { //remove upvote
-        this.upVotes.splice(this.upVotes.indexOf(_user), 1);
-    } else if (this.downVotes.includes(_user)) { // remove down, add up
-        this.downVotes.splice(this.downVotes.indexOf(_user), 1);
-        this.upVotes.push(_user)
+//DONE: chaged _user to _userID?
+postSchema.methods.toggleUpVoteAndSave = async function (_userID){
+    if (this.upVotes.includes(_userID)) { //remove upvote
+        this.upVotes.splice(this.upVotes.indexOf(_userID), 1);
+    } else if (this.downVotes.includes(_userID)) { // remove down, add up
+        this.downVotes.splice(this.downVotes.indexOf(_userID), 1);
+        this.upVotes.push(_userID)
     } else { // add upvote
-        this.upVotes.push(_user)
+        this.upVotes.push(_userID)
     }
     await this.save();
 }
 
-//add toggle down vote
+postSchema.methods.toggleDownVoteAndSave = async function (_userID){
+    if (this.downVotes.includes(_userID)) { //remove downvote
+        this.downVotes.splice(this.downVotes.indexOf(_userID), 1);
+    } else if (this.upVotes.includes(_userID)) { // remove up, add down
+        this.upVotes.splice(this.upVotes.indexOf(_userID), 1);
+        this.downVotes.push(_userID)
+    } else { // add downvote
+        this.downVotes.push(_userID)
+    }
+    await this.save();
+}
+
+//up or down vote getter, returns: 1 if upvote, 0 if no vote, -1 if downvote
+postSchema.methods.getVote = async function (_userID){
+    if (this.downVotes.includes(_userID)){
+        return -1;
+    } else if (this.upVotes.includes(_userID)) {
+        return 1;
+    } else return 0;
+}
 
 const Post = mongoose.model('Post', postSchema);
 
