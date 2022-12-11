@@ -86,6 +86,10 @@
 
         </div>
 
+        <% comments.forEach(function(comment){ %>
+            <%- include('../partials/comment.ejs', {comment: comment}); %>
+                <% }); %>
+
     </body>
 
     </html>
