@@ -2,6 +2,15 @@ body{
     background-color: #242323;
 }
 
+body{
+    height: auto;
+    width: auto;
+    background-image: url('bezsciemy.png');
+    background-repeat: repeat-x;
+    background-size: 300px;
+    
+}
+
 .loginTitle{
     text-align: center;
     margin: -10%;
@@ -23,12 +32,12 @@ body{
 }
 
 
-form{
+.login-form{
     text-align: center;
     background-color:rgba(255,255,255,0.13);
     backdrop-filter: blur(10px);
     border: none;
-    border-radius: 5%;
+    border-radius: 20px;
     padding: 20px;
     padding-top: 40px;
     padding-bottom: 40px;
@@ -61,7 +70,7 @@ button{
     border: none;
     cursor: pointer;
     width: 80%;
-    margin-top: 40px;
+    margin-top: 20px;
     border-radius: 5px;
     font-family: 'Poppins',sans-serif;
     font-weight: 600;
@@ -174,9 +183,11 @@ button:hover{
     padding-bottom: 40px;
     position: absolute;
     max-width: 70%;
-    left: 15%;
+    margin-left: 15%;
+    margin-right: 15%;
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     overflow: auto;
+    
 }
 
 .debunk_part{
@@ -226,6 +237,8 @@ div.grid-container {
     overflow-y: auto;
     white-space: nowrap;
     scrollbar-width:none;
+    scroll-behavior: smooth;
+
 }
 div.grid-item{
     display: inline-block;
@@ -296,11 +309,80 @@ img.content-image {
     padding-right: 20px;
 }
 
-body{
-    height: auto;
-    width: auto;
-    background-image: url('bezsciemy.png');
-    background-repeat: repeat-x;
-    background-size: 300px;
-    
+.creator-sizing{
+    max-width: 70%;
+    position: relative;
+    left: 30%;
+    max-width: 800px;
+}
+
+.create-header{
+    border-style: none none solid none;
+    border-width: 1px;
+    margin-top: 40px;
+}
+
+.creator{
+    text-align: left;
+    background-color:rgba(255,255,255,0.13);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    padding-top: 0px;
+    padding-bottom: 30px;
+    position: absolute;
+    width: 40%;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    overflow: auto;
+}
+
+.create-textbox{
+    width: 100%;
+    text-align: left;
+    position: relative;
+    height: 40px;
+    font-weight: 200;
+    font-size: 20px;
+    margin-top: -10px;
+    background-color: #797878;
+    margin-bottom: 10px;
+    border: none;
+
+}
+
+.create-textbox:focus{
+    outline: none;
+    border: 1px solid white;
+    box-shadow: 0 0 3px white;
+
+}
+
+.desc-textbox{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #797878;
+    resize: vertical;
+    width: 100%;
+    border: none;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    height: 40px;
+    transition: height 0.4s ease-in-out;
+}
+
+.desc-textbox:focus{
+    height: 200px;
+}
+input[type=file]{
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button[id=finish]{
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 15px;
 }

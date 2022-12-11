@@ -1,37 +1,43 @@
 <%- include('../partials/head.ejs') %>
 
     <body>
-        <form method="post" action="./create" enctype="multipart/form-data" id="postEditorForm">
-            <h2>Enter post title</h2>
+
+        <h2 class="text create-header creator-sizing">Create a post</h2>
+        <form method="post" action="./create" enctype="multipart/form-data" id="postEditorForm" class="creator creator-sizing">
+            
+            <h2 class="text">Enter post title</h2>
             <div>
-                <input type="text" placeholder="Title" class="textbox" name="title">
+                <input type="text" placeholder=" Title" class="text create-textbox" name="title">
             </div>
             <!-- Debunk part -->
-            <label for="debunk_desc">Add debunk description</label><br>
-            <textarea id="debunk_desc" name="debunk_desc"
+            <label for="debunk_desc" class="text">Add debunk description</label><br>
+            <textarea id="debunk_desc" name="debunk_desc" class="text desc-textbox"
                 placeholder="Type debunk part of your post here"></textarea><br>
-            <label for="debunk_links">Add links to debunk</label><br>
-            <textarea id="debunk_links" name="debunk_links"
+            <label for="debunk_links" class="text">Add links to debunk</label><br>
+            <textarea id="debunk_links" name="debunk_links" class="text desc-textbox"
                 placeholder="Type debunk links here. Separate them with enter"></textarea><br>
-            <label for="debunk_images">Add debunk images here</label><br>
-            <input id="debunk_images" type="file" name="debunk_images" multiple /><br>
-            <label for="debunk_iframes">Add iframes to debunk</label><br>
-            <textarea id="debunk_iframes" name="debunk_iframes"
+            <label for="debunk_images" class="text">Add debunk images here</label><br>
+            <input id="debunk_images" type="file" name="debunk_images" class="text create-input" multiple /><br>
+            <label for="debunk_iframes" class="text">Add iframes to debunk</label><br>
+            <textarea id="debunk_iframes" name="debunk_iframes" class="text desc-textbox"
                 placeholder="Type debunk iframes here. Separate them with enter"></textarea><br>
             <!-- Fake part -->
-            <label for="fake_desc">Add fake description</label><br>
-            <textarea id="fake_desc" name="fake_desc" placeholder="Type fake part of your post here"></textarea><br>
-            <label for="fake_links">Add links to fake</label><br>
-            <textarea id="fake_links" name="fake_links"
+            <label for="fake_desc" class="text">Add fake description</label><br>
+            <textarea id="fake_desc" name="fake_desc" class="text desc-textbox"
+            placeholder="Type fake part of your post here"></textarea><br>
+            <label for="fake_links" class="text">Add links to fake</label><br>
+            <textarea id="fake_links" name="fake_links" class="text desc-textbox"
                 placeholder="Type fake links here. Separate them with enter."></textarea><br>
-            <label for="fake_images">Add fake images here</label><br>
-            <input id="fake_images" type="file" name="fake_images" multiple /><br>
-            <label for="fake_iframes">Add iframes to fake</label><br>
-            <textarea id="fake_iframes" name="fake_iframes"
+            <label for="fake_images" class="text">Add fake images here</label><br>
+            <input id="fake_images" type="file" name="fake_images" class="text" multiple /><br>
+            <label for="fake_iframes" class="text">Add iframes to fake</label><br>
+            <textarea id="fake_iframes" name="fake_iframes" class="text desc-textbox"
                 placeholder="Type fake iframes here. Separate them with enter"></textarea><br>
             <!-- post button -->
             <button id="finish" type="submit">Post</button>
         </form>
+
+        
     </body>
 
     </html>
