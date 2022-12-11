@@ -59,6 +59,13 @@ userSchema.statics.login = async function (_username, _password) {
 	}
 };
 
+userSchema.methods.incrementPermissionLevel = async function (){
+	if (this.permLevel < 3){
+		this.permLevel = this.permLevel + 1;
+	}
+	await this.save();
+}
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
