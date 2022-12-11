@@ -1,14 +1,14 @@
 <div class="comment">
     <h6 name="author" class="comment_author">
-        <%= comment.comment_author %>
+        <%= comment.author.username %>
     </h6>
-    <% if(comment.comment_father) { %>
+    <% if(comment.father) { %>
         <h6 name="Respond" class="comment_author">
-            <%= comment.comment_father %>>
+            <%= comment.father %>
         </h6>
         <% } %>
             <p name="comment_content" class="comment_text">
-                <%= comment.comment_content %>
+                <%= comment.content %>
             </p>
             <button id="coment_respond" type="button">Respond</button>
 </div>

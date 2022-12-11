@@ -12,47 +12,50 @@ const view_get = async (req, res) => {
 
 	//dummy comment
 	const comment_dummy_1 = {
-		_id: "asdfasdf",
-		authorID: "6394aea53ef9e6a269925f82",
-		postID: "6390eb28d94478039870ce56",
+		_id: 'asdfasdf',
+		authorID: '6394aea53ef9e6a269925f82',
+		postID: '6390eb28d94478039870ce56',
 		father: null,
-		content: "Nie zgadzam się z panem, bo pan je gupi jak paczka gwoździ"
-	}
+		content: 'Nie zgadzam się z panem, bo pan je gupi jak paczka gwoździ',
+	};
 
 	const comment_dummy_2 = {
-		_id: "asdfasdf2",
-		authorID: "6383b318e4c5926e80db2d6f",
-		postID: "6390eb28d94478039870ce56",
-		father: "asdfasdf",
-		content: "A ja z panem, bo gwoździe to nie ludzie, nie mogą być gupie więc co pan"
-	}
+		_id: 'asdfasdf2',
+		authorID: '6383b318e4c5926e80db2d6f',
+		postID: '6390eb28d94478039870ce56',
+		father: 'asdfasdf',
+		content:
+			'A ja z panem, bo gwoździe to nie ludzie, nie mogą być gupie więc co pan',
+	};
 
 	const comment_dummy_3 = {
-		_id: "asdfasdf3",
-		authorID: "6383b318e4c5926e80db2d6f",
-		postID: "6390eb28d94478039870ce56",
+		_id: 'asdfasdf3',
+		authorID: '6383b318e4c5926e80db2d6f',
+		postID: '6390eb28d94478039870ce56',
 		father: null,
-		content: "Fajny post, pozdrawiam z całą rodzinką"
-	}
+		content: 'Fajny post, pozdrawiam z całą rodzinką',
+	};
 
 	//TODO: read from db
 	let comments = [comment_dummy_1, comment_dummy_2, comment_dummy_3];
 
-	const comments_filled = await Promise.all(comments.map(async (comment) => {
-		let author = await User.findById(comment.authorID);
-		if(author) {
-			author.password = undefined;
-			author._id = null;
-			comment.author = author;
-		} else {
-			comment.author = "deleted";
-		}
-		
-		comment._id = undefined;
-		return comment;
-	}));
+	const comments_filled = await Promise.all(
+		comments.map(async (comment) => {
+			let author = await User.findById(comment.authorID);
+			if (author) {
+				author.password = undefined;
+				author._id = null;
+				comment.author = author;
+			} else {
+				comment.author = 'deleted';
+			}
 
-	console.log(comments_filled);
+			comment._id = undefined;
+			return comment;
+		})
+	);
+
+	//console.log(comments_filled);
 
 	//tmp dummy data starts
 	/*let today = new Date();
@@ -113,7 +116,12 @@ const view_get = async (req, res) => {
 		res.send('Invalid post!');
 	}*/
 
-	res.render('post/postView', { post, author_user, accepted_user, comments: comments_filled });
+	res.render('post/postView', {
+		post,
+		author_user,
+		accepted_user,
+		comments: comments_filled,
+	});
 };
 
 const create_get = (req, res) => {
@@ -171,23 +179,26 @@ const upvote_post = async (req, res) => {
 		return res.sendStatus(404);
 	}
 
-	post.toggleUpVoteAndSave(req.session.user.id).then(() => {
-		res.sendStatus(200);
-	}).catch(err => {
-		console.log(err);
-		res.sendStatus(500);
-	});
-}
+	post
+		.toggleUpVoteAndSave(req.session.user.id)
+		.then(() => {
+			res.sendStatus(200);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.sendStatus(500);
+		});
+};
 
 const downvote_post = async (req, res) => {
 	//TODO implement
 	res.sendStatus(501);
-}
+};
 
 module.exports = {
 	view_get,
 	create_get,
 	create_post,
 	upvote_post,
-	downvote_post
+	downvote_post,
 };
