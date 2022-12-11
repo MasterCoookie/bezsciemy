@@ -35,6 +35,9 @@ const view_get = async (req, res) => {
 		content: "Fajny post, pozdrawiam z całą rodzinką"
 	}
 
+	//TODO: read from db
+	const comments = [comment_dummy_1, comment_dummy_2, comment_dummy_3];
+
 	//tmp dummy data starts
 	/*let today = new Date();
 	const dd = String(today.getDate()).padStart(2, '0');
@@ -94,7 +97,7 @@ const view_get = async (req, res) => {
 		res.send('Invalid post!');
 	}*/
 
-	res.render('post/postView', { post, author_user, accepted_user });
+	res.render('post/postView', { post, author_user, accepted_user, comments });
 };
 
 const create_get = (req, res) => {
