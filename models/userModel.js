@@ -35,6 +35,10 @@ const userSchema = new Schema({
 		maxlength: [24, 'Your password must be shorter than 24 characters'],
 		validate: [pwdValid, 'Your password must contain both letters (lowercase and uppercase) and numbers']
 	},
+	permLevel: {
+		type: Number,
+		default: 1
+	}
 });
 
 userSchema.pre('save', async function(next) {
