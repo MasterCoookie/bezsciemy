@@ -161,6 +161,10 @@ button:hover{
     
 }
 
+.view{
+    display: flex;
+}
+
 .posted-by{
     font-size: 12px;
     font-weight: 100;
@@ -181,12 +185,13 @@ button:hover{
     padding: 20px;
     padding-top: 0px;
     padding-bottom: 40px;
-    position: absolute;
+    position: relative;
     max-width: 70%;
     margin-left: 15%;
     margin-right: 15%;
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     overflow: auto;
+    
     
 }
 
@@ -385,4 +390,60 @@ button[id=finish]{
     width: 30%;
     margin-left: 35%;
     margin-top: 15px;
+}
+
+.vote{
+    max-width:fit-content;
+}
+
+.comment-background{
+    text-align: left;
+    background-color:rgba(255,255,255,0.13);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    padding-top: 0px;
+    padding-bottom: 40px;
+    position: relative;
+    max-width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 20px;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    overflow: auto;
+}
+
+.comment-text{
+    font-weight: 200;
+    margin:5px;
+}
+.comment-author{
+    margin: 0px;
+    
+}
+
+button[id=coment-reply]{
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    max-width: 70px;
+    height: 40px;
+    padding: 0px;
+    
+
+    font-size: 14px;
+}
+
+.comment{
+    padding-top: 5px;
+    padding-left: 10px;
+}
+
+.comment:hover{
+    background-color:rgba(255,255,255,0.13);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(8,7,16,0.6);
 }
