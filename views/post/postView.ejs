@@ -3,9 +3,9 @@
     <body>
         <div style="display: flex;">
             <div class="vote">
+                <h4 id="vote-counter">NaN</h4> <!--Tu jest Licznik wyniku posta-->
                 <button onclick='sendUpVote(postID, "upvote")' id="upvote" type="button">Upvote</button>
                 <button onclick='sendUpVote(postID, "downvote")' id="downvote" type="button">Downvote</button>
-
             </div>
             <div>
 
@@ -90,6 +90,7 @@
                         <script> let postID = "<%= post._id %>";
                             console.log(postID);
                         </script>
+                        <button id="comment_button" type="button">Comment</button> <!--Tu jest dodany przycisk do komentarzy-->
                     </div>
                     <div class="comment-background">
                         <h2 class="text">Comments</h2>
