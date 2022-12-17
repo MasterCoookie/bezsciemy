@@ -4,5 +4,6 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
+router.get('/', contentListController.main_get);
 
 module.exports = router;
