@@ -13,6 +13,8 @@ const dbURI =
 
 const port = 3000;
 
+console.log("B E Z Ś C I E M Y server starting...");
+
 mongoose
 	.connect(dbURI, {
 		autoIndex: true
