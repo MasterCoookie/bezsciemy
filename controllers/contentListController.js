@@ -24,9 +24,21 @@ const main_get = async (req, res) => {
         page_number = 0;
     }
     // console.log(page_number);
-    const posts = await acquire_posts("main", page_number);
+    let posts = await acquire_posts("main", page_number);
+    posts = await Promise.all(
+        posts.map(async (post) => {
+            const new_post = post.toObject();
+
+            let author = await User.findById(post.author_id);
+            new_post.author_obj = author;
+
+            let accepted_by = await User.findById(post.accepted_by)
+            new_post.accepted_by = accepted_by;
+
+            return new_post;
+    }));
     // console.log(posts);
-    res.send("not implemented");
+    res.render('contentList/page', { posts });
 }
 
 module.exports = {
