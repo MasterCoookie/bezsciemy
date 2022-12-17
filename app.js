@@ -47,7 +47,7 @@ app.use(
 	})
 );
 
-app.use('/', authRoutes);
+app.use('/auth', authRoutes);
 app.use('/post', postRoutes);
 
 app.get('/', (req, res) => {
