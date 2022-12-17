@@ -17,9 +17,16 @@ const acquire_posts = async (query_type, page_number)  => {
 }
 
 const main_get = async (req, res) => {
-    //TODO page number
-    const posts = await acquire_posts("main", 0);
-    console.log(posts);
+    let page_number = req.params.page_number;
+    if(page_number > 0) {
+        --page_number;
+    } else {
+        page_number = 0;
+    }
+    // console.log(page_number);
+    const posts = await acquire_posts("main", page_number);
+    // console.log(posts);
+    res.send("not implemented");
 }
 
 module.exports = {
