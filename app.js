@@ -3,6 +3,7 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const postRoutes = require('./routes/postRoutes');
+const contentListRoutes = require('./routes/contentListRoutes');
 const secret = require('./secret');
 // const store = new session.MemoryStore();
 
@@ -12,6 +13,8 @@ const dbURI =
 	'mongodb+srv://bezsciemy-express:' + secret.dbPWD + '@bezsciemy-main.ydqazk8.mongodb.net/?retryWrites=true&w=majority';
 
 const port = 3000;
+
+console.log("B E Z Ś C I E M Y server starting...");
 
 mongoose
 	.connect(dbURI, {
@@ -45,9 +48,6 @@ app.use(
 	})
 );
 
-app.use('/', authRoutes);
+app.use('/', contentListRoutes);
+app.use('/auth', authRoutes);
 app.use('/post', postRoutes);
-
-app.get('/', (req, res) => {
-	res.send('<h1>Witamy na B E Z Ś C I E M Y</h1>');
-});

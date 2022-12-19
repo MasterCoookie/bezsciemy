@@ -15,6 +15,7 @@ const postSchema = new Schema({
     accepted_by: {
         type: Schema.Types.ObjectId
     },
+    accepted_at: Date,
     fake_desc:      String,
     fake_links:    [String],
     fake_images:   [String],

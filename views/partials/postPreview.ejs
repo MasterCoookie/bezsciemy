@@ -1,0 +1,9 @@
+<div class="postPreview">
+    <a href="http://localhost:3000/view?<%= post._id %>" name="title" class="text_title_postTitle">
+        <%= post.title %>
+    </a>
+    <p class="text debunk_desc">
+        <%= post.debunk_desc %>
+    </p>
+    <img class="content-image" src="/uploads/<%= post.debunk_images[0] %>">
+</div>

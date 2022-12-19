@@ -18,7 +18,7 @@ window.addEventListener('load', () => {
 			document.getElementById('message').innerHTML = 'An error occured.';
 		});
 
-		request.open('POST', 'http://localhost:3000/login', true);
+		request.open('POST', 'http://localhost:3000/auth/login', true);
 		request.send(formData);
 	}
 	const loginForm = document.getElementById('loginForm');
