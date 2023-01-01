@@ -1,17 +1,16 @@
 const User = require('../models/userModel');
 const Post = require('../models/postModel');
 const Comment = require('../models/commentModel');
+var ObjectId = require('mongodb').ObjectId; 
 
 const acquire_comments = async (post_id, page_number)  => {
     let comments;
     const paginate = page_number * 10;
     try {
-        if(query_type == nil) {
-            comments = await Comment.find({ 
-                fatherID: { $exists: false },
-                postID: post_id
-             }).skip(paginate).limit(10)//.sort({ accepted_at: 'desc' });
-        }
+        comments = await Comment.find({ 
+           fatherID: { $exists: false },
+           postID: post_id
+        }).skip(paginate).limit(10)//.sort({ accepted_at: 'desc' });
     } catch (err) {
         console.log(err);
     }
@@ -34,13 +33,16 @@ const acquire_replies = async (father_id, page_number) => {
         limit_ = 10
     }
     try {
-        if(query_type == nil) {
-            replies = await Comment.find({ 
-                fatherID: father_id,
-             }).skip(paginate).limit(limit_)//.sort({ accepted_at: 'desc' });
-        }
+        replies = await Comment.find({ 
+            fatherID: father_id
+        }).skip(paginate).limit(limit_)//.sort({ accepted_at: 'desc' });
     } catch (err) {
         console.log(err);
     }
     return replies;
 }
+
+module.exports = {
+    acquire_comments,
+    acquire_replies
+};

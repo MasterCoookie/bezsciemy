@@ -1,5 +1,8 @@
 const User = require('../models/userModel');
 const Post = require('../models/postModel');
+const Comment = require('../models/commentModel');
+const commentController = require('../controllers/commentController');
+
 
 const view_get = async (req, res) => {
 	const post_id = req.query.id;
@@ -10,7 +13,9 @@ const view_get = async (req, res) => {
 		return res.sendStatus(404);
 	}
 
-	//dummy comment
+	//dummy comments
+	//not needed
+	/*
 	const comment_dummy_1 = {
 		_id: 'asdfasdf',
 		authorID: '6394aea53ef9e6a269925f82',
@@ -35,10 +40,21 @@ const view_get = async (req, res) => {
 		fatherID: null,
 		content: 'Fajny post, pozdrawiam z całą rodzinką',
 	};
-
-	//TODO: read from db
-	let comments = [comment_dummy_1, comment_dummy_2, comment_dummy_3];
-
+	*/
+	//DONE :) : read from db
+	//let comments = [comment_dummy_1, comment_dummy_2, comment_dummy_3];
+	
+	let comments = await commentController.acquire_comments(post_id, 0)
+	for (let i = 0; i < comments.length; i++) {
+		const firstReply = await commentController.acquire_replies(comments[i]._id, -1)
+		//console.log(firstReply)
+		//console.log(comments[i]._id)
+		if (firstReply.length > 0){
+			comments.splice(i + 1, 0, firstReply[0])
+			i++;
+		}
+		//console.log(comments)
+	}
 	const comments_filled = await Promise.all(
 		comments.map(async (comment) => {
 			let author = await User.findById(comment.authorID);
@@ -49,13 +65,17 @@ const view_get = async (req, res) => {
 			} else {
 				comment.author = 'deleted';
 			}
-
+			let parentPost = await Comment.findById(comment.fatherID)
+			if (parentPost){
+				 father_author = await User.findById(parentPost.authorID);
+				 comment.father = father_author.username
+			}
 			comment._id = undefined;
 			return comment;
 		})
 	);
 
-	//console.log(comments_filled);
+	//console.log(await comments_filled)
 
 	//tmp dummy data starts
 	/*let today = new Date();

@@ -14,7 +14,6 @@ const pwdValid = (password) => {
 }
 
 const userSchema = new Schema({
-	//todo: extend model
 	username: {
 		type: String,
 		required: [true, 'Please enter a username'],
