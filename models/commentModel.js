@@ -10,7 +10,7 @@ const commentSchema = new Schema({
         type: Schema.Types.ObjectId,
 		required: true
     },
-    father: Schema.Types.ObjectId,
+    fatherID: Schema.Types.ObjectId,
     content: {
         type: String,
 		required: true

@@ -15,7 +15,7 @@ const view_get = async (req, res) => {
 		_id: 'asdfasdf',
 		authorID: '6394aea53ef9e6a269925f82',
 		postID: '6390eb28d94478039870ce56',
-		father: null,
+		fatherID: null,
 		content: 'Nie zgadzam się z panem, bo pan je gupi jak paczka gwoździ',
 	};
 
@@ -23,7 +23,7 @@ const view_get = async (req, res) => {
 		_id: 'asdfasdf2',
 		authorID: '6383b318e4c5926e80db2d6f',
 		postID: '6390eb28d94478039870ce56',
-		father: 'asdfasdf',
+		fatherID: 'asdfasdf',
 		content:
 			'A ja z panem, bo gwoździe to nie ludzie, nie mogą być gupie więc co pan',
 	};
@@ -32,7 +32,7 @@ const view_get = async (req, res) => {
 		_id: 'asdfasdf3',
 		authorID: '6383b318e4c5926e80db2d6f',
 		postID: '6390eb28d94478039870ce56',
-		father: null,
+		fatherID: null,
 		content: 'Fajny post, pozdrawiam z całą rodzinką',
 	};
 
