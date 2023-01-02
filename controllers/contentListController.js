@@ -61,7 +61,12 @@ const waiting_room_get = async (req, res) => {
     res.render('contentList/page', { posts });
 }
 
+const hall_of_fame_get = async (req, res) => {
+
+}
+
 module.exports = {
     main_get,
-    waiting_room_get
+    waiting_room_get,
+    hall_of_fame_get
 };
