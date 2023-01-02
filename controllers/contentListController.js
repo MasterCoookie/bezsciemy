@@ -7,24 +7,13 @@ const acquire_posts = async (query_type, page_number)  => {
     try {
         if(query_type === "main") {
             posts = await Post.find({ accepted_by: { $exists: true } }).skip(paginate).limit(10).sort({ accepted_at: 'desc' });
+        } else if(query_type === "waiting_room")  {
+            posts = await Post.find({ accepted_by: { $exists: false } }).skip(paginate).limit(10);//TODO, order
         }
     } catch (err) {
         console.log(err);
     }
-    
 
-    return posts;
-}
-
-const main_get = async (req, res) => {
-    let page_number = req.params.page_number;
-    if(page_number > 0) {
-        --page_number;
-    } else {
-        page_number = 0;
-    }
-    // console.log(page_number);
-    let posts = await acquire_posts("main", page_number);
     posts = await Promise.all(
         posts.map(async (post) => {
             const new_post = post.toObject();
@@ -37,10 +26,39 @@ const main_get = async (req, res) => {
 
             return new_post;
     }));
-    // console.log(posts);
+    
+
+    return posts;
+}
+
+const calculate_page_number = page_number => {
+    if(page_number > 0) {
+        --page_number;
+    } else {
+        page_number = 0;
+    }
+    return page_number;
+}
+
+const main_get = async (req, res) => {
+    let page_number = calculate_page_number(req.params.page_number);
+    // console.log(page_number);
+    const posts = await acquire_posts("main", page_number);
+    
+    console.log(posts);
+    res.render('contentList/page', { posts });
+}
+
+const waiting_room_get = async (req, res) => {
+    let page_number = calculate_page_number(req.params.page_number);
+    // console.log(page_number);
+    const posts = await acquire_posts("waiting_room", page_number);
+    
+    console.log(posts);
     res.render('contentList/page', { posts });
 }
 
 module.exports = {
-    main_get
+    main_get,
+    waiting_room_get
 };
