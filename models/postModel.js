@@ -26,7 +26,7 @@ const postSchema = new Schema({
     debunk_iframes:[String],
     upVotes: [Schema.Types.ObjectId],
     downVotes: [Schema.Types.ObjectId]
-});
+}, { strict: false });
 
 postSchema.methods.acceptPostAndSave = async function(_user){
     this.accepted_by = _user;
