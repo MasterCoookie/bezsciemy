@@ -2,7 +2,7 @@ const User = require('../models/userModel');
 const Post = require('../models/postModel');
 
 const modify_users = async (post_no_users, is_accepted) => {
-    const post_with_users = await Promise.all(
+    return await Promise.all(
         post_no_users.map(async (post) => {
             const new_post = post.toObject();
 
@@ -17,8 +17,6 @@ const modify_users = async (post_no_users, is_accepted) => {
 
             return new_post;
     }));
-
-    return post_with_users;
 }
 
 const acquire_posts = async (query_type, page_number)  => {
