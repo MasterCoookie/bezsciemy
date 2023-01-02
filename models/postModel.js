@@ -66,6 +66,10 @@ postSchema.methods.getVote = async function (_userID){
     } else return 0;
 }
 
+postSchema.post('init', function (req, res, next) {
+    this.score = this.upVotes.length -  this.downVotes.length;
+})
+
 const Post = mongoose.model('Post', postSchema);
 
 module.exports = Post;

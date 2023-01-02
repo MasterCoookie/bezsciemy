@@ -26,6 +26,9 @@ const acquire_posts = async (query_type, page_number)  => {
             posts = await Post.find({ accepted_by: { $exists: true } }).skip(paginate).limit(10).sort({ accepted_at: 'desc' });
         } else if(query_type === 'waiting_room')  {
             posts = await Post.find({ accepted_by: { $exists: false } }).skip(paginate).limit(10);//TODO, order
+        } else if(query_type === 'hall_of_fame') {
+            posts = await Post.find({ accepted_by: { $exists: true } }).skip(paginate).limit(10).sort({ accepted_at: 'desc' });
+            // posts = posts.filter(post => post.)
         }
     } catch (err) {
         console.log(err);
@@ -62,7 +65,11 @@ const waiting_room_get = async (req, res) => {
 }
 
 const hall_of_fame_get = async (req, res) => {
-
+    let page_number = calculate_page_number(req.params.page_number);
+    const posts = await acquire_posts("hall_of_fame", page_number);
+    
+    // console.log(posts);
+    res.render('contentList/page', { posts });
 }
 
 module.exports = {
