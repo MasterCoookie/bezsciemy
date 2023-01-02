@@ -14,7 +14,6 @@ const modify_users = async (post_no_users, is_accepted) => {
                 new_post.accepted_by = accepted_by;
             }
             
-
             return new_post;
     }));
 }
@@ -32,7 +31,7 @@ const acquire_posts = async (query_type, page_number)  => {
         console.log(err);
     }
 
-    posts = await modify_users(posts, (query_type !== 'waiting_room'));
+    posts = await modify_users(posts, query_type !== 'waiting_room');
     
     return posts;
 }
@@ -48,7 +47,6 @@ const calculate_page_number = page_number => {
 
 const main_get = async (req, res) => {
     let page_number = calculate_page_number(req.params.page_number);
-    // console.log(page_number);
     const posts = await acquire_posts("main", page_number);
     
     console.log(posts);
@@ -57,7 +55,6 @@ const main_get = async (req, res) => {
 
 const waiting_room_get = async (req, res) => {
     let page_number = calculate_page_number(req.params.page_number);
-    // console.log(page_number);
     const posts = await acquire_posts("waiting_room", page_number);
     
     console.log(posts);

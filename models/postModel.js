@@ -33,7 +33,6 @@ postSchema.methods.acceptPostAndSave = async function(_user){
     await this.save();
 }
 
-//DONE: chaged _user to _userID
 postSchema.methods.toggleUpVoteAndSave = async function (_userID){
     if (this.upVotes.includes(_userID)) { //remove upvote
         this.upVotes.splice(this.upVotes.indexOf(_userID), 1);
