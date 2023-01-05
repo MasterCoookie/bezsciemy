@@ -28,30 +28,28 @@ const acquire_posts = async (query_type, page_number)  => {
             posts = await Post.find({ accepted_by: { $exists: false } }).skip(paginate).limit(10);//TODO, order
         } else if(query_type === 'hall_of_fame') {
             posts = await Post.aggregate([
-                {
-                  $project: {
-                    "plusy": {
+              {
+                $match: {
+                  accepted_by: { $exists: true }
+              }
+              }, {
+                $project: {
+                  "upVotesCount": {
+                    $size: "$upVotes"
+                  },
+                  "downVotesCount": {
+                    $size: "$downVotes"
+                  },
+                  "grade": {
+                    $subtract: [{
                       $size: "$upVotes"
-                    },
-                    "minusy": {
+                    }, {
                       $size: "$downVotes"
-                    }, "grade": {
-                      $subtract: [{
-                        $size: "$upVotes"
-                      }, {
-                        $size: "$downVotes"
-                      }]
-                    }
+                    }]
                   }
-                },
-                // {
-                //   $sort: {
-                //     "grade": 'desc'
-                //   }
-                // }
+                }
+              },
               ]).sort({"grade": 'desc'})
-            //posts = await posts.projection().sort({"grade": 'desc'})//.skip(paginate).limit(10);
-            // posts = posts.sort({"grade": 'desc'})
         }
     } catch (err) {
         console.log(err);
