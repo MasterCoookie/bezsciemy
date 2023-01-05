@@ -27,13 +27,36 @@ const acquire_posts = async (query_type, page_number)  => {
         } else if(query_type === 'waiting_room')  {
             posts = await Post.find({ accepted_by: { $exists: false } }).skip(paginate).limit(10);//TODO, order
         } else if(query_type === 'hall_of_fame') {
-            posts = await Post.find({ accepted_by: { $exists: true } }).skip(paginate).limit(10).sort({ accepted_at: 'desc' });
-            // posts = posts.filter(post => post.)
+            posts = await Post.aggregate([
+                {
+                  $project: {
+                    "plusy": {
+                      $size: "$upVotes"
+                    },
+                    "minusy": {
+                      $size: "$downVotes"
+                    }, "grade": {
+                      $subtract: [{
+                        $size: "$upVotes"
+                      }, {
+                        $size: "$downVotes"
+                      }]
+                    }
+                  }
+                },
+                // {
+                //   $sort: {
+                //     "grade": 'desc'
+                //   }
+                // }
+              ]).sort({"grade": 'desc'})
+            //posts = await posts.projection().sort({"grade": 'desc'})//.skip(paginate).limit(10);
+            // posts = posts.sort({"grade": 'desc'})
         }
     } catch (err) {
         console.log(err);
     }
-
+    console.log(posts);
     posts = await modify_users(posts, query_type !== 'waiting_room');
     
     return posts;
