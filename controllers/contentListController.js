@@ -4,17 +4,17 @@ const Post = require('../models/postModel');
 const modify_users = async (post_no_users, is_accepted) => {
     return await Promise.all(
         post_no_users.map(async (post) => {
-            const new_post = post.toObject();
+            // const new_post = post.toObject();
 
             let author = await User.findById(post.author_id);
-            new_post.author_obj = author;
+            post.author_obj = author;
             
             if(is_accepted) {
                 let accepted_by = await User.findById(post.accepted_by)
-                new_post.accepted_by = accepted_by;
+                post.accepted_by = accepted_by;
             }
             
-            return new_post;
+            return post;
     }));
 }
 
@@ -24,8 +24,10 @@ const acquire_posts = async (query_type, page_number)  => {
     try {
         if(query_type === 'main') {
             posts = await Post.find({ accepted_by: { $exists: true } }).skip(paginate).limit(10).sort({ accepted_at: 'desc' });
+            posts = posts.map(post => post.toObject());
         } else if(query_type === 'waiting_room')  {
             posts = await Post.find({ accepted_by: { $exists: false } }).skip(paginate).limit(10);//TODO, order
+            posts = posts.map(post => post.toObject());
         } else if(query_type === 'hall_of_fame') {
             posts = await Post.aggregate([
               {
@@ -48,13 +50,12 @@ const acquire_posts = async (query_type, page_number)  => {
                     }]
                   }
                 }
-              },
-              ]).sort({"grade": 'desc'})
+              }]).sort({"grade": 'desc'})
         }
     } catch (err) {
         console.log(err);
     }
-    console.log(posts);
+    // console.log(posts);
     posts = await modify_users(posts, query_type !== 'waiting_room');
     
     return posts;
@@ -89,7 +90,7 @@ const hall_of_fame_get = async (req, res) => {
     let page_number = calculate_page_number(req.params.page_number);
     const posts = await acquire_posts("hall_of_fame", page_number);
     
-    // console.log(posts);
+    console.log(posts);
     res.render('contentList/page', { posts });
 }
 
