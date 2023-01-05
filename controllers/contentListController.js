@@ -35,7 +35,7 @@ const acquire_posts = async (query_type, page_number)  => {
                   accepted_by: { $exists: true }
               }
               }, {
-                $project: {
+                $addFields: {
                   "upVotesCount": {
                     $size: "$upVotes"
                   },
