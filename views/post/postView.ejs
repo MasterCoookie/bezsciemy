@@ -13,7 +13,7 @@
                     <div class="post" class>
                         <p class="text posted-by">Posted <%=post.created%> by: <%=post.author_id%>
                         </p>
-            
+
                         <h1 name="title" class="text title postTitle">
                             <%= post.title %>
                         </h1>
@@ -32,17 +32,17 @@
                                     </li>
                                     <% }); %>
                             </ul>
-            
-            
+
+
                             <div class="grid-container debunkImage-list">
                                 <% post.debunk_images.forEach(element=> { %>
-            
+
                                     <div class="grid-item">
                                         <img class="content-image" src="/uploads/<%= element %>">
                                     </div>
                                     <% }); %>
                             </div>
-            
+
                             <ul class="debunkIframe-list">
                                 <li>
                                     <% post.debunk_iframes.forEach(element=> { %>
@@ -51,7 +51,7 @@
                                 </li>
                             </ul>
                         </div>
-            
+
                         <div class="fake-part">
                             <h3 class="text fake-title">Fake part</h3>
                             <p name="text" class="text fake-desc">
@@ -66,7 +66,7 @@
                                     </li>
                                     <% }); %>
                             </ul>
-            
+
                             <div class="grid-container fakeImage-list">
                                 <% post.fake_images.forEach(element=> { %>
                                     <div class="grid-item">
@@ -74,7 +74,7 @@
                                     </div>
                                     <% }); %>
                             </div>
-            
+
                             <ul class="fakeIframe-list">
                                 <li>
                                     <% post.fake_iframes.forEach(element=> { %>
@@ -82,26 +82,37 @@
                                             <% }); %>
                                 </li>
                             </ul>
-            
+
                         </div>
                         <p class="text posted-by">Accepted <%=post.created%> by: <%=post.accepted_by%>
                         </p>
                         <script src="../../scripts/voting-scripts.js"></script>
+                        <script src="../../scripts/comment-formula-script.js"></script>
                         <script> let postID = "<%= post._id %>";
                             console.log(postID);
                         </script>
-                        <button id="comment_button" type="button">Comment</button> <!--Tu jest dodany przycisk do komentarzy-->
+                        <button onclick='comment()' id="comment_button" type="button">Comment</button>
+                        <form id="comment-form" style="display: none;">
+                            <div class="commentEditor">
+                                <label for="new-comment" class="text">Type your comment here</label><br>
+                                <textarea id="new-comment" name="new-comment"
+                                    placeholder="Write your comment"></textarea><br>
+                                <button id="add-comment" type="button">Add</button>
+                            </div>
+                        </form>
+                        <!--Tu jest dodany przycisk do komentarzy-->
+                        <div id="comment-formula"></div>
                     </div>
                     <div class="comment-background">
                         <h2 class="text">Comments</h2>
                         <% comments.forEach(function(comment){ %>
-                            <%- include('../partials/comment.ejs', {comment: comment}); %>
+                            <%- include(' ../partials/comment.ejs', {comment: comment}); %>
                                 <% }); %>
-        
+
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
 
