@@ -23,6 +23,6 @@ router.post("/create", [upload_debunk_images_middleware, authMiddleware.require_
 router.post("/upvote", authMiddleware.require_login, postController.upvote_post);
 router.post("/downvote", authMiddleware.require_login, postController.downvote_post);
 
-router.put("/comment", commentController.comments_put);
+router.put("/comment", commentController.comment_put);
 
 module.exports = router;
