@@ -1,3 +1,4 @@
+//TODO wyjebać te importy
 const User = require('../models/userModel');
 const Post = require('../models/postModel');
 const Comment = require('../models/commentModel');
@@ -42,7 +43,12 @@ const replies_get = async (father_id, page_number) => {
     return replies;
 }
 
+const comment_put = async (req, res) => {
+    res.sendStatus(501);
+}
+
 module.exports = {
     comments_get,
-    replies_get
+    replies_get,
+    comment_put
 };
