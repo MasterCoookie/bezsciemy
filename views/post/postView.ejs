@@ -88,17 +88,16 @@
                         </p>
                         <script src="../../scripts/voting-scripts.js"></script>
                         <script src="../../scripts/comment-formula-script.js"></script>
-                        <script></script>
+                        <script src="../../scripts/comment-send-script.js"></script>
                         <script> let postID = "<%= post._id %>";
                             console.log(postID);
                         </script>
                         <button onclick='comment()' id="comment_button" type="button">Comment</button>
                         <form id="comment-form" style="display: none;">
                             <div class="commentEditor">
-                                <label for="new-comment" class="text">Type your comment here</label><br>
-                                <textarea id="new-comment" name="new-comment"
-                                    placeholder="Write your comment"></textarea><br>
-                                <button id="add-comment" type="submit">Add</button>
+                                <label for="content" class="text">Type your comment here</label><br>
+                                <textarea id="content" name="content" placeholder="Write your comment"></textarea><br>
+                                <button onclick='sendComment(postID, "no")' id="add-comment" type="button">Add</button>
                             </div>
                         </form>
                         <!--Tu jest dodany przycisk do komentarzy-->

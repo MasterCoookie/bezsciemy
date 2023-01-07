@@ -1,11 +1,11 @@
-/*window.addEventListener('load', () => {
-	function sendComment() {
-		const formData = new FormData(commentForm);
-		console.log(formData);
-	}
+function sendComment(postID, ifReply) {
 	const commentForm = document.getElementById('comment-form');
-	commentForm.addEventListener('submit', (event) => {
-		event.preventDefault();
-		sendComment();
-	});
-});*/
+	const formData = new FormData(commentForm);
+	formData.append('postID', postID);
+	if (ifReply === 'no') {
+		const request = new XMLHttpRequest();
+		request.open('PUT', '/post/comment');
+		request.send(formData);
+	}
+	console.log(formData.get('content'));
+}
