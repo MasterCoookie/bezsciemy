@@ -3,9 +3,9 @@ function sendUpVote(postID, voteType) {
 	const data = JSON.stringify({ postID: postID });
 	console.log(data);
 	if (voteType === 'upvote') {
-		request.open('POST', 'http://localhost:3000/post/upvote', true);
+		request.open('POST', '/post/upvote', true);
 	} else {
-		request.open('POST', 'http://localhost:3000/post/downvote', true);
+		request.open('POST', '/post/downvote', true);
 	}
 	request.setRequestHeader('Content-Type', 'application/json');
 	request.addEventListener('load', (event) => {

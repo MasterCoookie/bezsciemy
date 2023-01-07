@@ -3,7 +3,6 @@ const Post = require('../models/postModel');
 const Comment = require('../models/commentModel');
 const commentController = require('../controllers/commentController');
 
-
 const view_get = async (req, res) => {
 	const post_id = req.query.id;
 
@@ -43,14 +42,14 @@ const view_get = async (req, res) => {
 	*/
 	//DONE :) : read from db
 	//let comments = [comment_dummy_1, comment_dummy_2, comment_dummy_3];
-	
-	let comments = await commentController.acquire_comments(post_id, 0)
+
+	let comments = await commentController.comments_get(post_id, 0);
 	for (let i = 0; i < comments.length; i++) {
-		const firstReply = await commentController.acquire_replies(comments[i]._id, -1)
+		const firstReply = await commentController.replies_get(comments[i]._id, -1);
 		//console.log(firstReply)
 		//console.log(comments[i]._id)
-		if (firstReply.length > 0){
-			comments.splice(i + 1, 0, firstReply[0])
+		if (firstReply.length > 0) {
+			comments.splice(i + 1, 0, firstReply[0]);
 			i++;
 		}
 		//console.log(comments)
@@ -65,10 +64,10 @@ const view_get = async (req, res) => {
 			} else {
 				comment.author = 'deleted';
 			}
-			let parentPost = await Comment.findById(comment.fatherID)
-			if (parentPost){
-				 father_author = await User.findById(parentPost.authorID);
-				 comment.father = father_author.username
+			let parentPost = await Comment.findById(comment.fatherID);
+			if (parentPost) {
+				father_author = await User.findById(parentPost.authorID);
+				comment.father = father_author.username;
 			}
 			comment._id = undefined;
 			return comment;
@@ -161,7 +160,7 @@ const create_post = async (req, res, next) => {
 	} = req.body;
 
 	let { debunk_images, fake_images } = req.files;
-
+	//todo handle no images
 	debunk_images = debunk_images.map((image) => image.filename);
 	fake_images = fake_images.map((image) => image.filename);
 	// console.log(debunk_images);

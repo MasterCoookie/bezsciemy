@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
 			const response = JSON.parse(event.target.responseText);
 			console.log(response);
 			if (response.authenticated) {
-				window.location.href = 'http://localhost:3000/post/create';
+				window.location.href = '/post/create';
 			} else {
 				document.getElementById('message').innerHTML = 'Login failed.';
 			}
@@ -18,7 +18,7 @@ window.addEventListener('load', () => {
 			document.getElementById('message').innerHTML = 'An error occured.';
 		});
 
-		request.open('POST', 'http://localhost:3000/auth/login', true);
+		request.open('POST', '/auth/login', true);
 		request.send(formData);
 	}
 	const loginForm = document.getElementById('loginForm');

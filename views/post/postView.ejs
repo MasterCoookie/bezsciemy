@@ -88,6 +88,7 @@
                         </p>
                         <script src="../../scripts/voting-scripts.js"></script>
                         <script src="../../scripts/comment-formula-script.js"></script>
+                        <script></script>
                         <script> let postID = "<%= post._id %>";
                             console.log(postID);
                         </script>
@@ -97,7 +98,7 @@
                                 <label for="new-comment" class="text">Type your comment here</label><br>
                                 <textarea id="new-comment" name="new-comment"
                                     placeholder="Write your comment"></textarea><br>
-                                <button id="add-comment" type="button">Add</button>
+                                <button id="add-comment" type="submit">Add</button>
                             </div>
                         </form>
                         <!--Tu jest dodany przycisk do komentarzy-->
@@ -106,9 +107,8 @@
                     <div class="comment-background">
                         <h2 class="text">Comments</h2>
                         <% comments.forEach(function(comment){ %>
-                            <%- include(' ../partials/comment.ejs', {comment: comment}); %>
+                            <%- include('../partials/comment.ejs', {comment: comment}); %>
                                 <% }); %>
-
                     </div>
                 </div>
             </div>
