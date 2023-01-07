@@ -3,7 +3,7 @@ const Post = require('../models/postModel');
 const Comment = require('../models/commentModel');
 var ObjectId = require('mongodb').ObjectId; 
 
-const acquire_comments = async (post_id, page_number)  => {
+const comments_get = async (post_id, page_number)  => {
     let comments;
     const paginate = page_number * 10;
     try {
@@ -18,7 +18,7 @@ const acquire_comments = async (post_id, page_number)  => {
 }
 
 // page -1 is used to get the first reply
-const acquire_replies = async (father_id, page_number) => {
+const replies_get = async (father_id, page_number) => {
     let replies;
     let limit_;
     let paginate;
@@ -43,6 +43,6 @@ const acquire_replies = async (father_id, page_number) => {
 }
 
 module.exports = {
-    acquire_comments,
-    acquire_replies
+    comments_get,
+    replies_get
 };
