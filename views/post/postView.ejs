@@ -86,18 +86,14 @@
                         </div>
                         <p class="text posted-by">Accepted <%=post.created%> by: <%=post.accepted_by%>
                         </p>
-                        <script src="../../scripts/voting-scripts.js"></script>
-                        <script src="../../scripts/comment-formula-script.js"></script>
-                        <script src="../../scripts/comment-send-script.js"></script>
                         <script> let postID = "<%= post._id %>";
-                            console.log(postID);
                         </script>
                         <button onclick='comment()' id="comment_button" type="button">Comment</button>
                         <form id="comment-form" style="display: none;">
                             <div class="commentEditor">
                                 <label for="content" class="text">Type your comment here</label><br>
                                 <textarea id="content" name="content" placeholder="Write your comment"></textarea><br>
-                                <button onclick='sendComment(postID, "no")' id="add-comment" type="button">Add</button>
+                                <button onclick='sendComment(postID)' id="add-comment" type="button">Add</button>
                             </div>
                         </form>
                         <!--Tu jest dodany przycisk do komentarzy-->
@@ -107,13 +103,42 @@
                         <h2 class="text">Comments</h2>
                         <% comments.forEach(function(comment){ %>
                             <%- include('../partials/comment.ejs', {comment: comment}); %>
+                                <form id="<%= comment.id %>">
+                                    <input type="hidden" value="<%= comment.id%>">
+                                    <button class="reply-button" type="button">
+                                        Reply</button>
+                                    <div class="commentEditor" id="commentEditor-<%=comment.id %>" style="display:
+                                        none;">
+                                        <label for="content" class="text">Type your comment here</label><br>
+                                        <textarea id="content" name="content"
+                                            placeholder="Write your comment"></textarea><br>
+                                        <button class="reply-to-comment" type="button">Add</button>
+                                    </div>
+                                </form>
                                 <% }); %>
                     </div>
                 </div>
             </div>
 
         </div>
+        <script src="../../scripts/voting-scripts.js"></script>
+        <script src="../../scripts/comment-formula-script.js"></script>
+        <script src="../../scripts/comment-send-script.js"></script>
+        <script>Array.from(document.getElementsByClassName('reply-button')).forEach(
+                (element) => {
+                    element.addEventListener('click', (e) => {
+                        reply(e);
+                    });
+                }
+            );</script>
 
+        <script>Array.from(document.getElementsByClassName('reply-to-comment')).forEach(
+                (element) => {
+                    element.addEventListener('click', (event) => {
+                        sendReply(event, postID);
+                    });
+                }
+            );</script>
 
     </body>
 
