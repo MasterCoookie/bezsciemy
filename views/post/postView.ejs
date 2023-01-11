@@ -3,7 +3,9 @@
     <body>
         <div style="display: flex;">
             <div class="vote">
-                <h4 id="vote-counter">NaN</h4> <!--Tu jest Licznik wyniku posta-->
+                <h4 id="vote-counter">
+                    <%= post.upVotes.length - post.downVotes.length %>
+                </h4> <!--Tu jest Licznik wyniku posta-->
                 <button onclick='sendUpVote(postID, "upvote")' id="upvote" type="button">Upvote</button>
                 <button onclick='sendUpVote(postID, "downvote")' id="downvote" type="button">Downvote</button>
             </div>
