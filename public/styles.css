@@ -441,3 +441,13 @@ button[id='upvote']:hover {
 button[id='downvote']:hover {
 	background-color: rgb(255, 50, 50);
 }
+
+::placeholder {
+	/*god i love front-end...*/
+	color: white;
+	opacity: 1;
+}
+
+::-ms-input-placeholder {
+	color: white;
+}
