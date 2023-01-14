@@ -206,7 +206,7 @@ const create_post = async (req, res, next) => {
 };
 
 const upvote_post = async (req, res) => {
-	console.log(req.body.postID);
+	// console.log(req.body.postID);
 	const post_id = req.body.postID;
 	const post = await Post.findById(post_id);
 
@@ -214,20 +214,32 @@ const upvote_post = async (req, res) => {
 		return res.sendStatus(404);
 	}
 
-	post
-		.toggleUpVoteAndSave(req.session.user.id)
-		.then(() => {
-			res.sendStatus(200);
-		})
-		.catch((err) => {
+	post.toggleUpVoteAndSave(req.session.user.id)
+		.then(async () => {
+			votes = await post.getSumOfVotes()
+			res.json({ votes  })
+		}).catch((err) => {
 			console.log(err);
 			res.sendStatus(500);
 		});
 };
 
 const downvote_post = async (req, res) => {
-	//TODO implement
-	res.sendStatus(501);
+	const post_id = req.body.postID;
+	const post = await Post.findById(post_id);
+
+	if (!post) {
+		return res.sendStatus(404);
+	}
+
+	post.toggleDownVoteAndSave(req.session.user.id)
+		.then(async () => {
+			votes = await post.getSumOfVotes()
+			res.json({ votes })
+		}).catch((err) => {
+			console.log(err);
+			res.sendStatus(500);
+		});
 };
 
 module.exports = {
