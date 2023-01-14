@@ -5,9 +5,9 @@ body {
 body {
 	height: auto;
 	width: auto;
-	background-image: url('bezsciemy.png');
+	/* background-image: url('bezsciemy.png');
 	background-repeat: repeat-x;
-	background-size: 300px;
+	background-size: 300px; */
 }
 
 .loginTitle {
@@ -60,7 +60,7 @@ body {
 	width: 85%;
 }
 
-button {
+button[type="button"] {
 	background-color: white;
 	color: black;
 	padding: 15px 0;
@@ -75,7 +75,7 @@ button {
 	transition: width 0.2s ease-in-out;
 }
 
-button:hover {
+button:hover[type="button"]{
 	opacity: 0.8;
 	width: 82%;
 }
@@ -177,6 +177,7 @@ button:hover {
 	padding-bottom: 40px;
 	position: relative;
 	max-width: 70%;
+	margin-top: 25px;
 	margin-left: 20px;
 	margin-right: 15%;
 	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
@@ -210,7 +211,7 @@ button:hover {
 	font-family: 'Poppins', sans-serif;
 }
 
-a:visited {
+a:visited [class="ext-link"] {
 	color: #3366cc;
 }
 
@@ -372,6 +373,8 @@ button[id='finish'] {
 	border: none;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(8, 7, 16, 0.6);
+	margin-top: 25px;
+
 	margin-left: 250px;
 	padding-right: -10%;
 	padding: 0px;
