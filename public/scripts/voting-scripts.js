@@ -13,11 +13,19 @@ function sendUpVote(postID, voteType) {
 		console.log(response);
 		if (response.status === 200) {
 			console.log('Success');
-			document.getElementById('vote-message').innerHTML = 'Vote sent.';
+			console.log(response);
+			if (response.responseURL.indexOf('/auth/login') === -1) {
+				const response = JSON.parse(event.target.responseText);
+				document.getElementById('vote-message').innerHTML = 'Vote sent.';
+				document.getElementById('vote-counter').innerHTML = response.votes;
+			} else {
+				document.getElementById('vote-message').innerHTML =
+					'You have to be loggin in first!.';
+			}
 		} else {
 			console.log('Error');
 			document.getElementById('vote-message').innerHTML =
-				'You have to be loggin in first!.';
+				'An unexpected error occurred.';
 		}
 	});
 
