@@ -5,7 +5,7 @@ const login_get = (req, res) => {
 		// console.log('unauth..ed');
 		res.render('auth/login');
 	} else {
-		res.redirect('./protected/page');
+		res.redirect('/');
 		// console.log('auth..ed');
 	}
 };
@@ -23,7 +23,7 @@ const login_post = async (req, res) => {
 				if (user) {
 					console.log('OK');
 					req.session.authenticated = true;
-					req.session.user = { username, id: user._id };
+					req.session.user = { username, id: user._id, perm_lvl: user.permLevel };
 					res.json(req.session);
 				} else {
 					res.status(403).json({ msg: 'Invalid credentials' });
