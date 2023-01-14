@@ -164,8 +164,13 @@ const create_post = async (req, res, next) => {
 
 	let { debunk_images, fake_images } = req.files;
 	//todo handle no images
-	debunk_images = debunk_images.map((image) => image.filename);
-	fake_images = fake_images.map((image) => image.filename);
+	if(debunk_images) {
+		debunk_images = debunk_images.map((image) => image.filename);
+	}
+	if(fake_images) {
+		fake_images = fake_images.map((image) => image.filename);
+	}
+	
 	// console.log(debunk_images);
 
 	try {
