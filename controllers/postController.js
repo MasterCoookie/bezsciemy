@@ -155,12 +155,18 @@ const create_post = async (req, res, next) => {
 	const {
 		title,
 		debunk_desc,
-		debunk_links,
 		debunk_iframes,
 		fake_desc,
-		fake_links,
 		fake_iframes,
 	} = req.body;
+
+	let {
+		debunk_links,
+		fake_links
+	} = req.body;
+
+	debunk_links = debunk_links.split(/\r?\n/).filter((element) => element);
+	fake_links = fake_links.split(/\r?\n/).filter((element) => element);
 
 	let { debunk_images, fake_images } = req.files;
 	//todo handle no images
@@ -186,6 +192,7 @@ const create_post = async (req, res, next) => {
 			fake_images,
 			fake_iframes,
 		});
+		
 		if (post) {
 			//TODO MSG
 			res.redirect('/')
