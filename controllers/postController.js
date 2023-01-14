@@ -187,7 +187,8 @@ const create_post = async (req, res, next) => {
 			fake_iframes,
 		});
 		if (post) {
-			res.send('done');
+			//TODO MSG
+			res.redirect('/')
 		} else {
 			res.send('dupa');
 		}
