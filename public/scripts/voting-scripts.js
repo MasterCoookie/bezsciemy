@@ -13,8 +13,11 @@ function sendUpVote(postID, voteType) {
 		console.log(response);
 		if (response.status === 200) {
 			console.log('Success');
+			document.getElementById('vote-message').innerHTML = 'Vote sent.';
 		} else {
 			console.log('Error');
+			document.getElementById('vote-message').innerHTML =
+				'You have to be loggin in first!.';
 		}
 	});
 
