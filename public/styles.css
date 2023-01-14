@@ -177,6 +177,7 @@ button:hover[type="button"]{
 	padding-bottom: 40px;
 	position: relative;
 	max-width: 70%;
+	margin-top: 25px;
 	margin-left: 20px;
 	margin-right: 15%;
 	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
@@ -372,6 +373,8 @@ button[id='finish'] {
 	border: none;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(8, 7, 16, 0.6);
+	margin-top: 25px;
+
 	margin-left: 250px;
 	padding-right: -10%;
 	padding: 0px;
