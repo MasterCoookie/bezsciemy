@@ -11,8 +11,12 @@ window.addEventListener('load', () => {
 
 		request.addEventListener('load', (event) => {
 			const response = JSON.parse(event.target.responseText);
-			console.log(response);
-			document.getElementById('message').innerHTML = response.msg;
+			if (response.redirect === 'login') {
+				window.location.href = '/auth/login';
+			} else {
+				console.log(response);
+				document.getElementById('message').innerHTML = response.msg;
+			}
 		});
 
 		request.addEventListener('error', (event) => {
