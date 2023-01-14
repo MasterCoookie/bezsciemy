@@ -38,9 +38,9 @@ const login_post = async (req, res) => {
 	}
 };
 
-const logout_post = (req, res) => {
+const logout_get = (req, res) => {
 	req.session.destroy();
-	res.json({ redirect: '/login' });
+	res.redirect('/');
 };
 
 const register_get = (req, res) => {
@@ -89,7 +89,7 @@ const register_put = async (req, res) => {
 module.exports = {
 	login_get,
 	login_post,
-	logout_post,
+	logout_get,
 	register_put,
 	register_get,
 };
