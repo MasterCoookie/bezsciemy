@@ -130,6 +130,8 @@ const view_get = async (req, res) => {
 	const author_user = await User.findOne({ _id: post.author_id });
 	const accepted_user = await User.findOne({ _id: post.accepted_by });
 
+	console.log(author_user);
+
 	//TODO - unaccepted post technically should be visible too
 	/*if (!author_user || !accepted_user) {
 		res.send('Invalid post!');
