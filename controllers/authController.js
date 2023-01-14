@@ -2,11 +2,9 @@ const User = require('../models/userModel');
 
 const login_get = (req, res) => {
 	if (!req.session.authenticated) {
-		// console.log('unauth..ed');
 		res.render('auth/login');
 	} else {
 		res.redirect('/');
-		// console.log('auth..ed');
 	}
 };
 

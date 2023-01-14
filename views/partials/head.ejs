@@ -14,5 +14,8 @@
 </head>
 
 <body>
-    <%- include('./navbarloggedin.ejs') %>
-    <%- include('./navbarnotlogged.ejs') %>
+    <% if(locals.user) { %>
+        <%- include('./navbarloggedin.ejs') %>
+    <% } else { %>
+        <%- include('./navbarnotlogged.ejs') %>
+    <% } %> 

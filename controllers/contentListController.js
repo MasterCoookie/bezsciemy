@@ -74,24 +74,24 @@ const main_get = async (req, res) => {
     let page_number = calculate_page_number(req.params.page_number);
     const posts = await acquire_posts("main", page_number);
     
-    console.log(posts);
-    res.render('contentList/page', { posts });
+    // console.log(posts);
+    res.render('contentList/page', { posts, user: req.session.user });
 }
 
 const waiting_room_get = async (req, res) => {
     let page_number = calculate_page_number(req.params.page_number);
     const posts = await acquire_posts("waiting_room", page_number);
     
-    console.log(posts);
-    res.render('contentList/page', { posts });
+    // console.log(posts);
+    res.render('contentList/page', { posts, user: req.session.user  });
 }
 
 const hall_of_fame_get = async (req, res) => {
     let page_number = calculate_page_number(req.params.page_number);
     const posts = await acquire_posts("hall_of_fame", page_number);
     
-    console.log(posts);
-    res.render('contentList/page', { posts });
+    // console.log(posts);
+    res.render('contentList/page', { posts, user: req.session.user  });
 }
 
 module.exports = {
