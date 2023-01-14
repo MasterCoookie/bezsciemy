@@ -3,12 +3,12 @@ window.addEventListener('load', () => {
 		const request = new XMLHttpRequest();
 		const formData = new FormData(loginForm);
 		console.log(Array.from(formData.entries()));
-
+		console.log(request);
 		request.addEventListener('load', (event) => {
 			const response = JSON.parse(event.target.responseText);
 			console.log(response);
 			if (response.authenticated) {
-				window.location.href = '/post/create';
+				window.location.href = '/';
 			} else {
 				document.getElementById('message').innerHTML = 'Login failed.';
 			}

@@ -9,6 +9,16 @@ window.addEventListener('load', () => {
 		console.log(firstPassword);
 		console.log(repeatedPassword);
 
+		request.addEventListener('load', (event) => {
+			const response = JSON.parse(event.target.responseText);
+			console.log(response);
+			document.getElementById('message').innerHTML = response.msg;
+		});
+
+		request.addEventListener('error', (event) => {
+			document.getElementById('message').innerHTML = 'An error occured.';
+		});
+
 		request.open('PUT', '/auth/register', true);
 		request.send(formData);
 	}
