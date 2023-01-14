@@ -9,7 +9,6 @@ const login_get = (req, res) => {
 };
 
 const login_post = async (req, res) => {
-	//console.log(req.body);
 	const { username, password } = req.body;
 
 	if (username && password) {
@@ -48,14 +47,13 @@ const register_get = (req, res) => {
 	if (!req.session.authenticated) {
 		res.render('auth/register');
 	} else {
-		// console.log('auth..ed');
-		res.redirect('./protected/page');
+		res.redirect('/');
 	}
 };
 
 const register_put = async (req, res) => {
-
 	const { username, password, email } = req.body;
+
 	User.init().then(async() => {
 		try {
 			const user = await User.create({ username, password, email });
