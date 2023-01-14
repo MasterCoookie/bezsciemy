@@ -5,9 +5,9 @@ body {
 body {
 	height: auto;
 	width: auto;
-	background-image: url('bezsciemy.png');
+	/* background-image: url('bezsciemy.png');
 	background-repeat: repeat-x;
-	background-size: 300px;
+	background-size: 300px; */
 }
 
 .loginTitle {
