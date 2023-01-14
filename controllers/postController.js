@@ -165,8 +165,8 @@ const create_post = async (req, res, next) => {
 		fake_links
 	} = req.body;
 
-	debunk_links = debunk_links.split(/\r?\n/).filter((element) => element);
-	fake_links = fake_links.split(/\r?\n/).filter((element) => element);
+	debunk_links = debunk_links.split(/\r?\n/);
+	fake_links = fake_links.split(/\r?\n/);
 
 	let { debunk_images, fake_images } = req.files;
 	//todo handle no images
