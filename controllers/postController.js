@@ -46,10 +46,15 @@ const view_get = async (req, res) => {
 	let comments = await commentController.comments_get(post_id, 0);
 	for (let i = 0; i < comments.length; i++) {
 		const firstReply = await commentController.replies_get(comments[i]._id, -1);
+		//console.log("=====================REPLY===========================")
 		//console.log(firstReply)
+		//console.log("=====================father_ID===========================")
 		//console.log(comments[i]._id)
+		//console.log("=========================================================")
+		//console.log("=========================================================")
 		if (firstReply.length > 0) {
 			comments.splice(i + 1, 0, firstReply[0]);
+			//console.log(comments)
 			i++;
 		}
 		//console.log(comments)

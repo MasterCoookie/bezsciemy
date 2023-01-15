@@ -36,11 +36,16 @@ const replies_get = async (father_id, page_number) => {
 		limit_ = 10;
 	}
 	try {
+		replies_test = await Comment.find({ // for testing purposes
+			fatherID: father_id,
+		})
+		//console.log("replies" + replies_test)
 		replies = await Comment.find({
 			fatherID: father_id,
 		})
 			.skip(paginate)
 			.limit(limit_); //.sort({ accepted_at: 'desc' });
+		//console.log("replies 2" + replies)
 	} catch (err) {
 		console.log(err);
 	}
@@ -48,7 +53,23 @@ const replies_get = async (father_id, page_number) => {
 };
 
 const comment_put = async (req, res) => {
-	res.sendStatus(501);
+	//console.log("*************req_body*******************")
+	//console.log(req.body);
+	if(req.session.user) {
+		const {content, postID, fatherID} = req.body;
+		try{
+			const comment = await Comment.create({
+				authorID: req.session.user.id,
+				postID,
+				fatherID,
+				content
+			});	
+			res.json({ msg: "added successfully" });	
+		} catch (e) {
+			res.json({ msg: e });
+		}
+	}
+	// else log in first
 };
 
 module.exports = {
