@@ -60,7 +60,7 @@ body {
 	width: 85%;
 }
 
-button[type="button"],[type="submit"] {
+button[class="btn-universal"] {
 	background-color: white;
 	color: black;
 	padding: 15px 0;
@@ -75,7 +75,7 @@ button[type="button"],[type="submit"] {
 	transition: width 0.2s ease-in-out;
 }
 
-button:hover[type="button"]{
+button:hover[class="btn-universal"]{
 	opacity: 0.8;
 	width: 82%;
 }
@@ -184,12 +184,11 @@ button:hover[type="button"]{
 	padding: 20px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	transition: border 0.3s ease-in-out;
+	transition: border 0.1s ease-in-out;
 	margin-bottom: 10px;
 }
 .debunk_part:hover {
 	border: 2px solid rgba(255, 255, 255, 0.212);
-	background-color: rgba(255, 255, 255, 0.02);
 }
 
 .debunkTitle {
@@ -228,19 +227,17 @@ div.grid-item {
 .debunkIframe-list {
 	text-align: center;
 }
-
 .fake-part {
 	border: 2px solid black;
 	border-radius: 20px;
 	padding: 20px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	transition: border 0.3s ease-in-out;
+	transition: border 0.1s ease-in-out;
 }
 
 .fake-part:hover {
-	border: 2px solid rgba(0, 0, 0, 0.295);
-	background-color: rgba(0, 0, 0, 0.2);
+	border: 2px solid rgba(255, 255, 255, 0.212);
 }
 .fake-title {
 }
@@ -257,6 +254,7 @@ div.grid-item {
 .fakeIframe-list {
 	text-align: center;
 	margin-bottom: 15px;
+	margin-top: 15px;
 }
 
 .fake {
@@ -332,11 +330,11 @@ img.content-image {
 	box-shadow: 0 0 3px white;
 }
 
-.desc-textbox {
+.desc-textbox,.comment-textbox {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	background-color: #797878;
-	resize: vertical;
+	resize: none;
 	width: 100%;
 	border: none;
 	overflow-y: auto;
@@ -348,6 +346,15 @@ img.content-image {
 
 .desc-textbox:focus {
 	height: 200px;
+	outline: none;
+	border: 1px solid white;
+	box-shadow: 0 0 3px white;
+}
+.comment-textbox:focus {
+	height: 80px;
+	outline: none;
+	border: 1px solid white;
+	box-shadow: 0 0 3px white;
 }
 input[type='file'] {
 	margin-top: 10px;

@@ -1,4 +1,30 @@
-<div class="comment">
+<div class="container comment my-1">
+    <div class="row flex justify-content-start g-2">
+        <div class="col-2">
+            <h6 name="author" class="comment-author text">
+                Author: <%= comment.author.username %>
+            </h6>
+        </div>
+        <div class="col">
+            <% if(comment.father) { %>
+                <h6 name="Respond" class="comment-author text">
+                    Replying to: <%= comment.father %>
+                </h6>
+            <% } %>
+
+        </div>
+       
+    </div>
+    <div class="row">
+        <p name="comment_content" class="comment-text text">
+            <%= comment.content %>
+        </p>
+    </div>
+</div>
+<script src="../../scripts/comment-formula-script.js"></script>
+<script src="../../scripts/comment-send-script.js"></script>
+
+<!-- <div class="comment">
     <h6 name="author" class="comment-author text">
         Author: <%= comment.author.username %>
     </h6>
@@ -13,4 +39,4 @@
             <script src="../../scripts/comment-formula-script.js"></script>
             <script src="../../scripts/comment-send-script.js"></script>
 
-</div>
+</div> -->
