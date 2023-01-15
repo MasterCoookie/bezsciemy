@@ -2,7 +2,7 @@ const User = require('../models/userModel');
 
 const login_get = (req, res) => {
 	if (!req.session.authenticated) {
-		res.render('auth/login');
+		res.render('auth/login', { title: "Login" });
 	} else {
 		res.redirect('/');
 	}
@@ -45,7 +45,7 @@ const logout_get = (req, res) => {
 
 const register_get = (req, res) => {
 	if (!req.session.authenticated) {
-		res.render('auth/register');
+		res.render('auth/register', { title: 'Register' });
 	} else {
 		res.redirect('/');
 	}

@@ -75,7 +75,7 @@ const main_get = async (req, res) => {
     const posts = await acquire_posts("main", page_number);
     
     // console.log(posts);
-    res.render('contentList/page', { posts, user: req.session.user });
+    res.render('contentList/page', { posts, user: req.session.user, title: "" });
 }
 
 const waiting_room_get = async (req, res) => {
@@ -83,7 +83,7 @@ const waiting_room_get = async (req, res) => {
     const posts = await acquire_posts("waiting_room", page_number);
     
     // console.log(posts);
-    res.render('contentList/page', { posts, user: req.session.user  });
+    res.render('contentList/page', { posts, user: req.session.user, title: "Waiting Room"  });
 }
 
 const hall_of_fame_get = async (req, res) => {
@@ -91,7 +91,7 @@ const hall_of_fame_get = async (req, res) => {
     const posts = await acquire_posts("hall_of_fame", page_number);
     
     // console.log(posts);
-    res.render('contentList/page', { posts, user: req.session.user  });
+    res.render('contentList/page', { posts, user: req.session.user, title: "Hall of Fame" });
 }
 
 module.exports = {

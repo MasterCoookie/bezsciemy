@@ -142,12 +142,13 @@ const view_get = async (req, res) => {
 		author_user,
 		accepted_user,
 		comments: comments_filled,
-		user: req.session.user 
+		user: req.session.user,
+		title: post.title
 	});
 };
 
 const create_get = (req, res) => {
-	res.render('post/postEditor', { user: req.session.user } );
+	res.render('post/postEditor', { user: req.session.user, title: "Create Post" } );
 };
 
 const create_post = async (req, res, next) => {
