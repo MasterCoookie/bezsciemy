@@ -1,131 +1,165 @@
 <%- include('../partials/head.ejs') %>
 
 
-    <div style="display: flex;">
-        <div class="vote">
-            <h4 id="vote-counter">
-                <%= post.upVotes.length - post.downVotes.length %>
-            </h4> <!--Tu jest Licznik wyniku posta-->
-            <button onclick='sendUpVote(postID, "upvote")' id="upvote" type="button">Upvote</button>
-            <button onclick='sendUpVote(postID, "downvote")' id="downvote" type="button">Downvote</button>
-            <h4 id="vote-message"></h4>
+<div class="container-xl mt-3">
+    <div class="row text-center ">
+        <div class="col-2 ">
+            <div class="container vote justify-content-start">
+                <div class="row">
+                    <a onclick='sendUpVote(postID, "upvote")' id="upvote" class="rounded px-1">
+                        <img src="/up_chevron.svg" alt=" " height="50" width="50" 
+                        class="justify-content-center p-1">
+                    </a>
+                </div>
+                <div class="row">
+                    <h4 id="vote-counter" class="fw-bold" style="color: #ffffff;">
+                        <%= post.upVotes.length - post.downVotes.length %>
+                    </h4> <!--Tu jest Licznik wyniku posta-->
+                </div>
+                <div class="row">
+                    <a onclick='sendUpVote(postID, "downvote")' id="downvote" class="rounded">
+                        <img src="/down_chevron.svg" alt=" " height="50" width="50" 
+                        class="justify-content-center p-1">
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-8 ">
+            <div class="post" class>
+                <p class="text posted-by">Posted <%=post.created%> by: <%= author_user.username %>
+                </p>
+
+                <h1 name="title" class="text title postTitle">
+                    <%= post.title %>
+                </h1>
+                <div class="debunk_part">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <h3 class="text debunkTitle">Debunk part</h3>
+                    <p class="text debunk_desc">
+                        <%= post.debunk_desc %>
+                    </p>
+                    <ul class="debunkLinks-list ">
+                        <% post.debunk_links.forEach(element=> { %>
+                            <li>
+                                <a class="ext-link" href="<%= element %> ">
+                                    <%= element %>
+                                </a>
+                            </li>
+                            <% }); %>
+                    </ul>
+
+
+                    <div class="grid-container debunkImage-list">
+                        <% post.debunk_images.forEach(element=> { %>
+
+                            <div class="grid-item">
+                                <img class="content-image" src="/uploads/<%= element %>">
+                            </div>
+                            <% }); %>
+                    </div>
+
+                    <ul class="debunkIframe-list">
+                        <li>
+                            <% post.debunk_iframes.forEach(element=> { %>
+                                <%- element %>
+                                    <% }); %>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="fake-part">
+                    <h3 class="text fake-title">Fake part</h3>
+                    <p name="text" class="text fake-desc">
+                        <%= post.fake_desc %>
+                    </p>
+                    <ul class="text fakeLink-list">
+                        <% post.fake_links.forEach(element=> { %>
+                            <li>
+                                <a class="ext-link" href="<%= element %> ">
+                                    <%= element %>
+                                </a>
+                            </li>
+                            <% }); %>
+                    </ul>
+
+                    <div class="grid-container fakeImage-list">
+                        <% post.fake_images.forEach(element=> { %>
+                            <div class="grid-item">
+                                <img class="content-image" src="/uploads/<%= element %>">
+                            </div>
+                            <% }); %>
+                    </div>
+
+                    <ul class="fakeIframe-list">
+                        <li>
+                            <% post.fake_iframes.forEach(element=> { %>
+                                <%- element %> <br>
+                                    <% }); %>
+                        </li>
+                    </ul>
+
+                </div>
+                <p class="text posted-by">Accepted <%=post.created%> by: <%=post.accepted_by%>
+                </p>
+                <script> let postID = "<%= post._id %>";
+                </script>
+                <button onclick='comment()' id="comment_button" type="button">Comment</button>
+                <form id="comment-form" style="display: none;">
+                    <div class="commentEditor">
+                        <label for="content" class="text">Type your comment here</label><br>
+                        <textarea id="content" name="content" placeholder="Write your comment"></textarea><br>
+                        <button onclick='sendComment(postID)' id="add-comment" type="button">Add</button>
+                    </div>
+                </form>
+                <!--Tu jest dodany przycisk do komentarzy-->
+                <div id="comment-formula"></div>
+            </div>
+        </div>
+        <div class="col">
             <button id="acceptpost" type="button">Accept</button>
             <button id="deletepost" type="button">Delete</button>
         </div>
-        <div>
-
-            <div style="display: block;">
-                <div class="post" class>
-                    <p class="text posted-by">Posted <%=post.created%> by: <%= author_user.username %>
-                    </p>
-
-                    <h1 name="title" class="text title postTitle">
-                        <%= post.title %>
-                    </h1>
-                    <div class="debunk_part">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        <h3 class="text debunkTitle">Debunk part</h3>
-                        <p class="text debunk_desc">
-                            <%= post.debunk_desc %>
-                        </p>
-                        <ul class="debunkLinks-list ">
-                            <% post.debunk_links.forEach(element=> { %>
-                                <li>
-                                    <a class="ext-link" href="<%= element %> ">
-                                        <%= element %>
-                                    </a>
-                                </li>
-                                <% }); %>
-                        </ul>
-
-
-                        <div class="grid-container debunkImage-list">
-                            <% post.debunk_images.forEach(element=> { %>
-
-                                <div class="grid-item">
-                                    <img class="content-image" src="/uploads/<%= element %>">
-                                </div>
-                                <% }); %>
-                        </div>
-
-                        <ul class="debunkIframe-list">
-                            <li>
-                                <% post.debunk_iframes.forEach(element=> { %>
-                                    <%- element %>
-                                        <% }); %>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="fake-part">
-                        <h3 class="text fake-title">Fake part</h3>
-                        <p name="text" class="text fake-desc">
-                            <%= post.fake_desc %>
-                        </p>
-                        <ul class="text fakeLink-list">
-                            <% post.fake_links.forEach(element=> { %>
-                                <li>
-                                    <a class="ext-link" href="<%= element %> ">
-                                        <%= element %>
-                                    </a>
-                                </li>
-                                <% }); %>
-                        </ul>
-
-                        <div class="grid-container fakeImage-list">
-                            <% post.fake_images.forEach(element=> { %>
-                                <div class="grid-item">
-                                    <img class="content-image" src="/uploads/<%= element %>">
-                                </div>
-                                <% }); %>
-                        </div>
-
-                        <ul class="fakeIframe-list">
-                            <li>
-                                <% post.fake_iframes.forEach(element=> { %>
-                                    <%- element %> <br>
-                                        <% }); %>
-                            </li>
-                        </ul>
-
-                    </div>
-                    <p class="text posted-by">Accepted <%=post.created%> by: <%=post.accepted_by%>
-                    </p>
-                    <script> let postID = "<%= post._id %>";
-                    </script>
-                    <button onclick='comment()' id="comment_button" type="button">Comment</button>
-                    <form id="comment-form" style="display: none;">
-                        <div class="commentEditor">
-                            <label for="content" class="text">Type your comment here</label><br>
-                            <textarea id="content" name="content" placeholder="Write your comment"></textarea><br>
-                            <button onclick='sendComment(postID)' id="add-comment" type="button">Add</button>
-                        </div>
-                    </form>
-                    <!--Tu jest dodany przycisk do komentarzy-->
-                    <div id="comment-formula"></div>
-                </div>
-                <div class="comment-background">
-                    <h2 class="text">Comments</h2>
-                    <% comments.forEach(function(comment){ %>
-                        <%- include('../partials/comment.ejs', {comment: comment}); %>
-                            <form id="<%= comment.id %>">
-                                <input type="hidden" value="<%= comment.id%>">
-                                <button class="reply-button" type="button">
-                                    Reply</button>
-                                <div class="commentEditor" id="commentEditor-<%=comment.id %>" style="display:
-                                        none;">
-                                    <label for="content" class="text">Type your comment here</label><br>
-                                    <textarea id="content" name="content"
-                                        placeholder="Write your comment"></textarea><br>
-                                    <button class="reply-to-comment" type="button">Add</button>
-                                </div>
-                            </form>
-                            <% }); %>
-                </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-8 my-3">
+            <div class="comment-background">
+                <h2 class="text">Comments</h2>
+                <% comments.forEach(function(comment){ %>
+                    <%- include('../partials/comment.ejs', {comment: comment}); %>
+                        <form id="<%= comment.id %>">
+                            <input type="hidden" value="<%= comment.id%>">
+                            <button class="reply-button" type="button">
+                                Reply</button>
+                            <div class="commentEditor" id="commentEditor-<%=comment.id %>" style="display:
+                                    none;">
+                                <label for="content" class="text">Type your comment here</label><br>
+                                <textarea id="content" name="content"
+                                    placeholder="Write your comment"></textarea><br>
+                                <button class="reply-to-comment" type="button">Add</button>
+                            </div>
+                        </form>
+                <% }); %>
             </div>
         </div>
-
     </div>
+</div>
+
+
+
+
+
+                
+
+
+                
+         
+    <h4 id="vote-message"></h4>
+
+
+
+
     <script src="../../scripts/voting-scripts.js"></script>
     <script src="../../scripts/comment-formula-script.js"></script>
     <script src="../../scripts/comment-send-script.js"></script>
