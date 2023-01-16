@@ -3,9 +3,9 @@ function sendUpVote(postID, voteType) {
 	const data = JSON.stringify({ postID: postID });
 	console.log(data);
 	if (voteType === 'upvote') {
-		request.open('POST', 'http://localhost:3000/post/upvote', true);
+		request.open('POST', '/post/upvote', true);
 	} else {
-		request.open('POST', 'http://localhost:3000/post/downvote', true);
+		request.open('POST', '/post/downvote', true);
 	}
 	request.setRequestHeader('Content-Type', 'application/json');
 	request.addEventListener('load', (event) => {
@@ -13,8 +13,19 @@ function sendUpVote(postID, voteType) {
 		console.log(response);
 		if (response.status === 200) {
 			console.log('Success');
+			console.log(response);
+			if (response.responseURL.indexOf('/auth/login') === -1) {
+				const response = JSON.parse(event.target.responseText);
+				document.getElementById('vote-message').innerHTML = 'Vote sent.';
+				document.getElementById('vote-counter').innerHTML = response.votes;
+			} else {
+				document.getElementById('vote-message').innerHTML =
+					'You have to be loggin in first!.';
+			}
 		} else {
 			console.log('Error');
+			document.getElementById('vote-message').innerHTML =
+				'An unexpected error occurred.';
 		}
 	});
 

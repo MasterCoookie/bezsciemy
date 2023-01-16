@@ -3,12 +3,12 @@ window.addEventListener('load', () => {
 		const request = new XMLHttpRequest();
 		const formData = new FormData(loginForm);
 		console.log(Array.from(formData.entries()));
-
+		console.log(request);
 		request.addEventListener('load', (event) => {
 			const response = JSON.parse(event.target.responseText);
 			console.log(response);
 			if (response.authenticated) {
-				window.location.href = 'http://localhost:3000/post/create';
+				window.location.href = '/';
 			} else {
 				document.getElementById('message').innerHTML = 'Login failed.';
 			}
@@ -18,7 +18,7 @@ window.addEventListener('load', () => {
 			document.getElementById('message').innerHTML = 'An error occured.';
 		});
 
-		request.open('POST', 'http://localhost:3000/login', true);
+		request.open('POST', '/auth/login', true);
 		request.send(formData);
 	}
 	const loginForm = document.getElementById('loginForm');

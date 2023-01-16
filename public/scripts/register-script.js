@@ -8,27 +8,23 @@ window.addEventListener('load', () => {
 		var repeatedPassword = formData.get('repeatPassword');
 		console.log(firstPassword);
 		console.log(repeatedPassword);
-		if (firstPassword !== repeatedPassword) {
-			document.getElementById('message').innerHTML =
-				'Passwords do not match.<br>Please try again.';
-		} else {
-			request.addEventListener('load', (event) => {
-				const response = JSON.parse(event.target.responseText);
+
+		request.addEventListener('load', (event) => {
+			const response = JSON.parse(event.target.responseText);
+			if (response.redirect === 'login') {
+				window.location.href = '/auth/login';
+			} else {
 				console.log(response);
-				if (!response.msg) {
-					window.location.href = 'http://localhost:3000/login';
-				} else {
-					document.getElementById('message').innerHTML = response.msg;
-				}
-			});
+				document.getElementById('message').innerHTML = response.msg;
+			}
+		});
 
-			request.addEventListener('error', (event) => {
-				document.getElementById('message').innerHTML = 'An error occured.';
-			});
+		request.addEventListener('error', (event) => {
+			document.getElementById('message').innerHTML = 'An error occured.';
+		});
 
-			request.open('PUT', 'http://localhost:3000/register', true);
-			request.send(formData);
-		}
+		request.open('PUT', '/auth/register', true);
+		request.send(formData);
 	}
 	const registerForm = document.getElementById('registerForm');
 	registerForm.addEventListener('submit', (event) => {

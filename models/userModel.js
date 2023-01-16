@@ -14,7 +14,6 @@ const pwdValid = (password) => {
 }
 
 const userSchema = new Schema({
-	//todo: extend model
 	username: {
 		type: String,
 		required: [true, 'Please enter a username'],
@@ -35,6 +34,10 @@ const userSchema = new Schema({
 		maxlength: [24, 'Your password must be shorter than 24 characters'],
 		validate: [pwdValid, 'Your password must contain both letters (lowercase and uppercase) and numbers']
 	},
+	permLevel: {
+		type: Number,
+		default: 1
+	}
 });
 
 userSchema.pre('save', async function(next) {
@@ -54,6 +57,13 @@ userSchema.statics.login = async function (_username, _password) {
 		throw Error('Invalid username');
 	}
 };
+
+userSchema.methods.incrementPermissionLevel = async function (){
+	if (this.permLevel < 3){
+		this.permLevel = this.permLevel + 1;
+	}
+	await this.save();
+}
 
 const User = mongoose.model('User', userSchema);
 

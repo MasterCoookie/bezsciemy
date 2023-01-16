@@ -2,16 +2,13 @@ const User = require('../models/userModel');
 
 const login_get = (req, res) => {
 	if (!req.session.authenticated) {
-		// console.log('unauth..ed');
-		res.render('auth/login');
+		res.render('auth/login', { title: "Login" });
 	} else {
-		res.redirect('./protected/page');
-		// console.log('auth..ed');
+		res.redirect('/');
 	}
 };
 
 const login_post = async (req, res) => {
-	//console.log(req.body);
 	const { username, password } = req.body;
 
 	if (username && password) {
@@ -23,7 +20,7 @@ const login_post = async (req, res) => {
 				if (user) {
 					console.log('OK');
 					req.session.authenticated = true;
-					req.session.user = { username, id: user._id };
+					req.session.user = { username, id: user._id, perm_lvl: user.permLevel };
 					res.json(req.session);
 				} else {
 					res.status(403).json({ msg: 'Invalid credentials' });
@@ -41,23 +38,22 @@ const login_post = async (req, res) => {
 	}
 };
 
-const logout_post = (req, res) => {
+const logout_get = (req, res) => {
 	req.session.destroy();
-	res.json({ redirect: '/login' });
+	res.redirect('/');
 };
 
 const register_get = (req, res) => {
 	if (!req.session.authenticated) {
-		res.render('auth/register');
+		res.render('auth/register', { title: 'Register' });
 	} else {
-		// console.log('auth..ed');
-		res.redirect('./protected/page');
+		res.redirect('/');
 	}
 };
 
 const register_put = async (req, res) => {
-
 	const { username, password, email } = req.body;
+
 	User.init().then(async() => {
 		try {
 			const user = await User.create({ username, password, email });
@@ -93,7 +89,7 @@ const register_put = async (req, res) => {
 module.exports = {
 	login_get,
 	login_post,
-	logout_post,
+	logout_get,
 	register_put,
 	register_get,
 };

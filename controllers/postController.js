@@ -1,5 +1,7 @@
 const User = require('../models/userModel');
 const Post = require('../models/postModel');
+const Comment = require('../models/commentModel');
+const commentController = require('../controllers/commentController');
 
 const view_get = async (req, res) => {
 	const post_id = req.query.id;
@@ -10,12 +12,14 @@ const view_get = async (req, res) => {
 		return res.sendStatus(404);
 	}
 
-	//dummy comment
+	//dummy comments
+	//not needed
+	/*
 	const comment_dummy_1 = {
 		_id: 'asdfasdf',
 		authorID: '6394aea53ef9e6a269925f82',
 		postID: '6390eb28d94478039870ce56',
-		father: null,
+		fatherID: null,
 		content: 'Nie zgadzam się z panem, bo pan je gupi jak paczka gwoździ',
 	};
 
@@ -23,7 +27,7 @@ const view_get = async (req, res) => {
 		_id: 'asdfasdf2',
 		authorID: '6383b318e4c5926e80db2d6f',
 		postID: '6390eb28d94478039870ce56',
-		father: 'asdfasdf',
+		fatherID: 'asdfasdf',
 		content:
 			'A ja z panem, bo gwoździe to nie ludzie, nie mogą być gupie więc co pan',
 	};
@@ -32,13 +36,29 @@ const view_get = async (req, res) => {
 		_id: 'asdfasdf3',
 		authorID: '6383b318e4c5926e80db2d6f',
 		postID: '6390eb28d94478039870ce56',
-		father: null,
+		fatherID: null,
 		content: 'Fajny post, pozdrawiam z całą rodzinką',
 	};
+	*/
+	//DONE :) : read from db
+	//let comments = [comment_dummy_1, comment_dummy_2, comment_dummy_3];
 
-	//TODO: read from db
-	let comments = [comment_dummy_1, comment_dummy_2, comment_dummy_3];
-
+	let comments = await commentController.comments_get(post_id, 0);
+	for (let i = 0; i < comments.length; i++) {
+		const firstReply = await commentController.replies_get(comments[i]._id, -1);
+		//console.log("=====================REPLY===========================")
+		//console.log(firstReply)
+		//console.log("=====================father_ID===========================")
+		//console.log(comments[i]._id)
+		//console.log("=========================================================")
+		//console.log("=========================================================")
+		if (firstReply.length > 0) {
+			comments.splice(i + 1, 0, firstReply[0]);
+			//console.log(comments)
+			i++;
+		}
+		//console.log(comments)
+	}
 	const comments_filled = await Promise.all(
 		comments.map(async (comment) => {
 			let author = await User.findById(comment.authorID);
@@ -49,13 +69,17 @@ const view_get = async (req, res) => {
 			} else {
 				comment.author = 'deleted';
 			}
-
+			let parentPost = await Comment.findById(comment.fatherID);
+			if (parentPost) {
+				father_author = await User.findById(parentPost.authorID);
+				comment.father = father_author.username;
+			}
 			comment._id = undefined;
 			return comment;
 		})
 	);
 
-	//console.log(comments_filled);
+	//console.log(await comments_filled)
 
 	//tmp dummy data starts
 	/*let today = new Date();
@@ -111,6 +135,8 @@ const view_get = async (req, res) => {
 	const author_user = await User.findOne({ _id: post.author_id });
 	const accepted_user = await User.findOne({ _id: post.accepted_by });
 
+	console.log(author_user);
+
 	//TODO - unaccepted post technically should be visible too
 	/*if (!author_user || !accepted_user) {
 		res.send('Invalid post!');
@@ -121,11 +147,13 @@ const view_get = async (req, res) => {
 		author_user,
 		accepted_user,
 		comments: comments_filled,
+		user: req.session.user,
+		title: post.title
 	});
 };
 
 const create_get = (req, res) => {
-	res.render('post/postEditor');
+	res.render('post/postEditor', { user: req.session.user, title: "Create Post" } );
 };
 
 const create_post = async (req, res, next) => {
@@ -133,17 +161,28 @@ const create_post = async (req, res, next) => {
 	const {
 		title,
 		debunk_desc,
-		debunk_links,
 		debunk_iframes,
 		fake_desc,
-		fake_links,
 		fake_iframes,
 	} = req.body;
 
-	let { debunk_images, fake_images } = req.files;
+	let {
+		debunk_links,
+		fake_links
+	} = req.body;
 
-	debunk_images = debunk_images.map((image) => image.filename);
-	fake_images = fake_images.map((image) => image.filename);
+	debunk_links = debunk_links.split(/\r?\n/);
+	fake_links = fake_links.split(/\r?\n/);
+
+	let { debunk_images, fake_images } = req.files;
+	//todo handle no images
+	if(debunk_images) {
+		debunk_images = debunk_images.map((image) => image.filename);
+	}
+	if(fake_images) {
+		fake_images = fake_images.map((image) => image.filename);
+	}
+	
 	// console.log(debunk_images);
 
 	try {
@@ -159,19 +198,20 @@ const create_post = async (req, res, next) => {
 			fake_images,
 			fake_iframes,
 		});
+		
 		if (post) {
-			res.send('done');
+			//TODO MSG
+			res.redirect('/')
 		} else {
 			res.send('dupa');
 		}
 	} catch (e) {
-		console.log(e);
-		res.send('dupa e');
+		res.send(e);
 	}
 };
 
 const upvote_post = async (req, res) => {
-	console.log(req.body.postID);
+	// console.log(req.body.postID);
 	const post_id = req.body.postID;
 	const post = await Post.findById(post_id);
 
@@ -179,20 +219,59 @@ const upvote_post = async (req, res) => {
 		return res.sendStatus(404);
 	}
 
-	post
-		.toggleUpVoteAndSave(req.session.user.id)
-		.then(() => {
-			res.sendStatus(200);
-		})
-		.catch((err) => {
+	post.toggleUpVoteAndSave(req.session.user.id)
+		.then(async () => {
+			votes = await post.getSumOfVotes()
+			res.json({ votes  })
+		}).catch((err) => {
 			console.log(err);
 			res.sendStatus(500);
 		});
 };
 
 const downvote_post = async (req, res) => {
-	//TODO implement
-	res.sendStatus(501);
+	const post_id = req.body.postID;
+	const post = await Post.findById(post_id);
+
+	if (!post) {
+		return res.sendStatus(404);
+	}
+
+	post.toggleDownVoteAndSave(req.session.user.id)
+		.then(async () => {
+			votes = await post.getSumOfVotes()
+			res.json({ votes })
+		}).catch((err) => {
+			console.log(err);
+			res.sendStatus(500);
+		});
+};
+
+const accept_post = async (req, res) => {
+	if (req.session.user && req.session.user.permLevel > 1){
+		const post_id = req.body.postID;
+		const post = await Post.findById(post_id);
+
+		if (!post) {
+			return res.sendStatus(404);
+		}
+		post.acceptPostAndSave(req.session.user.id)
+	} else {
+		res.sendStatus(403);
+	}
+};
+
+const delete_post = async (req, res) => {
+	if (req.session.user && req.session.user.permLevel > 1){
+		const post_id = req.body.postID;
+		try{
+			await Post.deleteOne({ _id: post_id })
+		} catch (e) {
+			res.send(e);
+		}
+	} else {
+		res.sendStatus(403);
+	}
 };
 
 module.exports = {
@@ -201,4 +280,6 @@ module.exports = {
 	create_post,
 	upvote_post,
 	downvote_post,
+	accept_post,
+	delete_post
 };

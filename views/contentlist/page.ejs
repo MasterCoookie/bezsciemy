@@ -1,0 +1,17 @@
+<%- include('../partials/head.ejs') %>
+
+    
+        <div class="page">
+            <ul>
+                <li>
+                    <!--For each wczytujący posty jako postPreview-->
+
+                    <% posts.forEach(function(post){ %>
+                        <%- include('../partials/postPreview.ejs', {post: post}); %>
+                            <% }); %>
+                </li>
+            </ul>
+        </div>
+    </body>
+
+    </html>

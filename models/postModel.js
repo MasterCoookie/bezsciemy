@@ -15,6 +15,7 @@ const postSchema = new Schema({
     accepted_by: {
         type: Schema.Types.ObjectId
     },
+    accepted_at: Date,
     fake_desc:      String,
     fake_links:    [String],
     fake_images:   [String],
@@ -25,27 +26,54 @@ const postSchema = new Schema({
     debunk_iframes:[String],
     upVotes: [Schema.Types.ObjectId],
     downVotes: [Schema.Types.ObjectId]
-});
+}, { strict: false });
 
 postSchema.methods.acceptPostAndSave = async function(_user){
     this.accepted_by = _user;
+    this.accepted_at = new Date();
     await this.save();
 }
 
-//TODO - chage _user to _userID?
-postSchema.methods.toggleUpVoteAndSave = async function (_user){
-    if (this.upVotes.includes(_user)) { //remove upvote
-        this.upVotes.splice(this.upVotes.indexOf(_user), 1);
-    } else if (this.downVotes.includes(_user)) { // remove down, add up
-        this.downVotes.splice(this.downVotes.indexOf(_user), 1);
-        this.upVotes.push(_user)
+postSchema.methods.toggleUpVoteAndSave = async function (_userID){
+    if (this.upVotes.includes(_userID)) { //remove upvote
+        this.upVotes.splice(this.upVotes.indexOf(_userID), 1);
+    } else if (this.downVotes.includes(_userID)) { // remove down, add up
+        this.downVotes.splice(this.downVotes.indexOf(_userID), 1);
+        this.upVotes.push(_userID)
     } else { // add upvote
-        this.upVotes.push(_user)
+        this.upVotes.push(_userID)
     }
     await this.save();
 }
 
-//add toggle down vote
+postSchema.methods.toggleDownVoteAndSave = async function (_userID){
+    if (this.downVotes.includes(_userID)) { //remove downvote
+        this.downVotes.splice(this.downVotes.indexOf(_userID), 1);
+    } else if (this.upVotes.includes(_userID)) { // remove up, add down
+        this.upVotes.splice(this.upVotes.indexOf(_userID), 1);
+        this.downVotes.push(_userID)
+    } else { // add downvote
+        this.downVotes.push(_userID)
+    }
+    await this.save();
+}
+
+//up or down vote getter, returns: 1 if upvote, 0 if no vote, -1 if downvote
+postSchema.methods.getVote = async function (_userID){
+    if (this.downVotes.includes(_userID)){
+        return -1;
+    } else if (this.upVotes.includes(_userID)) {
+        return 1;
+    } else return 0;
+}
+
+postSchema.methods.getSumOfVotes = async function (){
+    return (this.upVotes.length - this.downVotes.length)
+}
+
+postSchema.post('init', function (req, res, next) {
+    this.score = this.upVotes.length -  this.downVotes.length;
+})
 
 const Post = mongoose.model('Post', postSchema);
 

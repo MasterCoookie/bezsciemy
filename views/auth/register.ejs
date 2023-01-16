@@ -1,37 +1,39 @@
 <%- include('../partials/head.ejs') %>
 
-    <script src="../../scripts/postEditor-send-script.js"></script>
-    <body>
 
-        <div class="background">
-            <div class="shape"></div>
-            <div class="shape"></div>
+
+
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form id="registerForm" method="post" class="login-form">
+        <h3 class="text loginTitle">Please create your account</h3>
+        <label for="emailInput" class="text registerLabel">E-mail adress</label>
+        <div class="email">
+            <input type="email" placeholder="E-mail" id="emailInput" class="textbox" name="email">
         </div>
-        <form id="registerForm" method="post" class="login-form">
-            <h3 class="text loginTitle">Please create your account</h3>
-            <label for="emailInput" class="text registerLabel">E-mail adress</label>
-            <div class="email">
-                <input type="email" placeholder="E-mail" id="emailInput" class="textbox" name="email">
-            </div>
-            <label for="loginInput" class="text registerLabel">Username</label>
-            <div class="login">
-                <input type="text" placeholder="Login" id="loginInput" class="textbox" name="username">
-            </div>
-            <label for="passwordInput" class="text registerLabel">Password</label>
-            <div class="password">
-                <input type="password" placeholder="Password" id="passwordInput" class="textbox" name="password">
-            </div>
-            <label for="textrepeatPasswordInput" class="text registerLabel">Repeat your password</label>
-            <div class="password">
-                <input type="password" placeholder="Repeat password" id="repeatPasswordInput" class="textbox" name="repeatPassword">
-            </div>
-            <h2 id="message"></h2>
-            <button id="btn" type="submit">Sign up</button>
-            <br></br>
-            <a href="http://localhost:3000/login" id="link" class="text forward">Alredy have an account? Sign in</a>
+        <label for="loginInput" class="text registerLabel">Username</label>
+        <div class="login">
+            <input type="text" placeholder="Login" id="loginInput" class="textbox" name="username">
+        </div>
+        <label for="passwordInput" class="text registerLabel">Password</label>
+        <div class="password">
+            <input type="password" placeholder="Password" id="passwordInput" class="textbox" name="password">
+        </div>
+        <label for="textrepeatPasswordInput" class="text registerLabel">Repeat your password</label>
+        <div class="password">
+            <input type="password" placeholder="Repeat password" id="repeatPasswordInput" class="textbox"
+                name="repeatPassword">
+        </div>
+        <h2 id="message"></h2>
+        <button id="btn" type="submit" class="btn-universal">Sign up</button>
+        <br></br>
+        <a href="/auth/login" id="link" class="text forward">Alredy have an account? Sign in</a>
 
-        </form>
+    </form>
 
     </body>
 
+    <!--<script src="../../scripts/postEditor-send-script.js"></script>-->
     <script src="../../scripts/register-script.js"></script>
