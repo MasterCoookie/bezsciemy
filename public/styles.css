@@ -463,3 +463,24 @@ button[id='downvote']:hover {
 ::-ms-input-placeholder {
 	color: white;
 }
+
+.post-preview{
+	text-align: left;
+	background-color: rgba(255, 255, 255, 0.13);
+	backdrop-filter: blur(10px);
+	border: none;
+	border-radius: 20px;
+	position: relative;
+	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+	overflow: auto;
+	padding: 20px;
+}
+
+a[class="text_title_postTitle"]{
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 40px;
+}
+a[class="text_title_postTitle"]:hover{
+	text-decoration: underline;
+}

@@ -1,9 +1,27 @@
+<div class="container-xl post-preview my-3">
+    <div class="row px-4">
+        <div class="col">
+            <a href="/post/view?id=<%=post._id %>" name="title" class="text_title_postTitle">
+                <%= post.title %>
+            </a>
+        </div>
+    </div>
+    <div class="row px-4">
+        <div class="col">
+            <p class="text debunk_desc">
+                <%= post.debunk_desc %>
+            </p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col ">
+            <img class="content-image mx-auto d-block" src="/uploads/<%=post.debunk_images[0] %>">
+
+        </div>
+    </div>
+</div>
+
 <div class="postPreview">
-    <a href="/post/view?id=<%=post._id %>" name="title" class="text_title_postTitle">
-        <%= post.title %>
-    </a>
-    <p class="text debunk_desc">
-        <%= post.debunk_desc %>
-    </p>
-    <img class="content-image" src="/uploads/<%=post.debunk_images[0] %>">
+    
+    
 </div>
