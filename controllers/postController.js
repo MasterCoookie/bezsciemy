@@ -206,8 +206,7 @@ const create_post = async (req, res, next) => {
 			res.send('dupa');
 		}
 	} catch (e) {
-		console.log(e);
-		res.send('dupa e');
+		res.send(e);
 	}
 };
 
@@ -248,10 +247,39 @@ const downvote_post = async (req, res) => {
 		});
 };
 
+const accept_post = async (req, res) => {
+	if (req.session.user && req.session.user.permLevel > 1){
+		const post_id = req.body.postID;
+		const post = await Post.findById(post_id);
+
+		if (!post) {
+			return res.sendStatus(404);
+		}
+		post.acceptPostAndSave(req.session.user.id)
+	} else {
+		res.sendStatus(403);
+	}
+};
+
+const delete_post = async (req, res) => {
+	if (req.session.user && req.session.user.permLevel > 1){
+		const post_id = req.body.postID;
+		try{
+			await Post.deleteOne({ _id: post_id })
+		} catch (e) {
+			res.send(e);
+		}
+	} else {
+		res.sendStatus(403);
+	}
+};
+
 module.exports = {
 	view_get,
 	create_get,
 	create_post,
 	upvote_post,
 	downvote_post,
+	accept_post,
+	delete_post
 };

@@ -30,6 +30,7 @@ const postSchema = new Schema({
 
 postSchema.methods.acceptPostAndSave = async function(_user){
     this.accepted_by = _user;
+    this.accepted_at = new Date();
     await this.save();
 }
 
