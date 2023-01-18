@@ -61,7 +61,9 @@ const view_get = async (req, res) => {
 	}
 	const comments_filled = await Promise.all(
 		comments.map(async (comment) => {
+			comment = comment.toObject()
 			let author = await User.findById(comment.authorID);
+			author = author.toObject()
 			if (author) {
 				author.password = undefined;
 				author._id = null;
@@ -69,17 +71,18 @@ const view_get = async (req, res) => {
 			} else {
 				comment.author = 'deleted';
 			}
-			let parentPost = await Comment.findById(comment.fatherID);
-			if (parentPost) {
-				father_author = await User.findById(parentPost.authorID);
-				comment.father = father_author.username;
+			let parentComment = await Comment.findById(comment.fatherID);
+			if (parentComment) {
+				// father_author = await User.findById(parentPost.authorID);
+				comment.father = parentComment._id
+				comment.replying_to = parentComment.author.username
 			}
-			comment._id = undefined;
+			// comment._id = undefined;
 			return comment;
 		})
 	);
 
-	//console.log(await comments_filled)
+	// console.log(comments_filled)
 
 	//tmp dummy data starts
 	/*let today = new Date();
