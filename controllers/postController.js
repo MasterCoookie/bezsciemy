@@ -74,7 +74,7 @@ const view_get = async (req, res) => {
 			let parentComment = await Comment.findById(comment.fatherID);
 			if (parentComment) {
 				replying_to = await User.findById(parentComment.authorID);
-				comment.father = parentComment._id
+				comment.father_id = parentComment._id
 				comment.replying_to = replying_to.username
 			}
 			// comment._id = undefined;
