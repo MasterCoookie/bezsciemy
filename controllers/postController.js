@@ -73,16 +73,16 @@ const view_get = async (req, res) => {
 			}
 			let parentComment = await Comment.findById(comment.fatherID);
 			if (parentComment) {
-				// father_author = await User.findById(parentPost.authorID);
+				replying_to = await User.findById(parentComment.authorID);
 				comment.father = parentComment._id
-				comment.replying_to = parentComment.author.username
+				comment.replying_to = replying_to.username
 			}
 			// comment._id = undefined;
 			return comment;
 		})
 	);
 
-	// console.log(comments_filled)
+	console.log(comments_filled)
 
 	//tmp dummy data starts
 	/*let today = new Date();
