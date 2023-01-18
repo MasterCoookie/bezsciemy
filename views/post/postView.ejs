@@ -145,8 +145,8 @@
                 <h2 class="text">Comments</h2>
                 <% comments.forEach(function(comment){ %>
                     <%- include('../partials/comment.ejs', {comment: comment}); %>
-                        <form id="<%= comment._id %>"> <!--COŚ TU JEST ZDUPIONE - MB-->
-                            <input type="hidden" value="<%= comment._id%>"> <!--COŚ TU JEST ZDUPIONE - MB-->
+                        <form id="<%= comment._id %>"> 
+                            <input type="hidden" value="<%= comment._id%>"> 
                             <button class="reply-button btn btn-outline-secondary text-light" type="button">
                                 Reply</button>
                             <div class="commentEditor" id="commentEditor-<%=comment._id %>" style="display:
