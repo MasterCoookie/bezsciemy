@@ -36,9 +36,10 @@ const replies_get = async (father_id, page_number) => {
 		limit_ = 10;
 	}
 	try {
-		replies_test = await Comment.find({ // for testing purposes
+		replies_test = await Comment.find({
+			// for testing purposes
 			fatherID: father_id,
-		})
+		});
 		//console.log("replies" + replies_test)
 		replies = await Comment.find({
 			fatherID: father_id,
@@ -55,16 +56,16 @@ const replies_get = async (father_id, page_number) => {
 const comment_put = async (req, res) => {
 	//console.log("*************req_body*******************")
 	//console.log(req.body);
-	if(req.session.user) {
-		const {content, postID, fatherID} = req.body;
-		try{
+	if (req.session.user) {
+		const { content, postID, fatherID } = req.body;
+		try {
 			const comment = await Comment.create({
 				authorID: req.session.user.id,
 				postID,
 				fatherID,
-				content
-			});	
-			res.json({ msg: "added successfully" });	
+				content,
+			});
+			res.json({ msg: 'added successfully' });
 		} catch (e) {
 			res.json({ msg: e });
 		}
