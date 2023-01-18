@@ -1,4 +1,4 @@
-<% if(comment.father) { %>
+<% if(comment.father_id) { %>
 <div class="container comment my-1">
     <div class="row flex justify-content-start g-2 ms-4">
         <div class="col-2">
@@ -9,7 +9,7 @@
         <div class="col">
             
                 <h6 name="Respond" class="comment-author text">
-                    Replying to: <%= comment.father %>
+                    Replying to: <%= comment.replying_to %>
                 </h6>
 
         </div>
@@ -23,7 +23,7 @@
 </div>
 <% } %>
 
-<% if(!comment.father) { %>
+<% if(!comment.father_id) { %>
     <div class="container comment my-1">
         <div class="row flex justify-content-start g-2">
             <div class="col-2">

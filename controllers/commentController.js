@@ -53,8 +53,8 @@ const replies_get = async (father_id, page_number) => {
 };
 
 const comment_put = async (req, res) => {
-	//console.log("*************req_body*******************")
-	//console.log(req.body);
+	// console.log("*************req_body*******************")
+	// console.log(req.body);
 	if(req.session.user) {
 		const {content, postID, fatherID} = req.body;
 		try{
