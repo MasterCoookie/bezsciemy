@@ -12,7 +12,7 @@ const require_redactor = (req, res, next) => {
 	if(req.session.perm_lvl >= 2) {
 		next();
 	} else {
-		res.redirect('../auth/login');
+		res.sendStatus(403);
 	}
 }
 
@@ -20,7 +20,7 @@ const require_admin = (req, res, next) => {
 	if(req.session.perm_lvl >= 3) {
 		next();
 	} else {
-		res.redirect('../auth/login');
+		res.sendStatus(403);
 	}
 }
 
