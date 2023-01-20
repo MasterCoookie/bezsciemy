@@ -2,7 +2,13 @@ const User = require('../models/userModel');
 
 const login_get = (req, res) => {
 	if (!req.session.authenticated) {
-		res.render('auth/login', { title: "Login" });
+		if(req.session.newly_registered) {
+			req.session.newly_registered = undefined;
+			res.render('auth/login', { title: "Login", newly_registered: true });
+			res.end();
+		} else {
+			res.render('auth/login', { title: "Login"})
+		}
 	} else {
 		res.redirect('/');
 	}
@@ -58,9 +64,12 @@ const register_put = async (req, res) => {
 		try {
 			const user = await User.create({ username, password, email });
 			console.log("New user %s created", username);
+
+			req.session.newly_registered = true;
 			res.status(201);
 			res.json({ redirect: 'login' });
 			res.end();
+
 		} catch (err) {
 			let error;
 			console.log(err);
