@@ -16,7 +16,8 @@ const require_redactor = (req, res, next) => {
 }
 
 const require_admin = (req, res, next) => {
-	if(req.session.perm_lvl >= 3) {
+	// console.log(req.session);
+	if(req.session.user && req.session.user.perm_lvl >= 3) {
 		next();
 	} else {
 		res.sendStatus(403);
