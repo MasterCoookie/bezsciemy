@@ -29,7 +29,7 @@
             <li class="nav-item border rounded-2 mx-1 ">
                 <a class="nav-link align-text-top" href="/administration/apply">Apply</a>
             </li>
-            <% if(locals.user && user.perm_lvl >= 3) { %> 
+            <% if(user.perm_lvl >= 3) { %> 
               <li class="nav-item border rounded-2 mx-1">
                   <a class="nav-link align-text-top" href="/administration">Administration</a>
               </li>
