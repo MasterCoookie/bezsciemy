@@ -82,7 +82,7 @@ const view_get = async (req, res) => {
 		})
 	);
 
-	console.log(comments_filled)
+	// console.log(comments_filled)
 
 	//tmp dummy data starts
 	/*let today = new Date();

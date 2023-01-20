@@ -4,8 +4,8 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-router.get('/waiting_room', contentListController.waiting_room_get);
-router.get('/waiting_room:page_number', contentListController.waiting_room_get);
+router.get('/waiting_room', authMiddleware.require_login, contentListController.waiting_room_get);
+router.get('/waiting_room:page_number', authMiddleware.require_login, contentListController.waiting_room_get);
 
 router.get('/hall_of_fame', contentListController.hall_of_fame_get);
 router.get('/hall_of_fame:page_number', contentListController.hall_of_fame_get);
