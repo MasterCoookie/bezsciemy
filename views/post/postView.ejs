@@ -94,7 +94,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <p class="text posted-by">Accepted <%=post.created%> by: <%=post.accepted_by%>
+                        <p class="text posted-by">Accepted by: <%= accepted_user.username %>
                         </p>
                         <script> let postID = "<%= post._id %>";
                         </script>
