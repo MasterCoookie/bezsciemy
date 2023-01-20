@@ -257,7 +257,7 @@ const accept_post = async (req, res) => {
 	if (!post) {
 		return res.sendStatus(404);
 	}
-	post.acceptPostAndSave(req.session.user.id);
+	await post.acceptPostAndSave(req.session.user.id);
 	res.sendStatus(200);
 };
 

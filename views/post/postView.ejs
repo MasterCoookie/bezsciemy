@@ -94,8 +94,8 @@
                                 </li>
                             </ul>
                         </div>
-                        <p class="text posted-by">Accepted by: <%= accepted_user.username %>
-                        </p>
+                        <% if(locals.accepted_user) { %><p class="text posted-by">Accepted by:  <%= locals.accepted_user.username %> 
+                        </p><% } %> 
                         <script> let postID = "<%= post._id %>";
                         </script>
                     </div>
