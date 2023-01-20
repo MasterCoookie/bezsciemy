@@ -94,8 +94,8 @@
                                 </li>
                             </ul>
                         </div>
-                        <p class="text posted-by">Accepted <%=post.created%> by: <%=post.accepted_by%>
-                        </p>
+                        <% if(locals.accepted_user) { %><p class="text posted-by">Accepted by:  <%= locals.accepted_user.username %> 
+                        </p><% } %> 
                         <script> let postID = "<%= post._id %>";
                         </script>
                     </div>
@@ -121,7 +121,8 @@
                 </div>
             </div>
                 
-        </div>
+        </div>          <!-- if post has accepetd user, it has been accepted -->
+        <% if(locals.user && locals.user.perm_lvl >= 2 && !locals.accepted_user) { %> 
         <div class="col-2">
             <div class="container accept justify-content-center align-items-center">
                 <div class="row">
@@ -137,7 +138,7 @@
                 </div>
             </div>
         </div>
-
+        <% } %> 
     </div>
     <div class="row justify-content-center">
         <div class="col-8 my-3">

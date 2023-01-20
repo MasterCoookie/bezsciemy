@@ -7,6 +7,9 @@
             <div class="shape"></div>
         </div>
         <form id="loginForm" method="post" class="login-form">
+            <% if(locals.newly_registered === true) { %>
+                <h3>Registration successful!</h3> 
+            <% } %> 
             <h3 class="text loginTitle">Please login into your account</h3>
             <div class="textbox-label">
                 <label class="text" for="text loginInput">Username</label>
