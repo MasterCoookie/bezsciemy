@@ -1,0 +1,18 @@
+<%- include('../partials/head.ejs') %>
+
+<div class="applyForm">
+    <h2 class="text">BEZŚCIEMY Application Form</h2><br>
+    <form>
+        <label clas="text">Choose position you are applying for:</label><br>
+        <input type="radio" id="admin" name="app" value="admin"><label>Admin</label><br>
+        <input type="radio" id="redactor" name="app" value="redactor"><label>Redactor</label><br>
+        <label class="text">Tell us why we should choose you</label><br>
+        <textarea id="apptext" name="apptext" class="text desc-textbox"
+                placeholder="Enter the content of your application here"></textarea> <br>
+        <button id="sendapp" type="submit" class="btn-universal">Send</button>
+    </form>
+</div>
+
+</body>
+
+</html>
