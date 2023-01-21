@@ -16,10 +16,10 @@ body {
 	padding-top: 40px;
 	padding-bottom: 40px;
 }
-.login {
+/* .login {
 	display: block;
 	text-align: left;
-}
+} */
 .text {
 	color: white;
 	font-family: 'Poppins', sans-serif;
@@ -36,20 +36,13 @@ body {
 	backdrop-filter: blur(10px);
 	border: none;
 	border-radius: 20px;
-	padding: 20px;
-	padding-top: 40px;
-	padding-bottom: 40px;
-	position: absolute;
-	transform: translate(-50%, -50%);
-	top: 50%;
-	left: 50%;
 	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+	max-width: 20%;
 }
 .textbox {
 	width: 80%;
 	padding: 10px 10px;
 	margin: 8px 10px;
-	display: block;
 	background-color: #797878;
 	border: none;
 	box-sizing: border-box;
@@ -57,7 +50,10 @@ body {
 }
 
 .textbox:focus {
-	width: 85%;
+	outline: none;
+	border: 1px solid white;
+	box-shadow: 0 0 3px white;
+	
 }
 
 button[class="btn-universal"] {
@@ -99,13 +95,13 @@ button:hover[class="btn-universal"]{
 
 .shape:first-child {
 	background: linear-gradient(#1845ad, #23a2f6);
-	left: 50%;
-	top: 60%;
+	left: 55%;
+	top: 70%;
 }
 
 .shape:last-child {
 	background: linear-gradient(to left, #ad4218, #f6f323);
-	right: 50%;
+	right: 55%;
 	bottom: 60%;
 }
 
@@ -484,3 +480,11 @@ a[class="text_title_postTitle"]{
 a[class="text_title_postTitle"]:hover{
 	text-decoration: underline;
 }
+
+.vertical-center {
+	min-height: 100%;
+	min-height: 100vh;
+  
+	display: flex;
+	align-items: center;
+  }
