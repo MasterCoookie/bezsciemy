@@ -1,3 +1,25 @@
+const User = require('../models/userModel');
+
+const fill_aplications = async aplications => {
+	return await Promise.all(
+		aplications.map(async (aplication) => {
+			// uncomment after getting form db
+			// aplication = aplication.toObject()
+			let applier = await User.findById(aplication.applier_id);
+			applier = applier.toObject()
+			if (applier) {
+				applier.password = undefined;
+				applier._id = undefined;
+				aplication.applier = applier;
+			} else {
+				aplication.applier = 'deleted';
+			}
+
+			return aplication;
+		})
+	);
+}
+
 const apply_get = (req, res) => {
 
 	res.render('adminPanel/apply', { user: req.session.user, title: "Apply" })
@@ -27,15 +49,19 @@ const aplications = [
 	},
 ];
 
-const list_get = (req, res) => {
+const list_get = async (req, res) => {
+	const aplications_filled = await fill_aplications(aplications);
 	
-	
-	res.render('adminPanel/list', { user: req.session.user, title: "List", aplications })
+	console.log(aplications_filled);
+	res.render('adminPanel/list', { user: req.session.user, title: "List", aplications: aplications_filled })
 }
 
-const review_get = (req, res) => {
+const review_get = async (req, res) => {
 	const review_id = req.query.id;
-	res.render('adminPanel/review', { user: req.session.user, title: "Review", aplication: aplications[0] })
+
+	const aplications_filled = await fill_aplications(aplications);
+
+	res.render('adminPanel/review', { user: req.session.user, title: "Review", aplication: aplications_filled[0] })
 }
 
 module.exports = {
