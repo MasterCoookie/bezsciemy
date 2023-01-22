@@ -505,3 +505,13 @@ a[class="text_title_postTitle"]:hover{
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 }
+
+.downvote-arrow{
+	border: 2px solid #ffffff;
+	border-radius: 5px;
+}
+
+.upvote-arrow{
+	border: 2px solid #ffffff;
+	border-radius: 5px;
+}
