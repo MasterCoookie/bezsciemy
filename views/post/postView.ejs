@@ -100,7 +100,7 @@
                         </script>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col-3">
+                        <div class="col-3 my-3">
                             <button onclick='comment()' id="comment_button" type="button" class="btn btn-light ">Comment</button>
                         </div>
                     </div>
@@ -122,12 +122,11 @@
                     </div>
                 </div>
 
-            </div>
                 
         </div>          <!-- if post has accepetd user, it has been accepted -->
         <% if(locals.user && locals.user.perm_lvl >= 2 && !locals.accepted_user) { %> 
         <div class="col-2">
-            <div class="container accept justify-content-center align-items-center">
+            <div class="container accept justify-content-center align-items-center my-0">
                 <div class="row">
                     <div class="col my-2">
                         <button id="acceptpost" type="button" class="btn-universal">Accept</button>
