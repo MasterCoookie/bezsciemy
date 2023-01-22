@@ -61,7 +61,9 @@ const view_get = async (req, res) => {
 	}
 	const comments_filled = await Promise.all(
 		comments.map(async (comment) => {
+			comment = comment.toObject()
 			let author = await User.findById(comment.authorID);
+			author = author.toObject()
 			if (author) {
 				author.password = undefined;
 				author._id = null;
@@ -69,17 +71,18 @@ const view_get = async (req, res) => {
 			} else {
 				comment.author = 'deleted';
 			}
-			let parentPost = await Comment.findById(comment.fatherID);
-			if (parentPost) {
-				father_author = await User.findById(parentPost.authorID);
-				comment.father = father_author.username;
+			let parentComment = await Comment.findById(comment.fatherID);
+			if (parentComment) {
+				replying_to = await User.findById(parentComment.authorID);
+				comment.father_id = parentComment._id
+				comment.replying_to = replying_to.username
 			}
-			comment._id = undefined;
+			// comment._id = undefined;
 			return comment;
 		})
 	);
 
-	//console.log(await comments_filled)
+	// console.log(comments_filled)
 
 	//tmp dummy data starts
 	/*let today = new Date();
@@ -248,29 +251,24 @@ const downvote_post = async (req, res) => {
 };
 
 const accept_post = async (req, res) => {
-	if (req.session.user && req.session.user.permLevel > 1){
-		const post_id = req.body.postID;
-		const post = await Post.findById(post_id);
+	const post_id = req.body.postID;
+	const post = await Post.findById(post_id);
 
-		if (!post) {
-			return res.sendStatus(404);
-		}
-		post.acceptPostAndSave(req.session.user.id)
-	} else {
-		res.sendStatus(403);
+	if (!post) {
+		return res.sendStatus(404);
 	}
+	await post.acceptPostAndSave(req.session.user.id);
+	res.sendStatus(200);
 };
 
 const delete_post = async (req, res) => {
-	if (req.session.user && req.session.user.permLevel > 1){
-		const post_id = req.body.postID;
-		try{
-			await Post.deleteOne({ _id: post_id })
-		} catch (e) {
-			res.send(e);
-		}
-	} else {
-		res.sendStatus(403);
+	const post_id = req.body.postID;
+	try{
+		await Post.deleteOne({ _id: post_id })
+		res.sendStatus(200);
+	} catch (e) {
+		console.log(e);
+		res.send(500);
 	}
 };
 
