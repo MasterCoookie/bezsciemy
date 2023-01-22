@@ -1,5 +1,5 @@
 const apply_get = (req, res) => {
-	res.render('/adminPanel/apply', { user: req.session.user, title: "Apply" })
+	res.render('adminPanel/apply', { user: req.session.user, title: "Apply" })
 }
 
 const apply_post = (req, res) => {
@@ -11,12 +11,12 @@ const review_post = (req, res) => {
 }
 
 const list_get = (req, res) => {
-	res.render('/adminPanel/list', { user: req.session.user, title: "List" })
+	res.render('adminPanel/list', { user: req.session.user, title: "List" })
 }
 
 const review_get = (req, res) => {
 	const review_id = req.query.id;
-	res.render('/adminPanel/review', { user: req.session.user, title: "Review" })
+	res.render('adminPanel/review', { user: req.session.user, title: "Review" })
 }
 
 module.exports = {
