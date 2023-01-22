@@ -1,9 +1,53 @@
 <%- include('../partials/head.ejs') %>
+<div class="vertical-center">
 
-<div class="applyForm">
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <div class="container-md application-form my-3">
+        <div class="row">
+            <div class="col text-center">
+                <h2 class="text">BEZŚCIEMY Application Form</h2><br>
+            </div>
+        </div>
+        <form>
+            <div class="row justify-content-center">
+                <div class="col-2 text-light">
+                    <input type="radio" id="admin" name="app" value="admin">
+                    <label>Admin</label>
+                </div>
+                <div class="col-2 text-light">
+                    <input type="radio" id="redaktor" name="app" value="redaktor">
+                    <label>Moderator</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="text">Tell us why we should choose you</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <textarea id="apptext" name="apptext" class="text application-textbox"
+                    placeholder="Enter the content of your application here"></textarea>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-3 text-center">
+                    <button id="sendapp" type="submit" class="btn-universal">Send</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<!-- <div class="applyForm">
     <h2 class="text">BEZŚCIEMY Application Form</h2><br>
     <form>
-        <label clas="text">Choose position you are applying for:</label><br>
+        <label class="text">Choose position you are applying for:</label><br>
         <input type="radio" id="admin" name="app" value="admin"><label>Admin</label><br>
         <input type="radio" id="redaktor" name="app" value="redaktor"><label>Moderator</label><br>
         <label class="text">Tell us why we should choose you</label><br>
@@ -11,7 +55,7 @@
                 placeholder="Enter the content of your application here"></textarea> <br>
         <button id="sendapp" type="submit" class="btn-universal">Send</button>
     </form>
-</div>
+</div> -->
 
 </body>
 
