@@ -10,7 +10,7 @@ function sendComment(postID) {
 	});
 	request.open('PUT', '/post/comment');
 	request.send(formData);
-	console.log(formData.get('content'));
+	//console.log(formData.get('content'));
 }
 
 function sendReply(event, postID) {
@@ -27,5 +27,5 @@ function sendReply(event, postID) {
 	});
 	request.open('PUT', '/post/comment');
 	request.send(formData);
-	console.log(formData.get('content'));
+	//console.log(formData.get('content'));
 }

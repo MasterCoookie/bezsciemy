@@ -1,56 +1,69 @@
 <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary navbar-dark bg-dark" data-bs-theme="dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-            <img src="/logo.svg" alt=" " width="30" height="30" class="d-inline-block align-text-top">
-            Bezsciemy
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="/logo.svg" alt=" " width="30" height="30" class="d-inline-block align-text-top">
+      Bezsciemy
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 navbar-nav-scroll">
+        <li class="nav-item">
+          <a class="nav-link <% if(locals.title === "") { %><%= " active" %>
+            <% } %>" aria-current="page" href="/">Main Page
           </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 navbar-nav-scroll">
-          <li class="nav-item">
-            <a class="nav-link <% if(locals.title === "") { %><%= "active" %><% } %>" aria-current="page" href="/">Main Page</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link <% if(locals.title === "Hall of Fame") { %><%= "active" %><% } %>" aria-current="page" href="/hall_of_fame">Hall of fame</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link <% if(locals.title === "Waiting Room") { %><%= "active" %><% } %>" aria-current="page" href="/waiting_room">Waiting room</a>
-          </li>
-          <li class="nav-item border rounded mx-5">
-            <a class="nav-link <% if(locals.title === "Create Post") { %><%= "active" %><% } %>" aria-current="page" href="/post/create">
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <% if(locals.title === " Hall of Fame") { %>
+            <%= "active" %>
+              <% } %>" aria-current="page" href="/hall_of_fame">Hall of fame
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <% if(locals.title === " Waiting Room") { %>
+            <%= "active" %>
+              <% } %>" aria-current="page" href="/waiting_room">Waiting room
+          </a>
+        </li>
+        <li class="nav-item border rounded mx-5">
+          <a class="nav-link <% if(locals.title === " Create Post") { %>
+            <%= "active" %>
+              <% } %>" aria-current="page" href="/post/create">
                 <img src="/plus.svg" alt=" " width="20" height="20" class="d=inline-block me-2 align-text-top">
-                 Create new post</a>
+                Create new post
+          </a>
+        </li>
+
+      </ul>
+      <ul class="navbar-nav ">
+        <li class="nav-item border rounded-2 mx-1 ">
+          <a class="nav-link align-text-top" href="/adminPanel/apply">Apply</a>
+        </li>
+        <% if(user.perm_lvl>= 3) { %>
+          <li class="nav-item border rounded-2 mx-1">
+            <a class="nav-link align-text-top" href="/adminPanel">Administration</a>
           </li>
-
-        </ul>
-        <ul class="navbar-nav ">
-            <li class="nav-item border rounded-2 mx-1 ">
-                <a class="nav-link align-text-top" href="/administration/apply">Apply</a>
-            </li>
-            <% if(user.perm_lvl >= 3) { %> 
-              <li class="nav-item border rounded-2 mx-1">
-                  <a class="nav-link align-text-top" href="/administration">Administration</a>
-              </li>
-            <% } %> 
+          <% } %>
             <div class="btn-group dropdown">
-                <li class="nav-item dropdown show">
-                    <a class="nav-link dropdown-toggle mx-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <%= user.username %>
-                    </a>
-                    <ul class="dropdown-menu me-1 dropdown-menu-lg-end">
-                      <li><a class="dropdown-item" href="#">Profile</a></li>
-                      <li><a class="dropdown-item" href="#">User settings</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="/auth/logout">Log out</a></li>
-                    </ul>
+              <li class="nav-item dropdown show">
+                <a class="nav-link dropdown-toggle mx-2" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <%= user.username %>
+                </a>
+                <ul class="dropdown-menu me-1 dropdown-menu-lg-end">
+                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <li><a class="dropdown-item" href="#">User settings</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
                   </li>
+                  <li><a class="dropdown-item" href="/auth/logout">Log out</a></li>
+                </ul>
+              </li>
             </div>
-        </ul>
+      </ul>
 
     </div>
-    </div>
-  </nav>
-
-
+  </div>
+</nav>
