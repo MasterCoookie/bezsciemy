@@ -488,7 +488,7 @@ a[class="text_title_postTitle"]:hover{
 
 .vertical-center {
 	min-height: 100%;
-	min-height: 100vh;
+	min-height: 90vh;
   
 	display: flex;
 	align-items: center;
@@ -552,4 +552,23 @@ input[type=radio] {
 	outline: none;
 	border: 1px solid white;
 	box-shadow: 0 0 3px white;
+}
+
+.shape-apply {
+	height: 200px;
+	width: 200px;
+	position: absolute;
+	border-radius: 50%;
+}
+
+.shape-apply:first-child {
+	background: linear-gradient(#1845ad, #23a2f6);
+	left: 65%;
+	top: 65%;
+}
+
+.shape-apply:last-child {
+	background: linear-gradient(to left, #ad4218, #f6f323);
+	right: 65%;
+	bottom: 65%;
 }
