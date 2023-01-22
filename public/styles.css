@@ -7,14 +7,11 @@ body {
 	width: auto;
 	/* background-image: url('bezsciemy.png');
 	background-repeat: repeat-x;
-	background-size: 300px; */
+	background-size: egisterForm300px; */
 }
 
 .loginTitle {
 	text-align: center;
-	margin: -10%;
-	padding-top: 40px;
-	padding-bottom: 40px;
 }
 /* .login {
 	display: block;
@@ -37,7 +34,17 @@ body {
 	border: none;
 	border-radius: 20px;
 	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-	max-width: 20%;
+	max-width: 380px;
+}
+.register-form {
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.13);
+	backdrop-filter: blur(10px);
+	border: none;
+	border-radius: 20px;
+	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+	max-width: 380px;
+	
 }
 .textbox {
 	width: 80%;
@@ -79,9 +86,6 @@ button:hover[class="btn-universal"]{
 .registerLabel {
 	display: block;
 	text-align: left;
-	margin-left: 10px;
-	margin-top: 20px;
-	margin-bottom: 8px;
 	font-size: 16px;
 	font-weight: 500;
 }
