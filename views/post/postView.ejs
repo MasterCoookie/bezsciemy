@@ -198,7 +198,7 @@
     <script>Array.from(document.getElementsByClassName('reply-to-comment')).forEach(
             (element) => {
                 element.addEventListener('click', (event) => {
-                    console.log(event.target.form.id);
+                    // console.log(event.target.form.id);
                     sendReply(event, postID);
                 });
             }

@@ -2,7 +2,7 @@ function sendComment(postID) {
 	const commentForm = document.getElementById('comment-form');
 	const formData = new FormData(commentForm);
 	formData.append('postID', postID);
-	console.log(postID);
+	// console.log(postID);
 	const request = new XMLHttpRequest();
 	request.addEventListener('load', (event) => {
 		const response = JSON.parse(event.target.responseText);
