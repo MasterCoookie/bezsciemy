@@ -118,8 +118,10 @@
 
 
 
+                        </div>
                     </div>
                 </div>
+
             </div>
                 
         </div>          <!-- if post has accepetd user, it has been accepted -->
@@ -130,14 +132,16 @@
                     <div class="col my-2">
                         <button id="acceptpost" type="button" class="btn-universal">Accept</button>
 
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col my-2">
-                        <button id="deletepost" type="button" class="btn-universal">Delete</button>
+                    <div class="row">
+                        <div class="col my-2">
+                            <button id="deletepost" type="button" class="btn-universal">Delete</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
         <% } %> 
     </div>
@@ -170,11 +174,11 @@
 
 
 
-                
 
 
-                
-         
+
+
+
     <h4 id="vote-message"></h4>
 
 
@@ -194,6 +198,7 @@
     <script>Array.from(document.getElementsByClassName('reply-to-comment')).forEach(
             (element) => {
                 element.addEventListener('click', (event) => {
+                    // console.log(event.target.form.id);
                     sendReply(event, postID);
                 });
             }
