@@ -1,13 +1,13 @@
 function acceptPostScript(decision, postID) {
     let request = new XMLHttpRequest();
     const data = JSON.stringify({ postID: postID });
-	console.log(postID);
+	// console.log(data.toString());
     if (decision === 'accept') {
 		request.open('POST', '/post/accept', true);
 	} else {
 		request.open('POST', '/post/delete', true);
 	}
-
+	request.setRequestHeader('Content-Type', 'application/json');
 	request.addEventListener('load', (event) => {
 		const response = event.target;
 		console.log(response);
