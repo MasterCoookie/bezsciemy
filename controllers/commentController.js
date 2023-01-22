@@ -54,19 +54,11 @@ const replies_get = async (father_id, page_number) => {
 };
 
 const comment_put = async (req, res) => {
-<<<<<<< HEAD
 	//console.log("*************req_body*******************")
 	//console.log(req.body);
 	if (req.session.user) {
 		const { content, postID, fatherID } = req.body;
 		try {
-=======
-	// console.log("*************req_body*******************")
-	// console.log(req.body);
-	if(req.session.user) {
-		const {content, postID, fatherID} = req.body;
-		try{
->>>>>>> master
 			const comment = await Comment.create({
 				authorID: req.session.user.id,
 				postID,
