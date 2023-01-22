@@ -8,7 +8,7 @@ const require_login = (req, res, next) => {
 };
 
 const require_redactor = (req, res, next) => {
-	if(req.session.perm_lvl >= 2) {
+	if(req.session.user && req.session.user.perm_lvl >= 2) {
 		next();
 	} else {
 		res.sendStatus(403);
