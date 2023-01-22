@@ -492,3 +492,7 @@ a[class="text_title_postTitle"]:hover{
 	display: flex;
 	align-items: center;
   }
+
+.text-shadow{
+	text-shadow:2px 2px 8px #646161;
+}
