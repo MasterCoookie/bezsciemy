@@ -277,6 +277,12 @@ ul {
 	background-size: 20px;
 	padding-right: 20px;
 }
+.ext-link-icon {
+	background: url('icons8-external-link-30.png') no-repeat 100% 0;
+	background-size: 20px;
+
+}
+
 img.content-image {
 	height: 360px;
 	width: auto;
@@ -400,12 +406,10 @@ a[id="downvote"]:hover,[id="upvote"]:hover
 	backdrop-filter: blur(10px);
 	border: none;
 	border-radius: 20px;
-	padding: 20px;
-	padding-top: 10px;
-	padding-bottom: 40px;
 	position: relative;
 	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
 	overflow: auto;
+	padding: 20px;
 }
 
 .comment-text {
@@ -488,7 +492,7 @@ a[class="text_title_postTitle"]:hover{
 
 .vertical-center {
 	min-height: 100%;
-	min-height: 100vh;
+	min-height: 90vh;
   
 	display: flex;
 	align-items: center;
@@ -504,4 +508,71 @@ a[class="text_title_postTitle"]:hover{
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
+}
+
+.downvote-arrow{
+	border: 2px solid #ffffff;
+	border-radius: 5px;
+}
+
+.upvote-arrow{
+	border: 2px solid #ffffff;
+	border-radius: 5px;
+}
+
+.application-form {
+	text-align: left;
+	background-color: rgba(255, 255, 255, 0.13);
+	backdrop-filter: blur(10px);
+	border: none;
+	border-radius: 20px;
+	position: relative;
+	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+	overflow: auto;
+	padding: 20px;
+	max-width: 800px;
+}
+
+input[type=radio] {
+	accent-color: rgb(0, 153, 255);
+}
+
+.application-textbox{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color: #797878;
+	resize: none;
+	width: 100%;
+	border: none;
+	overflow-y: auto;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+	height: 200px;
+	transition: height 0.4s ease-in-out;
+}
+
+.application-textbox:focus {
+	height: 240px;
+	outline: none;
+	border: 1px solid white;
+	box-shadow: 0 0 3px white;
+}
+
+.shape-apply {
+	height: 200px;
+	width: 200px;
+	position: absolute;
+	border-radius: 50%;
+}
+
+.shape-apply:first-child {
+	background: linear-gradient(#1845ad, #23a2f6);
+	left: 65%;
+	top: 65%;
+}
+
+.shape-apply:last-child {
+	background: linear-gradient(to left, #ad4218, #f6f323);
+	right: 65%;
+	bottom: 65%;
 }

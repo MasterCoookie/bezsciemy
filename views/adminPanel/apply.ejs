@@ -1,13 +1,58 @@
 <%- include('../partials/head.ejs') %>
 
-    <div class="applyForm">
-        <h2 class="text">BEZŚCIEMY Application Form</h2><br>
+<div class="background">
+    <div class="shape-apply"></div>
+    <div class="shape-apply"></div>
+</div>
+
+<div class="vertical-center">
+    <div class="container-md application-form ">
+        <div class="row">
+            <div class="col text-center">
+                <h2 class="text">BEZŚCIEMY Application Form</h2><br>
+            </div>
+        </div>
         <form id='application-form'>
-            <label clas="text">Choose position you are applying for:</label><br>
-            <input type="radio" id="admin" name="app" value="admin"><label>Admin</label><br>
-            <input type="radio" id="redaktor" name="app" value="redaktor"><label>Moderator</label><br>
-            <label class="text">Tell us why we should choose you</label><br>
-            <textarea id="apptext" name="apptext" class="text desc-textbox"
+            <div class="row justify-content-center">
+                <div class="col-2 text-light">
+                    <input type="radio" id="admin" name="app" value="admin">
+                    <label>Admin</label>
+                </div>
+                <div class="col-2 text-light">
+                    <input type="radio" id="redaktor" name="app" value="redaktor">
+                    <label>Moderator</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="text">Tell us why we should choose you</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <textarea id="apptext" name="apptext" class="text application-textbox"
+                    placeholder="Enter the content of your application here"></textarea>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-3 text-center">
+                    <button onclick='sendApplication()' id="sendapp" type="submit" class="btn-universal">Send</button>
+                </div>
+                <!-- add alert -->
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<!-- <div class="applyForm">
+    <h2 class="text">BEZŚCIEMY Application Form</h2><br>
+    <form>
+        <label class="text">Choose position you are applying for:</label><br>
+        <input type="radio" id="admin" name="app" value="admin"><label>Admin</label><br>
+        <input type="radio" id="redaktor" name="app" value="redaktor"><label>Moderator</label><br>
+        <label class="text">Tell us why we should choose you</label><br>
+        <textarea id="apptext" name="apptext" class="text desc-textbox"
                 placeholder="Enter the content of your application here"></textarea> <br>
             <button onclick='sendApplication()' id="sendapp" type="submit" class="btn-universal">Send</button>
             <h1 id="application-message"></h1>

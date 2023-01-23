@@ -2,7 +2,7 @@
 
 
     <div class="container-xl mt-3">
-        <div class="row text-center justify-content-start">
+        <div class="row text-center justify-content-start my-0">
             <div class="col-2 ">
                 <div class="container vote me-0 mt-0">
                     <div class="row">
@@ -24,12 +24,12 @@
                                 class="justify-content-center p-1">
                         </a>
                     </div>
-
                 </div>
 
             </div>
+
             <div class="col-8">
-                <div class="post" class>
+                <div class="post">
                     <div class="container">
                         <div class="row">
                             <p class="text posted-by">Posted <%=post.created%> by: <%= author_user.username %>
@@ -96,45 +96,38 @@
                                     </li>
                                 </ul>
                             </div>
-                            <% if(locals.accepted_user) { %>
-                                <p class="text posted-by">Accepted by: <%= locals.accepted_user.username %>
-                                </p>
-                                <% } %>
-                                    <script> let postID = "<%= post._id %>";
-                                    </script>
+                            <% if(locals.accepted_user) { %><p class="text posted-by">Accepted by:  <%= locals.accepted_user.username %> 
+                            </p><% } %> 
+                            <script> let postID = "<%= post._id %>";
+                            </script>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="col-3">
-                                <button onclick='comment()' id="comment_button" type="button"
-                                    class="btn btn-light ">Comment</button>
+                            <div class="col-3 my-3">
+                                <button onclick='comment()' id="comment_button" type="button" class="btn btn-light ">Comment</button>
                             </div>
                         </div>
                         <div class="row justify-content-start">
                             <form id="comment-form" style="display: none;">
                                 <div class="commentEditor">
                                     <label for="content" class="text">Type your comment here</label><br>
-                                    <textarea id="content" name="content" placeholder="Write your comment"
-                                        class="comment-textbox"></textarea><br>
-                                    <button onclick='sendComment(postID)' id="add-comment" type="button"
-                                        class="btn btn-outline-secondary text-light">Add</button>
-                                    <h1 id="comment-message"></h1>
+                                    <textarea id="content" name="content" placeholder="Write your comment" class="comment-textbox"></textarea><br>
+                                    <button onclick='sendComment(postID)' id="add-comment" type="button" class="btn btn-outline-secondary text-light">Add</button>
+                                    
                                 </div>
                             </form>
                             <!--Tu jest dodany przycisk do komentarzy-->
                             <div id="comment-formula"></div>
 
-
-
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
-            </div>
-
-        </div> <!-- if post has accepetd user, it has been accepted -->
+             <!-- if post has accepetd user, it has been accepted -->
         <% if(locals.user && locals.user.perm_lvl>= 2 && !locals.accepted_user) { %>
             <div class="col-2">
-                <div class="container accept justify-content-center align-items-center">
+                <div class="container accept justify-content-center align-items-center my-0">
                     <div class="row">
                         <div class="col my-2">
                             <button onclick='handleUserAction("/post/accept", "postMessage", "Post accepted!", postID)'
@@ -151,49 +144,118 @@
                 </div>
             </div>
 
+        <% } %>
     </div>
-    <% } %>
+    <div class="row justify-content-center my-3">
+        <div class="col-8 my-3">
+            <div class="comment-background">
+                <h2 class="text">Comments</h2>
+                <% comments.forEach(function(comment){ %>
+                    <%- include('../partials/comment.ejs', {comment: comment}); %>
+                        <form id="<%= comment._id %>">
+                            <input type="hidden" value="<%= comment._id%>">
+                            <button class="reply-button btn btn-outline-secondary text-light" type="button">
+                                Reply</button>
+                            <div class="commentEditor" id="commentEditor-<%=comment._id %>" style="display:
+                                none;">
+                            <label for="content" class="text">Type your comment here</label><br>
+                            <textarea id="content" name="content"
+                                placeholder="Write your comment" class="comment-textbox text-light"></textarea><br>
+                            <button id="liveToastBtn" class="reply-to-comment btn btn-outline-secondary text-light" type="button">Add</button>
+                            <!-- this message eventually will be in Toast but i couldn't figure out how to parse this
+                            event to js script bown below -->
+                            <h1 id = "comment-message-<%= comment._id %>"></h1>
+                        </div>
+                    </form>
+            <% }); %>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-8 my-3">
-                <div class="comment-background">
-                    <h2 class="text">Comments</h2>
-                    <% comments.forEach(function(comment){ %>
-                        <%- include('../partials/comment.ejs', {comment: comment}); %>
-                            <form id="<%= comment._id %>">
-                                <input type="hidden" value="<%= comment._id%>">
-                                <button class="reply-button btn btn-outline-secondary text-light" type="button">
-                                    Reply</button>
-                                <div class="commentEditor" id="commentEditor-<%=comment._id %>" style="display:
-                                    none;">
-                                    <label for="content" class="text">Type your comment here</label><br>
-                                    <textarea id="content" name="content" placeholder="Write your comment"
-                                        class="comment-textbox text-light"></textarea><br>
-                                    <button class="reply-to-comment btn btn-outline-secondary text-light"
-                                        type="button">Add</button>
-                                    <h1 id="comment-message-<%= comment._id %>"></h1>
-                                </div>
-                            </form>
-                            <% }); %>
-                </div>
-            </div>
+    </div>
+</div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+    <div id="deleteToast" class="toast text-bg-transparent" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header text-bg-secondary">
+          <strong class="me-auto">Delete</strong>
+          <small>just now</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
+        <div class="toast-body">
+            <p id="postMessage"></p>
         </div>
+    </div>
+
+    <div id="commentToast" class="toast text-bg-transparent" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header text-bg-secondary">
+        <strong class="me-auto">Comment</strong>
+        <small>just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        <p id = "comment-message"></p>
+      </div>
+    </div>
+
+    <div id="voteToast" class="toast text-bg-transparent" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header text-bg-secondary">
+        <strong class="me-auto">Vote</strong>
+        <small>just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+          <p class="alert-heading" id="vote-message"></p>
+      </div>
+    </div>
+
+</div>
 
 
 
+<script>
+    const toastTriggerUp = document.getElementById('upvote')
+    const toastTriggerDown = document.getElementById('downvote')
+    const toastTriggerComBtn = document.getElementById('add-comment')
+    const toastTriggerDelBtn = document.getElementById('deletepost')
 
 
+    // here should be event triggered by adding a comment
+    // const toastTriggerComment = document.getElementById(comment._id)
+    const toastLiveComment = document.getElementById('commentToast')
+
+    const toastLiveVote = document.getElementById('voteToast')
+    
+    const toastLiveDelete = document.getElementById('deleteToast')
+
+    // const toastLiveComment = document.getElementById('commentToast')
+    if (toastTriggerUp) {
+    toastTriggerUp.addEventListener('click', () => {
+        const toast = new bootstrap.Toast(toastLiveVote)
+
+        toast.show()
+    })
+    }
+    if (toastTriggerDown) {
+        toastTriggerDown.addEventListener('click', () => {
+        const toast = new bootstrap.Toast(toastLiveVote)
 
 
+        toast.show()
+    })
+    }
+    if (toastTriggerComBtn) {
+        toastTriggerComBtn.addEventListener('click', () => {
+        const toast = new bootstrap.Toast(toastLiveComment)
 
+        toast.show()
+    })
+    }
+    if (toastTriggerDelBtn) {
+        toastTriggerDelBtn.addEventListener('click', () => {
+        const toast = new bootstrap.Toast(toastLiveDelete)
 
-
-        <h4 id="vote-message"></h4>
-
-
-
-
+        toast.show()
+    })
+    }
+</script>
         <script src="../../scripts/comment-formula-script.js"></script>
         <script src="../../scripts/comment-send-script.js"></script>
         <script src="../../scripts/post-JSON-sender-script.js"></script>
