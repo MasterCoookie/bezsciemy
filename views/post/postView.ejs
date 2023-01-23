@@ -110,7 +110,7 @@
                                 <label for="content" class="text">Type your comment here</label><br>
                                 <textarea id="content" name="content" placeholder="Write your comment" class="comment-textbox"></textarea><br>
                                 <button onclick='sendComment(postID)' id="add-comment" type="button" class="btn btn-outline-secondary text-light">Add</button>
-                                <h1 id = "comment-message"></h1>
+                                
                             </div>
                         </form>
                         <!--Tu jest dodany przycisk do komentarzy-->
@@ -121,6 +121,7 @@
                         </div>
                     </div>
                 </div>
+
 
                 
         </div>          <!-- if post has accepetd user, it has been accepted -->
@@ -159,7 +160,9 @@
                                 <label for="content" class="text">Type your comment here</label><br>
                                 <textarea id="content" name="content"
                                     placeholder="Write your comment" class="comment-textbox text-light"></textarea><br>
-                                <button class="reply-to-comment btn btn-outline-secondary text-light" type="button">Add</button>
+                                <button id="liveToastBtn" class="reply-to-comment btn btn-outline-secondary text-light" type="button">Add</button>
+                                <!-- this message eventually will be in Toast but i couldn't figure out how to parse this
+                                event to js script bown below -->
                                 <h1 id = "comment-message-<%= comment._id %>"></h1>
                             </div>
                         </form>
@@ -168,21 +171,67 @@
         </div>
     </div>
 </div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+    <div id="commentToast" class="toast text-bg-transparent" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header text-bg-secondary">
+        <strong class="me-auto">Comment</strong>
+        <small>just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        <p id = "comment-message"></p>
+      </div>
+    </div>
+
+    <div id="voteToast" class="toast text-bg-transparent" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header text-bg-secondary">
+        <strong class="me-auto">Vote</strong>
+        <small>just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+          <p class="alert-heading" id="vote-message"></p>
+      </div>
+    </div>
+
+</div>
 
 
 
+<script>
+    const toastTriggerUp = document.getElementById('upvote')
+    const toastTriggerDown = document.getElementById('downvote')
+    const toastTriggerComBtn = document.getElementById('add-comment')
 
+    // here should be event triggered by adding a comment
+    // const toastTriggerComment = document.getElementById(comment._id)
+    const toastLiveComment = document.getElementById('commentToast')
 
+    const toastLiveVote = document.getElementById('voteToast')
+    // const toastLiveComment = document.getElementById('commentToast')
+    if (toastTriggerUp) {
+    toastTriggerUp.addEventListener('click', () => {
+        const toast = new bootstrap.Toast(toastLiveVote)
 
+        toast.show()
+    })
+    }
+    if (toastTriggerDown) {
+        toastTriggerDown.addEventListener('click', () => {
+        const toast = new bootstrap.Toast(toastLiveVote)
 
+        toast.show()
+    })
+    }
+    if (toastTriggerComBtn) {
+        toastTriggerComBtn.addEventListener('click', () => {
+        const toast = new bootstrap.Toast(toastLiveComment)
 
-
-
-    <h4 id="vote-message"></h4>
-
-
-
-
+        toast.show()
+    })
+    }
+</script>
     <script src="../../scripts/voting-scripts.js"></script>
     <script src="../../scripts/comment-formula-script.js"></script>
     <script src="../../scripts/comment-send-script.js"></script>

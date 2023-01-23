@@ -277,6 +277,12 @@ ul {
 	background-size: 20px;
 	padding-right: 20px;
 }
+.ext-link-icon {
+	background: url('icons8-external-link-30.png') no-repeat 100% 0;
+	background-size: 20px;
+
+}
+
 img.content-image {
 	height: 360px;
 	width: auto;
