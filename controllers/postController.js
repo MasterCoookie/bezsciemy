@@ -251,6 +251,7 @@ const downvote_post = async (req, res) => {
 };
 
 const accept_post = async (req, res) => {
+	// console.log(req.body.postID);
 	const post_id = req.body.postID;
 	const post = await Post.findById(post_id);
 
