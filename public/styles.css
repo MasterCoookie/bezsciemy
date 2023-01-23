@@ -406,12 +406,10 @@ a[id="downvote"]:hover,[id="upvote"]:hover
 	backdrop-filter: blur(10px);
 	border: none;
 	border-radius: 20px;
-	padding: 20px;
-	padding-top: 10px;
-	padding-bottom: 40px;
 	position: relative;
 	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
 	overflow: auto;
+	padding: 20px;
 }
 
 .comment-text {
