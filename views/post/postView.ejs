@@ -6,7 +6,8 @@
             <div class="col-2 ">
                 <div class="container vote me-0 mt-0">
                     <div class="row">
-                        <a onclick='sendUpVote(postID, "upvote")' id="upvote" class="upvote-arrow rounded px-1">
+                        <a onclick='handleUserAction("/post/upvote", "vote-message", "Vote sent.", postID)' id="upvote"
+                            class="upvote-arrow rounded px-1">
                             <img src="/up_chevron.svg" alt=" " height="50" width="50"
                                 class="justify-content-center p-1">
                         </a>
@@ -17,7 +18,8 @@
                         </h4> <!--Tu jest Licznik wyniku posta-->
                     </div>
                     <div class="row">
-                        <a onclick='sendUpVote(postID, "downvote")' id="downvote" class="downvote-arrow rounded">
+                        <a onclick='handleUserAction("/post/downvote", "vote-message", "Vote sent.", postID)'
+                            id="downvote" class="downvote-arrow rounded">
                             <img src="/down_chevron.svg" alt=" " height="50" width="50"
                                 class="justify-content-center p-1">
                         </a>
@@ -135,14 +137,14 @@
                 <div class="container accept justify-content-center align-items-center">
                     <div class="row">
                         <div class="col my-2">
-                            <button onclick='acceptPostScript("accept", postID)' id="acceptpost" type="button"
-                                class="btn-universal">Accept</button>
+                            <button onclick='handleUserAction("/post/accept", "postMessage", "Post accepted!", postID)'
+                                id="acceptpost" type="button" class="btn-universal">Accept</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col my-2">
-                            <button onclick='acceptPostScript("delete", postID)' id="deletepost" type="button"
-                                class="btn-universal">Delete</button>
+                            <button onclick='handleUserAction("/post/delete", "postMessage", "Post deleted!", postID)'
+                                id="deletepost" type="button" class="btn-universal">Delete</button>
                             <h2 id="postMessage"></h2>
                         </div>
                     </div>
@@ -192,10 +194,9 @@
 
 
 
-        <script src="../../scripts/voting-scripts.js"></script>
         <script src="../../scripts/comment-formula-script.js"></script>
         <script src="../../scripts/comment-send-script.js"></script>
-        <script src="../../scripts/post-auth-scripts.js"></script>
+        <script src="../../scripts/post-JSON-sender-script.js"></script>
         <script>Array.from(document.getElementsByClassName('reply-button')).forEach(
                 (element) => {
                     element.addEventListener('click', (e) => {
