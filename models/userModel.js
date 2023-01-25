@@ -1,3 +1,4 @@
+const Post = require('./postModel');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const { isEmail } = require('validator');
@@ -63,6 +64,11 @@ userSchema.methods.incrementPermissionLevel = async function (){
 		this.permLevel = this.permLevel + 1;
 	}
 	await this.save();
+}
+
+userSchema.methods.getPostsCount = async function () {
+	const count = await Post.countDocuments({ author_id: this._id, accepted_by: { $exists: true } });
+	return count
 }
 
 const User = mongoose.model('User', userSchema);
