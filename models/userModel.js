@@ -76,6 +76,12 @@ userSchema.methods.getAcceptancesCount = async function () {
 	return await Post.countDocuments({ accepted_by: this._id });
 }
 
+userSchema.methods.getVotesCount = async function () {
+	const upvotedPosts = await Post.countDocuments({ upVotes: this._id });
+	const downvotedPosts = await Post.countDocuments({ downVotes: this._id });
+	return upvotedPosts + downvotedPosts;
+}
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

@@ -25,8 +25,6 @@ const profile_get = async (req, res) => {
         res.sendStatus(500);
         console.log(e);
     }
-    
-    
 }
 
 const settings_get = (req, res) => {
