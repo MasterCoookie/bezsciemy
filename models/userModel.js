@@ -66,9 +66,14 @@ userSchema.methods.incrementPermissionLevel = async function (){
 	await this.save();
 }
 
+// returns count of ACCEPETED posts created by user
 userSchema.methods.getPostsCount = async function () {
-	const count = await Post.countDocuments({ author_id: this._id, accepted_by: { $exists: true } });
-	return count
+	return await Post.countDocuments({ author_id: this._id, accepted_by: { $exists: true } });
+}
+
+// returns count of all posts, that this user accepted
+userSchema.methods.getAcceptancesCount = async function () {
+	return await Post.countDocuments({ accepted_by: this._id });
 }
 
 const User = mongoose.model('User', userSchema);

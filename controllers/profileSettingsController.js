@@ -4,8 +4,23 @@ const profile_get = async (req, res) => {
     
     try {
         const user = await User.findById(req.session.user.id)
+
         const postsCount = await user.getPostsCount();
-        res.render('profileSettings/profile', { user: req.session.user, title: 'Profile' })
+
+        let acceptedPostsCount;
+        if(req.session.user.perm_lvl >= 2) {
+            acceptedPostsCount = user.getAcceptancesCount()
+        }
+
+        const votesCount = await user.getVotesCount();
+
+        res.render('profileSettings/profile', {
+            user: req.session.user,
+            title: 'Profile',
+            postsCount,
+            acceptedPostsCount,
+            votesCount
+        })
     } catch(e) {
         res.sendStatus(500);
         console.log(e);
