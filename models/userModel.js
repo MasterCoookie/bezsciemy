@@ -1,3 +1,4 @@
+const Post = require('./postModel');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const { isEmail } = require('validator');
@@ -63,6 +64,22 @@ userSchema.methods.incrementPermissionLevel = async function (){
 		this.permLevel = this.permLevel + 1;
 	}
 	await this.save();
+}
+
+// returns count of ACCEPETED posts created by user
+userSchema.methods.getAcceptedPostsCount = async function () {
+	return await Post.countDocuments({ author_id: this._id, accepted_by: { $exists: true } });
+}
+
+// returns count of all posts, that this user accepted
+userSchema.methods.getAcceptancesCount = async function () {
+	return await Post.countDocuments({ accepted_by: this._id });
+}
+
+userSchema.methods.getVotesCount = async function () {
+	const upvotedPosts = await Post.countDocuments({ upVotes: this._id });
+	const downvotedPosts = await Post.countDocuments({ downVotes: this._id });
+	return upvotedPosts + downvotedPosts;
 }
 
 const User = mongoose.model('User', userSchema);
