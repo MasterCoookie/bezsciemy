@@ -2,7 +2,7 @@ function handleUserAction(redirect, messageFieldID, successMessage, postID) {
     let request = new XMLHttpRequest();
     const data = JSON.stringify({ postID: postID });
 	// console.log(data.toString());
-		request.open('POST', redirect, true); 
+	request.open('POST', redirect, true); 
 	request.setRequestHeader('Content-Type', 'application/json');
 	request.addEventListener('load', (event) => {
 		const response = event.target;
@@ -11,8 +11,28 @@ function handleUserAction(redirect, messageFieldID, successMessage, postID) {
             if(redirect === "/post/upvote" || redirect === "/post/downvote") {
                 if (response.responseURL.indexOf('/auth/login') === -1) {
                     const response = JSON.parse(event.target.responseText);
-                    document.getElementById('vote-message').innerHTML = 'Vote sent.';
+                    
                     document.getElementById('vote-counter').innerHTML = response.votes;
+					
+					const vote_status = response.vote_status;
+					const arrow_highlight_class = "arrow-highlited";
+					if(vote_status === 1) {
+						document.getElementById('upvote').classList.add(arrow_highlight_class)
+						document.getElementById('downvote').classList.remove(arrow_highlight_class)
+
+						document.getElementById('vote-message').innerHTML = 'Vote sent.';
+					} else if(vote_status === -1) {
+						document.getElementById('upvote').classList.remove(arrow_highlight_class)
+						document.getElementById('downvote').classList.add(arrow_highlight_class)
+
+						document.getElementById('vote-message').innerHTML = 'Vote sent.';
+					} else {
+						document.getElementById('upvote').classList.remove(arrow_highlight_class)
+						document.getElementById('downvote').classList.remove(arrow_highlight_class)
+
+						document.getElementById('vote-message').innerHTML = 'Vote removed.';
+					}
+					
                 } else {
                     document.getElementById('vote-message').innerHTML =
                         'You have to be logged in first!.';
