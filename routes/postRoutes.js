@@ -28,5 +28,6 @@ router.post("/downvote", authMiddleware.require_login, postController.downvote_p
 router.put("/comment", upload.none(), commentController.comment_put);
 router.post("/accept", authMiddleware.require_redactor, postController.accept_post);
 router.post("/delete", authMiddleware.require_redactor, postController.delete_post);
+router.get("/vote_status", authMiddleware.require_login, postController.vote_status_get)
 
 module.exports = router;

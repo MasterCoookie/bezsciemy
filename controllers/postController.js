@@ -273,6 +273,20 @@ const delete_post = async (req, res) => {
 	}
 };
 
+const vote_status_get = async (req, res) => {
+	const post_id = req.body.postID;
+	
+	try {
+		const post = await Post.findById(post_id);
+		const vote = await post.getVote(req.user.id);
+
+		res.json({ vote });
+	} catch(e) {
+		console.log(e);
+		res.sendStatus(500);
+	}
+}
+
 module.exports = {
 	view_get,
 	create_get,
@@ -280,5 +294,6 @@ module.exports = {
 	upvote_post,
 	downvote_post,
 	accept_post,
-	delete_post
+	delete_post,
+	vote_status_get
 };
