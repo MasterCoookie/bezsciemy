@@ -67,7 +67,7 @@ userSchema.methods.incrementPermissionLevel = async function (){
 }
 
 // returns count of ACCEPETED posts created by user
-userSchema.methods.getPostsCount = async function () {
+userSchema.methods.getAcceptedPostsCount = async function () {
 	return await Post.countDocuments({ author_id: this._id, accepted_by: { $exists: true } });
 }
 
