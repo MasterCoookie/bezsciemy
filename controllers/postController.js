@@ -145,13 +145,19 @@ const view_get = async (req, res) => {
 		res.send('Invalid post!');
 	}*/
 
+	let vote_status = 0;
+	if(req.session.authenticated) {
+		vote_status = await post.getVote(req.session.user.id)
+	}
+
 	res.render('post/postView', {
 		post,
 		author_user,
 		accepted_user,
 		comments: comments_filled,
 		user: req.session.user,
-		title: post.title
+		title: post.title,
+		vote_status
 	});
 };
 
@@ -225,7 +231,8 @@ const upvote_post = async (req, res) => {
 	post.toggleUpVoteAndSave(req.session.user.id)
 		.then(async () => {
 			votes = await post.getSumOfVotes()
-			res.json({ votes  })
+			const vote_status = await post.getVote(req.session.user.id);
+			res.json({ votes, vote_status })
 		}).catch((err) => {
 			console.log(err);
 			res.sendStatus(500);
@@ -243,7 +250,8 @@ const downvote_post = async (req, res) => {
 	post.toggleDownVoteAndSave(req.session.user.id)
 		.then(async () => {
 			votes = await post.getSumOfVotes()
-			res.json({ votes })
+			const vote_status = await post.getVote(req.session.user.id);
+			res.json({ votes, vote_status })
 		}).catch((err) => {
 			console.log(err);
 			res.sendStatus(500);

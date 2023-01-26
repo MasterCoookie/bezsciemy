@@ -513,11 +513,13 @@ a[class="text_title_postTitle"]:hover{
 .downvote-arrow{
 	border: 2px solid #ffffff;
 	border-radius: 5px;
+	cursor: pointer;
 }
 
 .upvote-arrow{
 	border: 2px solid #ffffff;
 	border-radius: 5px;
+	cursor: pointer;
 }
 
 .application-form {
@@ -624,4 +626,12 @@ input[type=radio] {
 	--bs-accordion-btn-bg: rgba(255, 255, 255, 0);
 	--bs-accordion-active-color: black;
 	--bs-accordion-active-bg: White;
+}
+
+.arrow-highlited {
+	background-color: rgba(255, 255, 255, 0.5)
+}
+
+.arrow-highlited:hover {
+	background-color: rgba(255, 255, 255, 0.5) !important;
 }
