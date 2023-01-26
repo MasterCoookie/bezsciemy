@@ -7,7 +7,7 @@
                 <div class="container vote me-0 mt-0">
                     <div class="row">
                         <a onclick='handleUserAction("/post/upvote", "vote-message", "Vote sent.", postID)' id="upvote"
-                            class="upvote-arrow rounded px-1">
+                            class="upvote-arrow rounded px-1 <% if(vote_status === 1) { %>arrow-highlited<% } %>">
                             <img src="/up_chevron.svg" alt=" " height="50" width="50"
                                 class="justify-content-center p-1">
                         </a>
@@ -19,7 +19,7 @@
                     </div>
                     <div class="row">
                         <a onclick='handleUserAction("/post/downvote", "vote-message", "Vote sent.", postID)'
-                            id="downvote" class="downvote-arrow rounded">
+                            id="downvote" class="downvote-arrow rounded <% if(vote_status === -1) { %>arrow-highlited<% } %>">
                             <img src="/down_chevron.svg" alt=" " height="50" width="50"
                                 class="justify-content-center p-1">
                         </a>

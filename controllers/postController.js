@@ -145,13 +145,19 @@ const view_get = async (req, res) => {
 		res.send('Invalid post!');
 	}*/
 
+	let vote_status = 0;
+	if(req.session.authenticated) {
+		vote_status = await post.getVote(req.session.user.id)
+	}
+
 	res.render('post/postView', {
 		post,
 		author_user,
 		accepted_user,
 		comments: comments_filled,
 		user: req.session.user,
-		title: post.title
+		title: post.title,
+		vote_status
 	});
 };
 
@@ -278,7 +284,7 @@ const vote_status_get = async (req, res) => {
 	
 	try {
 		const post = await Post.findById(post_id);
-		const vote = await post.getVote(req.user.id);
+		const vote = await post.getVote(req.session.user.id);
 
 		res.json({ vote });
 	} catch(e) {
