@@ -15,15 +15,19 @@
     </div>
     <div class="row justify-content-center">
         <div class="col ">
-            <img class="content-image mx-auto d-block" src="/uploads/<%=post.debunk_images[0] %>">
-
+            <% if(post.debunk_images.length !=0){ %>
+                <img class="content-image mx-auto d-block" src="/uploads/<%=post.debunk_images[0] %>">
+                <% } %>
         </div>
     </div>
     <div class="row">
-        <div class="col"><h4>Votes: </h4></div>
-        <div class="col"></div><h4 id="vote-counter" class="fw-bold" style="color: #ffffff;">
+        <div class="col">
+            <h4>Votes: </h4>
+        </div>
+        <div class="col"></div>
+        <h4 id="vote-counter" class="fw-bold" style="color: #ffffff;">
             <%= post.upVotes.length - post.downVotes.length %>
-        </h4></div>
+        </h4>
     </div>
 </div>
-
+</div>
