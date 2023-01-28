@@ -5,7 +5,7 @@ const profile_get = async (req, res) => {
     try {
         const user = await User.findById(req.session.user.id)
 
-        const postsCount = await user.getPostsCount();
+        const postsCount = await user.getAcceptedPostsCount();
 
         let acceptedPostsCount;
         if(req.session.user.perm_lvl >= 2) {
