@@ -635,3 +635,25 @@ input[type=radio] {
 .arrow-highlited:hover {
 	background-color: rgba(255, 255, 255, 0.5) !important;
 }
+
+.pagination{
+	--bs-pagination-color: #ffffff;
+	--bs-pagination-bg: #181a1b;
+	--bs-pagination-border-color: #383d3f;
+	--bs-pagination-hover-color: #ffffff;
+	--bs-pagination-hover-bg: #2b3035;
+
+}
+.pagination-menu{
+	text-align: left;
+	background-color: rgba(255, 255, 255, 0.13);
+	backdrop-filter: blur(10px);
+	border: none;
+	border-radius: 20px;
+	position: relative;
+	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+	overflow: auto;
+	padding: 20px;
+	max-width: 290px;
+	max-height: 100px;
+}
