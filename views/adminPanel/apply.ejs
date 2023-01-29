@@ -15,11 +15,11 @@
         <form id='application-form'>
             <div class="row justify-content-center">
                 <div class="col-2 text-light">
-                    <input type="radio" id="admin" name="app" value="admin" required>
+                    <input type="radio" id="admin" name="role" value="admin" required>
                     <label>Admin</label>
                 </div>
                 <div class="col-2 text-light">
-                    <input type="radio" id="redaktor" name="app" value="redaktor">
+                    <input type="radio" id="redaktor" name="role" value="redaktor">
                     <label>Moderator</label>
                 </div>
             </div>
@@ -41,10 +41,13 @@
                 <!-- add alert -->
             </div>
         </form>
+        <h1 id="application-message"></h1>
 
     </div>
 </div>
+</body>
 
+</html>
 <!-- <div class="applyForm">
     <h2 class="text">BEZŚCIEMY Application Form</h2><br>
     <form>
@@ -55,12 +58,8 @@
         <textarea id="apptext" name="apptext" class="text desc-textbox"
                 placeholder="Enter the content of your application here"></textarea> <br>
             <button onclick='sendApplication()' id="sendapp" type="submit" class="btn-universal">Send</button>
-            <h1 id="application-message"></h1>
+            
         </form>
-    </div>
-
-    </body>
-
-    </html>
+    </div-->
 
     <script src="../../scripts/application-send-script.js"></script>

@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const Application = require('../models/applicationModel');
 
 const fill_applications = async (applications) => {
 	return await Promise.all(
@@ -24,11 +25,34 @@ const apply_get = (req, res) => {
 	res.render('adminPanel/apply', { user: req.session.user, title: 'Apply' });
 };
 
-const apply_post = (req, res) => {
-	res.sendStatus(501);
+const apply_post = async (req, res) => {
+	console.log(req.body);
+	const { role, apptext } = req.body; 
+	let application_perm_lvl;
+	if (role === 'redactor' || role === 'redaktor') {
+		application_perm_lvl = 2;
+	} else if (role === 'admin') {
+		application_perm_lvl = 3;
+	} else {
+		res.json({ msg: "incorrect role" });
+		return;
+	}
+	try{
+		const application = await Application.create({
+			applier_id: req.session.user.id,
+			application_perm_lvl,
+			content: apptext
+		});
+		res.json({ msg: 'added successfully' });
+
+	} catch (e) {
+		res.json({ msg: e });
+	}
+	//res.sendStatus(501);
 };
 
 const review_post = (req, res) => {
+	console.log(req.body);
 	res.sendStatus(501);
 };
 
