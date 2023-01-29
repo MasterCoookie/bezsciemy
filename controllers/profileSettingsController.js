@@ -9,7 +9,7 @@ const profile_get = async (req, res) => {
 
         let acceptedPostsCount;
         if(req.session.user.perm_lvl >= 2) {
-            acceptedPostsCount = user.getAcceptancesCount()
+            acceptedPostsCount = await user.getAcceptancesCount()
         }
 
         const votesCount = await user.getVotesCount();

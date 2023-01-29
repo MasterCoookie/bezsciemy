@@ -21,13 +21,13 @@
             <div class="col text">
                 <ul> <!--Dopisać statystyki-->
                     <li>
-                        <p>Number of votes: 420</p>
+                        <p>Number of votes: <%= locals.votesCount %></p>
                     </li>
                     <li>
-                        <p>Number of created posts: 69</p>
+                        <p>Number of created posts: <%= locals.postsCount %></p>
                     </li>
                     <li>
-                        <p>Number of approved posts: -1</p>
+                        <p>Number of approved posts: <%= locals.acceptedPostsCount %></p>
                     </li>
                 </ul>
             </div>
