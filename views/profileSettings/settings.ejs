@@ -3,30 +3,32 @@
         <h3 class="text">Your current email:</h3>
         <form name="emailform">
             <label for="newemail" class="text">Change your email here:</label><br>
-            <input type="email" id="newemail" name="newemail" 
-            placeholder="Write your new email here">
+            <input type="email" id="newemail" name="newemail" placeholder="Write your new email here">
             </input><br>
-            <button type="submit" id="sendnewemail">Change email</button>
+            <button onclick='sendForm("/auth/changeEmail", "emailform")' type="submit" id="sendnewemail">Change
+                email</button>
         </form>
         <form name="passwordform">
             <h3 class="text">Change your password</h3>
             <label for="oldpassword" class="text">Write your current password here:</label><br>
-            <input type="password" id="oldpassword" name="oldpassword" 
-            placeholder="Write your current password here">
+            <input type="password" id="oldpassword" name="oldpassword" placeholder="Write your current password here">
             </input><br>
             <label for="newpassword" class="text">Write your new password here:</label><br>
-            <input type="password" id="newpassword" name="newpassword" 
-            placeholder="Write your new password here">
+            <input type="password" id="newpassword" name="newpassword" placeholder="Write your new password here">
             </input><br>
             <label for="repeatpassword" class="text">Repeat your new password:</label><br>
-            <input type="password" id="repeatpassword" name="repeatpassword" 
-            placeholder="Repeat your new password">
+            <input type="password" id="repeatpassword" name="repeatpassword" placeholder="Repeat your new password">
             </input><br>
-            <button type="submit" id="sendnewpassword">Change password</button>
+            <button onclick='sendForm("/auth/changePassword", "passwordform")' type="submit" id="sendnewpassword">Change
+                password</button>
         </form>
+
+        <h1 id='message'></h1>
 
     </div>
 
-</body>
+    </body>
 
-</html>
+    </html>
+
+    <script src="../../scripts/form-send-script.js"></script>

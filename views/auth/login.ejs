@@ -1,64 +1,66 @@
 <%- include('../partials/head.ejs') %>
-<div class="vertical-center">
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    <div class="container-xl login-form mx-auto px-2">
-        <form id="loginForm" method="post" class="">
-            <div class="row py-3">
-                <div class="col">
-                    <h3 class="text">Please login into your account</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col px-5">
-                    <div class="textbox-label px-0">
-                        <label class="text" for="text loginInput">Username</label>
+    <div class="vertical-center">
+        <div class="background">
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="container-xl login-form mx-auto px-2">
+            <form id="loginForm" method="post" class="">
+                <div class="row py-3">
+                    <div class="col">
+                        <h3 class="text">Please login into your account</h3>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="login">
-                        <input type="text" placeholder="Login" id="loginInput" class="textbox" name="username">
+                <div class="row">
+                    <div class="col px-5">
+                        <div class="textbox-label px-0">
+                            <label class="text" for="text loginInput">Username</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row ">
-                <div class="col px-5">
-                    <div class="textbox-label px-0">
-                        <label class="text" for="text passwordInput">Password</label>
+                <div class="row">
+                    <div class="col">
+                        <div class="login">
+                            <input type="text" placeholder="Login" id="loginInput" class="textbox" name="username">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="password">
-                        <input type="password" placeholder="Password" id="passwordInput" class="textbox" name="password">
+                <div class="row ">
+                    <div class="col px-5">
+                        <div class="textbox-label px-0">
+                            <label class="text" for="text passwordInput">Password</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col py-2">
-                    <h2 id="message"></h2>
+                <div class="row">
+                    <div class="col">
+                        <div class="password">
+                            <input type="password" placeholder="Password" id="passwordInput" class="textbox"
+                                name="password">
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row py-4">
-                <div class="col">
-                    <button id="btn" type="submit" class="btn-universal">Log in</button>
+                <div class="row">
+                    <div class="col py-2">
+                        <h2 id="message"></h2>
+                    </div>
                 </div>
-            </div>
-            <div class="row py-4">
-                <div class="col">
-                    <a href="/auth/register" id="link" class="text forward">Register here</a>
+                <div class="row py-4">
+                    <div class="col">
+                        <button onclick="sendForm('/auth/login', 'loginForm')" id="btn" type="submit"
+                            class="btn-universal">Log in</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+                <div class="row py-4">
+                    <div class="col">
+                        <a href="/auth/register" id="link" class="text forward">Register here</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
 
     </div>
-
-</div>
     <!-- </div>
 
         <div class="background">
@@ -93,4 +95,4 @@
 
     </html>
 
-    <script src="../../scripts/login-script.js"></script>
+    <script src="../../scripts/form-send-script.js"></script>
