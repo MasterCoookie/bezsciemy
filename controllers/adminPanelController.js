@@ -34,8 +34,7 @@ const apply_post = async (req, res) => {
 	} else if (role === 'admin') {
 		application_perm_lvl = 3;
 	} else {
-		res.json({ msg: "incorrect role" });
-		return;
+		res.sendStatus(500).json({ msg: "incorrect role" });
 	}
 	try{
 		const application = await Application.create({
