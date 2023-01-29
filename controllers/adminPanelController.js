@@ -65,13 +65,39 @@ const review_get = async (req, res) => {
 	const review_id = req.query.id;
 
 	const applications_filled = await fill_applications(applications);
+	
+	try {
+		const application = applications_filled[0];
+        const user = await User.findById(application.applier_id);
 
-	res.render('adminPanel/review', {
-		user: req.session.user,
-		title: 'Review',
-		application: applications_filled[0],
-	});
+        const postsCount = await user.getAcceptedPostsCount();
+
+		let acceptedPostsCount;
+		if(application.application_perm_lvl >= 3) {
+            acceptedPostsCount = await user.getAcceptancesCount()
+        }
+
+        const votesCount = await user.getVotesCount();
+		
+		res.render('adminPanel/review', {
+			user: req.session.user,
+			title: 'Review',
+			application,
+			votesCount,
+			acceptedPostsCount,
+			postsCount,
+		});
+	}
+	catch(e) {
+        res.sendStatus(500);
+        console.log(e);
+    }
+
+
+	
 };
+
+
 
 module.exports = {
 	apply_get,

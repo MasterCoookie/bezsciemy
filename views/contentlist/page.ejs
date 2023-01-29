@@ -11,9 +11,24 @@
                             <% }); %>
                 </li>
             </ul>
-            <button id="previousPage" type="button"><</button>
-            <p>Current Page</p>
-            <button id="nextPage" type="button">></button>
+            <!-- highlight current page with  aria-current="page" and class="active"-->
+            <!-- dynamicaly change labels according to the current page +/-1 e.g. [Prevoius][3][_4_][5][Next] -->
+            <!-- ?make it work for Waiting room/Hall of fame? -->
+            <nav aria-label="..." >
+                <ul class="pagination justify-content-center mx-auto pagination-menu">
+                  <li class="page-item">
+                    <a class="page-link" href="#" id="previousPage">Previous</a>
+                  </li>
+                  <li class="page-item active" aria-current="page"><a class="page-link" href="/1">1</a></li>
+                  <li class="page-item" >
+                    <a class="page-link" href="/2">2</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="/3">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" id="nextPage">Next</a>
+                  </li>
+                </ul>
+              </nav>
         </div>
     </body>
 

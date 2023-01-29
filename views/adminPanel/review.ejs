@@ -54,14 +54,16 @@
             <div class="col">
                 <ul class="text"> <!--Dopisać statystyki-->
                     <li>
-                        <p>Number of votes:</p>
+                        <p>Number of votes: <%= votesCount %></p>
                     </li>
                     <li>
-                        <p>Number of created posts:</p>
+                        <p>Number of created posts: <%= postsCount %></p>
                     </li>
+                    <% if(locals.application_perm_lvl >= 3) {%>
                     <li>
                         <p>Number of approved posts:</p>
                     </li>
+                    <% } %>
                 </ul>
             </div>
         </div>

@@ -1,32 +1,112 @@
 <%- include('../partials/head.ejs') %>
-    <div>
-        <h3 class="text">Your current email:</h3>
-        <form name="emailform">
-            <label for="newemail" class="text">Change your email here:</label><br>
-            <input type="email" id="newemail" name="newemail" 
-            placeholder="Write your new email here">
-            </input><br>
-            <button type="submit" id="sendnewemail">Change email</button>
-        </form>
-        <form name="passwordform">
-            <h3 class="text">Change your password</h3>
-            <label for="oldpassword" class="text">Write your current password here:</label><br>
-            <input type="password" id="oldpassword" name="oldpassword" 
-            placeholder="Write your current password here">
-            </input><br>
-            <label for="newpassword" class="text">Write your new password here:</label><br>
-            <input type="password" id="newpassword" name="newpassword" 
-            placeholder="Write your new password here">
-            </input><br>
-            <label for="repeatpassword" class="text">Repeat your new password:</label><br>
-            <input type="password" id="repeatpassword" name="repeatpassword" 
-            placeholder="Repeat your new password">
-            </input><br>
-            <button type="submit" id="sendnewpassword">Change password</button>
-        </form>
 
+<div class="vertical-center">
+
+    <div class="background">
+        <div class="shape" ></div>
+        <div class="shape"style="top: 10%"></div>
     </div>
 
-</body>
+    <div class="container-md mx-auto login-form px-2 mx-auto">
+        <div class="row py-3">
+            <div class="col">
+                <h3 class="text loginTitle">Your current email:</h3>
+            </div>
+        </div>
+        <form name="emailform">
+            <div class="row">
+                <div class="col px-5">
+                    <label for="newemail" class="text registerLabel">Change your email here:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="email" id="newemail" name="newemail" 
+                    placeholder="Write your new email here" class="textbox"></input>
+                </div>
+            </div>
+            <div class="row py-4">
+                <div class="col">
+                    <button type="submit" id="sendnewemail" class="btn-universal">Change email</button>
+                </div>
+            </div>
+        </form>
+        <form name="passwordform">
+            <div class="row">
+                <div class="col px-5">
+                    <label for="oldpassword" class="text registerLabel">Write your current password here:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="password" id="oldpassword" name="oldpassword" 
+                    placeholder="Write your current password here" class="textbox"></input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col px-5">
+                    <label for="newpassword" class="text registerLabel">Write your new password here:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="password" id="newpassword" name="newpassword" 
+                    placeholder="Write your new password here" class="textbox"></input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col px-5">
+                    <label for="repeatpassword" class="text registerLabel">Repeat your new password:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="password" id="repeatpassword" name="repeatpassword" 
+                    placeholder="Repeat your new password" class="textbox"></input>
+                </div>
+            </div>
+            <div class="row py-4">
+                <div class="col">
+                    <button type="submit" id="sendnewpassword" class="btn-universal">Change password</button>
+                </div>
+            </div>
+        </form>
+    </div>
+<h1 id='message'></h1>
+</div>
 
-</html>
+<!-- <div>
+        <h3 class="text">Your current email:</h3>
+        <form name="emailform" id="emailForm">
+            <label for="newemail" class="text">Change your email here:</label><br>
+            <input type="email" id="newemail" name="newemail" placeholder="Write your new email here">
+            </input><br>
+            <button type="submit" id="sendnewemail">Change
+                email</button>
+        </form>
+        <form name="passwordform" id="passwordForm">
+            <h3 class="text">Change your password</h3>
+            <label for="oldpassword" class="text">Write your current password here:</label><br>
+            <input type="password" id="oldpassword" name="oldpassword" placeholder="Write your current password here">
+            </input><br>
+            <label for="newpassword" class="text">Write your new password here:</label><br>
+            <input type="password" id="newpassword" name="newpassword" placeholder="Write your new password here">
+            </input><br>
+            <label for="repeatpassword" class="text">Repeat your new password:</label><br>
+            <input type="password" id="repeatpassword" name="repeatpassword" placeholder="Repeat your new password">
+            </input><br>
+            <button type="submit" id="sendnewpassword">Change
+                password</button>
+        </form>
+
+    </div> -->
+
+    </body>
+
+    </html>
+
+    <script src="../../scripts/form-send-script.js"></script>
+
+    <script>formListener('passwordForm', '/auth/changePassword')</script>
+
+    <script>formListener('emailForm', '/auth/changeEmail')</script>

@@ -1,29 +1,48 @@
-<div class="container-xl post-preview my-3 mx-auto">
-    <div class="row px-4">
-        <div class="col">
-            <a href="/post/view?id=<%=post._id %>" name="title" class="text_title_postTitle">
-                <%= post.title %>
-            </a>
+<div class="container-md">
+    <div class="row ">
+        <div class="col-2 justify-content-end">
+            <div class="container-md vote text-center me-0 mt-3">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="text">Votes:</h5>
+                    </div>
+                    <div class="row mx-auto">
+                        <div class="col">
+                            <h5 id="vote-counter" class="fw-bold" style="color: #ffffff;">
+                                <%= post.upVotes.length - post.downVotes.length %>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row px-4">
-        <div class="col">
-            <p class="text debunk_desc text-truncate-container">
-                <%= post.debunk_desc %>
-            </p>
+        <div class="col-8 px-0">
+            <div class="container-md post-preview my-3 mx-auto">
+                <div class="row">
+                    <div class="col mx-4">
+                        <a href="/post/view?id=<%=post._id %>" name="title" class="text_title_postTitle">
+                            <%= post.title %>
+                        </a>
+                    </div>
+                </div>
+                <div class="row px-4">
+                    <div class="col">
+                        <p class="text debunk_desc text-truncate-container">
+                            <%= post.debunk_desc %>
+                        </p>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col ">
+                        <% if(post.debunk_images.length !=0){ %>
+                            <img class="content-image mx-auto d-block" src="/uploads/<%=post.debunk_images[0] %>">
+                            <% } %>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col ">
-            <img class="content-image mx-auto d-block" src="/uploads/<%=post.debunk_images[0] %>">
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col"><h4>Votes: </h4></div>
-        <div class="col"></div><h4 id="vote-counter" class="fw-bold" style="color: #ffffff;">
-            <%= post.upVotes.length - post.downVotes.length %>
-        </h4></div>
+        <div class="col-2"></div>
     </div>
 </div>
 
+</div>

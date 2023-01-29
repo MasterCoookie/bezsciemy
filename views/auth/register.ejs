@@ -1,92 +1,94 @@
 <%- include('../partials/head.ejs') %>
-<div class="vertical-center">
+    <div class="vertical-center">
 
     <div class="background">
         <div class="shape"></div>
-        <div class="shape"></div>
+        <div class="shape" style="top: 10%"></div>
     </div>
 
+        <div class="contaner-md login-form mx-auto px-2">
+            <form id="registerForm" method="post" class="">
 
-    <div class="contaner-md login-form mx-auto px-2">
-        <form id="registerForm" method="post" class="">
-
-        <div class="row py-3">
-            <div class="col">
-                <h3 class="text loginTitle">Please create your account</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col px-5">
-                <label for="emailInput" class="text registerLabel mx-auto">E-mail adress</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="email">
-                    <input type="email" placeholder="E-mail" id="emailInput" class="textbox" name="email">
+                <div class="row py-3">
+                    <div class="col">
+                        <h3 class="text loginTitle">Please create your account</h3>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col px-5">
-                <label for="loginInput" class="text registerLabel">Username</label>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="login">
-                    <input type="text" placeholder="Login" id="loginInput" class="textbox" name="username">
+                <div class="row">
+                    <div class="col px-5">
+                        <label for="emailInput" class="text registerLabel mx-auto">E-mail adress</label>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col px-5">
-                <label for="passwordInput" class="text registerLabel">Password</label>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="password">
-                    <input type="password" placeholder="Password" id="passwordInput" class="textbox" name="password">
+                <div class="row">
+                    <div class="col">
+                        <div class="email">
+                            <input type="email" placeholder="E-mail" id="emailInput" class="textbox" name="email">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col px-5">
-                <label for="textrepeatPasswordInput" class="text registerLabel">Repeat your password</label>
+                <div class="row">
+                    <div class="col px-5">
+                        <label for="loginInput" class="text registerLabel">Username</label>
 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="password">
-                    <input type="password" placeholder="Repeat password" id="repeatPasswordInput" class="textbox"
-                        name="repeatPassword">
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col py-2">
-                <h2 id="message"></h2>
+                <div class="row">
+                    <div class="col">
+                        <div class="login">
+                            <input type="text" placeholder="Login" id="loginInput" class="textbox" name="username">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col px-5">
+                        <label for="passwordInput" class="text registerLabel">Password</label>
 
-            </div>
-        </div>
-        <div class="row py-4">
-            <div class="col">
-                <button id="btn" type="submit" class="btn-universal">Sign up</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="password">
+                            <input type="password" placeholder="Password" id="passwordInput" class="textbox"
+                                name="password">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col px-5">
+                        <label for="textrepeatPasswordInput" class="text registerLabel">Repeat your password</label>
 
-            </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="password">
+                            <input type="password" placeholder="Repeat password" id="repeatPasswordInput"
+                                class="textbox" name="repeatPassword">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col py-2">
+                        <h2 id="message"></h2>
+
+                    </div>
+                </div>
+                <div class="row py-4">
+                    <div class="col">
+                        <!--<button id="btn" type="submit" class="btn-universal">Sign up</button>-->
+                        <button id="btn" type="submit" class="btn-universal">Sign up</button>
+
+                    </div>
+                </div>
+                <div class="row py-4">
+                    <div class="col">
+                        <a href="/auth/login" id="link" class="text forward text-shadow">Alredy have an account? Sign
+                            in</a>
+                    </div>
+                </div>
         </div>
-        <div class="row py-4">
-            <div class="col">
-                <a href="/auth/login" id="link" class="text forward text-shadow">Alredy have an account? Sign in</a>
-            </div>
-        </div>
+        </form>
     </div>
-    </form>
-</div>
 
 
     <!-- <form id="registerForm" method="post" class="login-form">
@@ -117,5 +119,6 @@
 
     </body>
 
-    <!--<script src="../../scripts/postEditor-send-script.js"></script>-->
-    <script src="../../scripts/register-script.js"></script>
+    <script src="../../scripts/form-send-script.js"></script>
+
+    <script>formListener('registerForm', '/auth/register')</script>

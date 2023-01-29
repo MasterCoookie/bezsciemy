@@ -5,7 +5,7 @@
         <div class="row text-center justify-content-start my-0">
             <div class="col-2 ">
                 <div class="container vote me-0 mt-0">
-                    <div class="row">
+                    <div class="row" style="cursor:pointer;">
                         <a onclick='handleUserAction("/post/upvote", "vote-message", "Vote sent.", postID)' id="upvote"
                             class="upvote-arrow rounded px-1 <% if(vote_status === 1) { %>arrow-highlited<% } %>">
                             <img src="/up_chevron.svg" alt=" " height="50" width="50"
@@ -17,7 +17,7 @@
                             <%= post.upVotes.length - post.downVotes.length %>
                         </h4> <!--Tu jest Licznik wyniku posta-->
                     </div>
-                    <div class="row">
+                    <div class="row" style="cursor:pointer;">
                         <a onclick='handleUserAction("/post/downvote", "vote-message", "Vote sent.", postID)'
                             id="downvote" class="downvote-arrow rounded <% if(vote_status === -1) { %>arrow-highlited<% } %>">
                             <img src="/down_chevron.svg" alt=" " height="50" width="50"
@@ -146,6 +146,7 @@
 
         <% } %>
     </div>
+
     <div class="row justify-content-center my-3">
         <div class="col-8 my-3">
             <div class="comment-background">
@@ -168,9 +169,12 @@
                         </div>
                     </form>
             <% }); %>
-        <button id="loadMoreComments" type="button">Load More</button>
+            <div class="d-grid col-6 mx-auto">
+                <button id="loadMoreComments" type="button" class="btn btn-light my-3">Load More</button>
+            </div>
         </div>
     </div>
+
 </div>
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
 
@@ -272,7 +276,7 @@
                 (element) => {
                     element.addEventListener('click', (event) => {
                         // console.log(event.target.form.id);
-                        sendReply(event, postID);
+                        sendComment(postID, event);
                     });
                 }
             );</script>

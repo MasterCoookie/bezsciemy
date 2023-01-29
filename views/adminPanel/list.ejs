@@ -9,10 +9,9 @@
     <div class="row">
         <div class="col">
             <ul class="text">
-                <li><a class="application px-2">Janek</a></li>
-                <li><a class="application px-2">Ma</a></li>
-                <li><a class="application px-2">Duże</a></li>
-                <li><a class="application px-2">Czoło</a></li>
+                <% locals.applications.forEach(application => { %>
+                    <li><a href="/administration/review?id=<%= application._id %>" class="application px-2"><%= application.applier.username %> for <% if(application.application_perm_lvl === 2) {%>Admin <%} else{ %>Redactor <% }%></a></li>
+                <% }); %> 
             </ul>
         </div>
     </div>

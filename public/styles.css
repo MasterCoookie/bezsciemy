@@ -75,12 +75,11 @@ button[class="btn-universal"] {
 	font-family: 'Poppins', sans-serif;
 	font-weight: 600;
 	font-size: 18px;
-	transition: width 0.2s ease-in-out;
+	transition: opacity 0.2s ease-in-out;
 }
 
 button:hover[class="btn-universal"]{
 	opacity: 0.8;
-	width: 82%;
 }
 
 .registerLabel {
@@ -297,9 +296,9 @@ img.content-image {
 }
 
 .create-header {
-	border-style: none none solid none;
-	border-width: 1px;
-	margin-top: 40px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 20px;
 }
 
 .creator {
@@ -309,7 +308,7 @@ img.content-image {
 	border: none;
 	border-radius: 20px;
 	padding: 20px;
-	padding-top: 0px;
+	padding-top: 15px;
 	padding-bottom: 30px;
 	position: absolute;
 	width: 40%;
@@ -478,7 +477,7 @@ button[id='downvote']:hover {
 	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
 	overflow: auto;
 	padding: 20px;
-	max-width: 800px;
+	max-width: 900px;
 }
 
 a[class="text_title_postTitle"]{
@@ -634,4 +633,27 @@ input[type=radio] {
 
 .arrow-highlited:hover {
 	background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.pagination{
+	--bs-pagination-color: #ffffff;
+	--bs-pagination-bg: #181a1b;
+	--bs-pagination-border-color: #383d3f;
+	--bs-pagination-hover-color: #ffffff;
+	--bs-pagination-hover-bg: #2b3035;
+
+}
+.pagination-menu{
+	text-align: left;
+	background-color: rgba(255, 255, 255, 0.13);
+	backdrop-filter: blur(10px);
+	border: none;
+	border-radius: 20px;
+	position: relative;
+	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+	overflow: auto;
+	padding: 20px;
+	max-width: 290px;
+	max-height: 100px;
+	margin-bottom: 20px;
 }
