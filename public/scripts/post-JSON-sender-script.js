@@ -1,7 +1,12 @@
-function handleUserAction(redirect, messageFieldID, successMessage, postID) {
+function handleUserAction(redirect, messageFieldID = "", successMessage ="", postID = -1, ifApproved = -1) {
     let request = new XMLHttpRequest();
-    const data = JSON.stringify({ postID: postID });
-	// console.log(data.toString());
+	var data;
+	if(redirect !== '/administration/review') {
+    data = JSON.stringify({ postID: postID });
+	}
+	else {
+	data = JSON.stringify({approve: ifApproved});
+	}
 	request.open('POST', redirect, true); 
 	request.setRequestHeader('Content-Type', 'application/json');
 	request.addEventListener('load', (event) => {
