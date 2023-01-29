@@ -1,7 +1,15 @@
-    function sendForm(path, formName) {
+function formListener(formName, path) {
+window.addEventListener('load', () => {
+   function sendForm(path) {
 		const request = new XMLHttpRequest();
-        const capturedForm = document.getElementById(formName);
 		const formData = new FormData(capturedForm);
+        if(path === '/auth/register') {
+            var firstPassword = formData.get('passwordInput');
+            var repeatedPassword = formData.get('repeatPasswordInput');
+            
+        }
+        var firstPassword = formData.get('passwordInput');
+		var repeatedPassword = formData.get('repeatPasswordInput');
 		request.addEventListener('load', (event) => {
 			const response = JSON.parse(event.target.responseText);
             if(path === '/auth/login') {
@@ -29,27 +37,39 @@
             }
 		});
 
-		request.addEventListener('error', (event) => {
-			document.getElementById('message').innerHTML = 'An error occured.';
-		});
+
+  
         if(path === '/auth/changePassword') {
             var password = formData.get("newpassword");
             var repeatPassword = formData.get('repeatpassword');
             if(password === repeatPassword) {
-                event.preventDefault();
                 request.open('POST', path, true);
                 request.send(formData);
             }
+            else {
+                document.getElementById('message').innerHTML = "Both passwords are not matching.";
+            }
         }
         else if(path === '/auth/register'){
-            console.log("register");
-            event.preventDefault();
+        var firstPassword = formData.get('passwordInput');
+		var repeatedPassword = formData.get('repeatPasswordInput');
+            if(firstPassword === repeatedPassword) {
             request.open('PUT', '/auth/register', true);
             request.send(formData);
+            }
+            else {
+                document.getElementById('message').innerHTML = "Both passwords are not matching.";
+            }
         }
         else {
-            event.preventDefault();
             request.open('POST', path, true);
             request.send(formData);
         }
 	}
+    const capturedForm = document.getElementById(formName);
+	capturedForm.addEventListener('submit', (event) => {
+		event.preventDefault();
+		sendForm(path);
+	});
+});
+}

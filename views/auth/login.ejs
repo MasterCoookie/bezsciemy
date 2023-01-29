@@ -47,8 +47,7 @@
                 </div>
                 <div class="row py-4">
                     <div class="col">
-                        <button onclick="sendForm('/auth/login', 'loginForm')" id="btn" type="submit"
-                            class="btn-universal">Log in</button>
+                        <button id="btn" type="submit" class="btn-universal">Log in</button>
                     </div>
                 </div>
                 <div class="row py-4">
@@ -96,3 +95,5 @@
     </html>
 
     <script src="../../scripts/form-send-script.js"></script>
+
+    <script>formListener('loginForm', '/auth/login')</script>

@@ -1,14 +1,14 @@
 <%- include('../partials/head.ejs') %>
     <div>
         <h3 class="text">Your current email:</h3>
-        <form name="emailform">
+        <form name="emailform" id="emailForm">
             <label for="newemail" class="text">Change your email here:</label><br>
             <input type="email" id="newemail" name="newemail" placeholder="Write your new email here">
             </input><br>
-            <button onclick='sendForm("/auth/changeEmail", "emailform")' type="submit" id="sendnewemail">Change
+            <button type="submit" id="sendnewemail">Change
                 email</button>
         </form>
-        <form name="passwordform">
+        <form name="passwordform" id="passwordForm">
             <h3 class="text">Change your password</h3>
             <label for="oldpassword" class="text">Write your current password here:</label><br>
             <input type="password" id="oldpassword" name="oldpassword" placeholder="Write your current password here">
@@ -19,7 +19,7 @@
             <label for="repeatpassword" class="text">Repeat your new password:</label><br>
             <input type="password" id="repeatpassword" name="repeatpassword" placeholder="Repeat your new password">
             </input><br>
-            <button onclick='sendForm("/auth/changePassword", "passwordform")' type="submit" id="sendnewpassword">Change
+            <button type="submit" id="sendnewpassword">Change
                 password</button>
         </form>
 
@@ -32,3 +32,7 @@
     </html>
 
     <script src="../../scripts/form-send-script.js"></script>
+
+    <script>formListener('passwordForm', '/auth/changePassword')</script>
+
+    <script>formListener('emailForm', '/auth/changeEmail')</script>
