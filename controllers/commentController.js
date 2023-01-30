@@ -35,11 +35,11 @@ const replies_get = async (father_id, page_number) => {
 		paginate = page_number * 10;
 		limit_ = 10;
 	}
-	try {
+	try {/*
 		replies_test = await Comment.find({
 			// for testing purposes
 			fatherID: father_id,
-		});
+		});*/
 		//console.log("replies" + replies_test)
 		replies = await Comment.find({
 			fatherID: father_id,
