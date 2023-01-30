@@ -138,7 +138,7 @@ const view_get = async (req, res) => {
 	const author_user = await User.findOne({ _id: post.author_id });
 	const accepted_user = await User.findOne({ _id: post.accepted_by });
 
-	console.log(author_user);
+	//console.log(author_user);
 
 	//TODO - unaccepted post technically should be visible too
 	/*if (!author_user || !accepted_user) {
@@ -273,7 +273,7 @@ const accept_post = async (req, res) => {
 const delete_post = async (req, res) => {
 	const post_id = req.body.postID;
 	try{
-		await Post.deleteOne({ _id: post_id })
+		await Post.findByIdAndDelete(post_id);
 		res.sendStatus(200);
 	} catch (e) {
 		console.log(e);

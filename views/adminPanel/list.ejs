@@ -10,7 +10,7 @@
         <div class="col">
             <ul class="text">
                 <% locals.applications.forEach(application => { %>
-                    <li><a href="/administration/review?id=<%= application._id %>" class="application px-2"><%= application.applier.username %> for <% if(application.application_perm_lvl === 2) {%>Admin <%} else{ %>Redactor <% }%></a></li>
+                    <li><a href="/administration/review?id=<%= application._id %>" class="application px-2"><%= application.applier.username %> for <% if(application.application_perm_lvl === 2) {%>Redactor <%} else{ %>Admin <% }%></a></li>
                 <% }); %> 
             </ul>
         </div>
@@ -22,7 +22,7 @@
     <ul>
         <li><a>Janek</a></li>
         <li><a>Ma</a></li>
-        <li><a>Duże</a></li>
+        <li><a>Duuuuuuuuuuuuuuże</a></li>
         <li><a>Czoło</a></li>
     </ul>
 </div> -->

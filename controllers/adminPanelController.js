@@ -5,7 +5,7 @@ const fill_applications = async (applications) => {
 	return await Promise.all(
 		applications.map(async (application) => {
 			// uncomment after getting form db
-			// aplication = aplication.toObject()
+			application = application.toObject() // tu było typo
 			let applier = await User.findById(application.applier_id);
 			applier = applier.toObject();
 			if (applier) {
@@ -52,11 +52,13 @@ const apply_post = async (req, res) => {
 
 const review_post = (req, res) => {
 	console.log(req.body);
+	//todo implement
 	res.sendStatus(501);
 };
 
+
 //tmp dummy data
-const applications = [
+/*const applications = [
 	{
 		_id: '6383ae11ffafdd02c0b8b56x',
 		application_perm_lvl: 2,
@@ -71,9 +73,12 @@ const applications = [
 		content:
 			'Admin dej admina pls, bede giga dobrym adminem i mam horego synka Fifonża :(( a dotego mnie wykastrowali, więc sobie nie zrobię kolejnego :((',
 	},
-];
+];*/
 
 const list_get = async (req, res) => {
+	const applications = await Application.find({
+			approved_by: { $exists: false }
+		})
 	const applications_filled = await fill_applications(applications);
 
 	console.log(applications_filled);
@@ -86,25 +91,24 @@ const list_get = async (req, res) => {
 
 const review_get = async (req, res) => {
 	const review_id = req.query.id;
-
-	const applications_filled = await fill_applications(applications);
-	
 	try {
-		const application = applications_filled[0];
-        const user = await User.findById(application.applier_id);
+		const application = await Application.findById(review_id);
+		
+        const applier = await User.findById(application.applier_id);
 
-        const postsCount = await user.getAcceptedPostsCount();
+        const postsCount = await applier.getAcceptedPostsCount();
 
 		let acceptedPostsCount;
 		if(application.application_perm_lvl >= 3) {
-            acceptedPostsCount = await user.getAcceptancesCount()
+            acceptedPostsCount = await applier.getAcceptancesCount()
         }
 
-        const votesCount = await user.getVotesCount();
+        const votesCount = await applier.getVotesCount();
 		
 		res.render('adminPanel/review', {
 			user: req.session.user,
 			title: 'Review',
+			applier,
 			application,
 			votesCount,
 			acceptedPostsCount,
