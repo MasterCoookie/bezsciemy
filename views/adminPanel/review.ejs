@@ -97,7 +97,7 @@ aria-hidden="true">
                 </p> 
             </div>
             <div class="modal-footer">
-                <button onclick = 'handleUserAction("/administration/review", "message", "Application approved!", -1, true)' class="btn btn-warning" id="approve_application">Yes</button>
+                <button onclick = 'handleUserAction("/administration/review", "message", "Application approved!",  applicationID, true)' class="btn btn-warning" id="approve_application">Yes</button>
                 <button class="btn btn-light btn-outline-secondary" data-bs-dismiss="modal"
                 aria-label="Close">No</button>
             </div>
@@ -121,7 +121,7 @@ aria-hidden="true">
                 </p> 
             </div>
             <div class="modal-footer">
-                <button onclick = 'handleUserAction("/administration/review", "message", "Application declined.", -1, false)' class="btn btn-warning" id="deny_application">Yes</button>
+                <button onclick = 'handleUserAction("/administration/review", "message", "Application declined.", applicationID, false)' class="btn btn-warning" id="deny_application">Yes</button>
                 <button class="btn btn-light btn-outline-secondary" data-bs-dismiss="modal"
                 aria-label="Close">No</button>
 
@@ -170,6 +170,8 @@ aria-hidden="true">
     </body>
 
     </html>
+
+    <script> let applicationID = "<%= application._id %>";</script>
 
     <script> let permissionLevel = '<%= application.application_perm_lvl %>'
         var role;

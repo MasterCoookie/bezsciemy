@@ -1,11 +1,11 @@
-function handleUserAction(redirect, messageFieldID = "", successMessage ="", postID = -1, ifApproved = -1) {
+function handleUserAction(redirect, messageFieldID , successMessage, ID = -1, ifApproved = -1) {
     let request = new XMLHttpRequest();
 	var data;
 	if(redirect !== '/administration/review') {
-    data = JSON.stringify({ postID: postID });
+    data = JSON.stringify({ postID: ID });
 	}
 	else {
-	data = JSON.stringify({approve: ifApproved});
+	data = JSON.stringify({applicationID: ID, approve: ifApproved});
 	}
 	request.open('POST', redirect, true); 
 	request.setRequestHeader('Content-Type', 'application/json');
@@ -53,5 +53,6 @@ function handleUserAction(redirect, messageFieldID = "", successMessage ="", pos
 				"An unexpected error occurred.";
 		}
 	});
-	request.send(data);
+	console.log(data);
+	//request.send(data);
 }
