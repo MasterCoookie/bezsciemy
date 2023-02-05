@@ -20,17 +20,19 @@ const modify_users = async (post_no_users, is_accepted) => {
 
 const acquire_posts = async (query_type, page_number)  => {
     let posts;
+    let posts_query;
     let total_posts_count = 0;
-    const paginate = page_number * 10;
+    const page_size = 10;
+    const paginate = page_number * page_size;
     try {
         if(query_type === 'main') {
             posts_query = Post.find({ accepted_by: { $exists: true } }).sort({ accepted_at: 'desc' });
-            total_posts_count = (await posts_query).length;
-            posts = await posts_query.clone().skip(paginate).limit(10);
-            posts = posts.map(post => post.toObject());
+            posts = (await posts_query.skip(paginate).limit(10)).map(post => post.toObject());
+            total_posts_count = (await posts_query.clone()).length;
         } else if(query_type === 'waiting_room')  {
-            posts = await Post.find({ accepted_by: { $exists: false } }).skip(paginate).limit(10);//TODO, order
-            posts = posts.map(post => post.toObject());
+            posts_query = Post.find({ accepted_by: { $exists: false } })//TODO, order
+            posts = (await posts_query.skip(paginate).limit(10)).map(post => post.toObject());
+            total_posts_count = (await posts_query.clone()).length;
         } else if(query_type === 'hall_of_fame') {
             posts = await Post.aggregate([
               {
@@ -54,15 +56,18 @@ const acquire_posts = async (query_type, page_number)  => {
                   }
                 }
               }]).sort({"grade": 'desc'})
+              total_posts_count = posts.length;
+              posts = posts.slice(page_number * page_size, (page_number + 1) * page_size);
         }
     } catch (err) {
         console.log(err);
     }
     // console.log(posts);
+    
     console.log(total_posts_count);
     posts = await modify_users(posts, query_type !== 'waiting_room');
     
-    return posts;
+    return [posts, total_posts_count];
 }
 
 const calculate_page_number = page_number => {
@@ -76,26 +81,32 @@ const calculate_page_number = page_number => {
 
 const main_get = async (req, res) => {
     let page_number = calculate_page_number(req.params.page_number);
-    const posts = await acquire_posts("main", page_number);
+    const posts_count_pair = await acquire_posts("main", page_number);
+    const posts = posts_count_pair[0];
+    const posts_count = posts_count_pair[1]; 
     
     // console.log(posts);
-    res.render('contentList/page', { posts, user: req.session.user, title: "" });
+    res.render('contentList/page', { posts, posts_count, user: req.session.user, title: "" });
 }
 
 const waiting_room_get = async (req, res) => {
     let page_number = calculate_page_number(req.params.page_number);
-    const posts = await acquire_posts("waiting_room", page_number);
+    const posts_count_pair = await acquire_posts("waiting_room", page_number);
+    const posts = posts_count_pair[0];
+    const posts_count = posts_count_pair[1]; 
     
     // console.log(posts);
-    res.render('contentList/page', { posts, user: req.session.user, title: "Waiting Room"  });
+    res.render('contentList/page', { posts, posts_count, user: req.session.user, title: "Waiting Room"  });
 }
 
 const hall_of_fame_get = async (req, res) => {
     let page_number = calculate_page_number(req.params.page_number);
-    const posts = await acquire_posts("hall_of_fame", page_number);
+    const posts_count_pair = await acquire_posts("hall_of_fame", page_number);
+    const posts = posts_count_pair[0];
+    const posts_count = posts_count_pair[1];
     
     // console.log(posts);
-    res.render('contentList/page', { posts, user: req.session.user, title: "Hall of Fame" });
+    res.render('contentList/page', { posts, posts_count, user: req.session.user, title: "Hall of Fame" });
 }
 
 module.exports = {
