@@ -86,7 +86,7 @@ const main_get = async (req, res) => {
     const posts_count = posts_count_pair[1]; 
     
     // console.log(posts);
-    res.render('contentList/page', { posts, posts_count, user: req.session.user, title: "" });
+    res.render('contentList/page', { posts, page_number: page_number + 1, user: req.session.user, title: "" });
 }
 
 const waiting_room_get = async (req, res) => {
@@ -96,7 +96,7 @@ const waiting_room_get = async (req, res) => {
     const posts_count = posts_count_pair[1]; 
     
     // console.log(posts);
-    res.render('contentList/page', { posts, posts_count, user: req.session.user, title: "Waiting Room"  });
+    res.render('contentList/page', { posts, page_number: page_number + 1, user: req.session.user, title: "Waiting Room"  });
 }
 
 const hall_of_fame_get = async (req, res) => {
@@ -106,7 +106,7 @@ const hall_of_fame_get = async (req, res) => {
     const posts_count = posts_count_pair[1];
     
     // console.log(posts);
-    res.render('contentList/page', { posts, posts_count, user: req.session.user, title: "Hall of Fame" });
+    res.render('contentList/page', { posts, page_number: page_number + 1, user: req.session.user, title: "Hall of Fame" });
 }
 
 module.exports = {
