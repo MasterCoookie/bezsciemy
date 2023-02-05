@@ -50,10 +50,22 @@ const apply_post = async (req, res) => {
 	//res.sendStatus(501);
 };
 
-const review_post = (req, res) => {
+const review_post = async (req, res) => {
 	console.log(req.body);
-	//todo implement
-	res.sendStatus(501);
+	const { applicationID, approve } = req.body;
+	let application = await Application.findById(applicationID)
+	if (approve) {
+		application.approveApplicationAndSave(req.session.user.id)
+	} else {
+		try{
+			await Application.findByIdAndDelete(applicationID);
+			res.sendStatus(200);
+		} catch (e) {
+			console.log(e);
+			res.send(500);
+		}
+	}
+	//res.sendStatus(501);
 };
 
 
@@ -119,9 +131,6 @@ const review_get = async (req, res) => {
         res.sendStatus(500);
         console.log(e);
     }
-
-
-	
 };
 
 
