@@ -1,4 +1,4 @@
-function handleUserAction(redirect, messageFieldID , successMessage, ID = -1, ifApproved = -1) {
+function handleUserAction(redirect, messageFieldID , successMessage, ID, ifApproved = -1) {
     let request = new XMLHttpRequest();
 	var data;
 	if(redirect !== '/administration/review') {
@@ -53,6 +53,5 @@ function handleUserAction(redirect, messageFieldID , successMessage, ID = -1, if
 				"An unexpected error occurred.";
 		}
 	});
-	console.log(data);
-	//request.send(data);
+	request.send(data);
 }
