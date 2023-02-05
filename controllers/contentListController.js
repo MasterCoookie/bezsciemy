@@ -20,10 +20,13 @@ const modify_users = async (post_no_users, is_accepted) => {
 
 const acquire_posts = async (query_type, page_number)  => {
     let posts;
+    let total_posts_count = 0;
     const paginate = page_number * 10;
     try {
         if(query_type === 'main') {
-            posts = await Post.find({ accepted_by: { $exists: true } }).skip(paginate).limit(10).sort({ accepted_at: 'desc' });
+            posts_query = Post.find({ accepted_by: { $exists: true } }).sort({ accepted_at: 'desc' });
+            total_posts_count = (await posts_query).length;
+            posts = await posts_query.clone().skip(paginate).limit(10);
             posts = posts.map(post => post.toObject());
         } else if(query_type === 'waiting_room')  {
             posts = await Post.find({ accepted_by: { $exists: false } }).skip(paginate).limit(10);//TODO, order
@@ -56,6 +59,7 @@ const acquire_posts = async (query_type, page_number)  => {
         console.log(err);
     }
     // console.log(posts);
+    console.log(total_posts_count);
     posts = await modify_users(posts, query_type !== 'waiting_room');
     
     return posts;
