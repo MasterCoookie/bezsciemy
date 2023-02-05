@@ -1,36 +1,83 @@
 <%- include('../partials/head.ejs') %>
 
-    
-        <div class="page">
-            <ul>
-                <li>
-                    <!--For each wczytujący posty jako postPreview-->
 
-                    <% posts.forEach(function(post){ %>
-                        <%- include('../partials/postPreview.ejs', {post: post}); %>
-                            <% }); %>
-                </li>
-            </ul>
-            <!-- highlight current page with  aria-current="page" and class="active"-->
-            <!-- dynamicaly change labels according to the current page +/-1 e.g. [Prevoius][3][_4_][5][Next] -->
-            <!-- ?make it work for Waiting room/Hall of fame? -->
-            <nav aria-label="..." >
-                <ul class="pagination justify-content-center mx-auto pagination-menu">
-                  <li class="page-item">
-                    <a class="page-link" href="#" id="previousPage">Previous</a>
-                  </li>
-                  <li class="page-item active" aria-current="page"><a class="page-link" href="/1">1</a></li>
-                  <li class="page-item" >
-                    <a class="page-link" href="/2">2</a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="/3">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" id="nextPage">Next</a>
-                  </li>
-                </ul>
-              </nav>
-        </div>
-    </body>
+  <div class="page">
+    <ul>
+      <li>
+        <!--For each wczytujący posty jako postPreview-->
 
-    </html>
-    
+        <% posts.forEach(function(post){ %>
+          <%- include('../partials/postPreview.ejs', {post: post}); %>
+            <% }); %>
+      </li>
+    </ul>
+    <!-- highlight current page with  aria-current="page" and class="active"-->
+    <!-- dynamicaly change labels according to the current page +/-1 e.g. [Prevoius][3][_4_][5][Next] -->
+    <!-- ?make it work for Waiting room/Hall of fame? -->
+    <nav aria-label="...">
+      <ul class="pagination justify-content-center mx-auto pagination-menu">
+        <% if(!pagination.is_left){%>
+          <li class="page-item">
+            <a class="page-link" href="<%=pagination.link%>/<% if(pagination.is_left)
+                      { %><%= " 1" %>
+              <%} else{%>
+                <%=(pagination.page_number - 1)%>
+                  <% } %>" id="previousPage">Previous
+            </a>
+          </li>
+          <%}%>
+            <li class="<% if(pagination.is_left)
+                  {%>page-item active<%}
+                  else{%>page-item<%
+                  }%>" aria-current="page">
+              <a class="page-link" href="<%=pagination.link%>/<%if(pagination.is_left){%><%=1%><%}
+                else if(pagination.is_right){%><%=pagination.page_number-2%><%}
+                else{%><%=(pagination.page_number-1)%><%}%>">
+                <%if(pagination.is_left) {%>
+                  <%=1%>
+                    <%}else if(pagination.is_right) {%><%=pagination.page_number-2%>
+                        <%}else {%><%=(pagination.page_number-1)%>
+                            <%}%>
+              </a>
+            </li>
+            <li class="<% if(!pagination.is_left && !pagination.is_right)
+            {%>page-item active<%}else
+            {%>page-item<%}%>">
+              <a class="page-link" href="<%=pagination.link%>/<% if(!pagination.is_left && !pagination.is_right)
+                {%><%=pagination.page_number%><% }else if(pagination.is_left)
+                {%><%= 2 %><% }else{ %><%=(pagination.page_number-1) %><% } %>">
+                <% if(!pagination.is_left && !pagination.is_right) {%>
+                  <%=pagination.page_number%>
+                    <% }else if(pagination.is_left) {%>
+                      <%=2 %>
+                        <% }else { %><%=(pagination.page_number-1) %>
+                            <% } %>
+              </a>
+            </li>
+            <li class="<% if(pagination.is_right){%>page-item active<%}else{%>page-item<%}%>"><a class="page-link" href="<%=pagination.link%>/<%if(pagination.is_right)
+                {%><%=pagination.page_number%><%}
+                else if(pagination.is_left)
+                {%><%=pagination.page_number+2%><%}
+                else
+                {%><%=(pagination.page_number+1)%><%}%>">
+                <%if(pagination.is_right){%>
+                  <%=pagination.page_number%>
+                    <%}else if(pagination.is_left){%>
+                      <%=pagination.page_number+2%>
+                        <%}else{%>
+                          <%=(pagination.page_number+1)%>
+                            <%}%>
+              </a></li>
+            <%if(!pagination.is_right){%>
+              <li class="page-item">
+                <a class="page-link" href="<%=pagination.link%>/<%if(pagination.is_right)
+                  {%><%=pagination.page_number%><%}
+                  else{%><%=(pagination.page_number + 1)%><%}%>" id="nextPage">Next</a>
+              </li>
+              <%}%>
+      </ul>
+    </nav>
+  </div>
+  </body>
+
+  </html>
