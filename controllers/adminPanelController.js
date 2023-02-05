@@ -53,8 +53,13 @@ const review_post = async (req, res) => {
 	const { applicationID, approve } = req.body;
 	let application = await Application.findById(applicationID)
 	if (approve) {
-		application.approveApplicationAndSave(req.session.user.id)
-		res.sendStatus(200);
+		try {
+			application.approveApplicationAndSave(req.session.user.id)
+			res.sendStatus(200);
+		} catch (e) {
+			console.log(e);
+			res.send(500);
+		}
 	} else {
 		try{
 			await Application.findByIdAndDelete(applicationID);
