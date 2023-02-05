@@ -24,11 +24,6 @@ applicationSchema.methods.approveApplicationAndSave = async function(_user){
     await this.save();
 }
 
-applicationSchema.methods.rejectApplicationAndSave = async function(_user){
-    // todo implement
-    await this.save();
-}
-
 const Application = mongoose.model('Application', applicationSchema);
 
 module.exports = Application;

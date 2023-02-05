@@ -15,7 +15,6 @@ const fill_applications = async (applications) => {
 			} else {
 				application.applier = 'deleted';
 			}
-
 			return application;
 		})
 	);
@@ -47,33 +46,30 @@ const apply_post = async (req, res) => {
 	} catch (e) {
 		res.json({ msg: e });
 	}
-	//res.sendStatus(501);
 };
 
-const review_post = (req, res) => {
+const review_post = async (req, res) => {
 	console.log(req.body);
-	//todo implement
-	res.sendStatus(501);
+	const { applicationID, approve } = req.body;
+	let application = await Application.findById(applicationID)
+	if (approve) {
+		try {
+			application.approveApplicationAndSave(req.session.user.id)
+			res.sendStatus(200);
+		} catch (e) {
+			console.log(e);
+			res.send(500);
+		}
+	} else {
+		try{
+			await Application.findByIdAndDelete(applicationID);
+			res.sendStatus(200);
+		} catch (e) {
+			console.log(e);
+			res.send(500);
+		}
+	}
 };
-
-
-//tmp dummy data
-/*const applications = [
-	{
-		_id: '6383ae11ffafdd02c0b8b56x',
-		application_perm_lvl: 2,
-		applier_id: '6383ae11ffafdd02c0b8b563',
-		content:
-			'Admin dej redaktora pls, bede giga dobrym redaktorem i mam horom curke pls :((. btw sprzedam Opla',
-	},
-	{
-		_id: '6383ae11ffafdd02c0b8b56z',
-		application_perm_lvl: 3,
-		applier_id: '6383af445323f013a20199ed',
-		content:
-			'Admin dej admina pls, bede giga dobrym adminem i mam horego synka Fifonża :(( a dotego mnie wykastrowali, więc sobie nie zrobię kolejnego :((',
-	},
-];*/
 
 const list_get = async (req, res) => {
 	const applications = await Application.find({
@@ -119,12 +115,7 @@ const review_get = async (req, res) => {
         res.sendStatus(500);
         console.log(e);
     }
-
-
-	
 };
-
-
 
 module.exports = {
 	apply_get,
