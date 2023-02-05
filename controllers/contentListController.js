@@ -86,7 +86,7 @@ const main_get = async (req, res) => {
     const posts = posts_count_pair[0];
     const posts_count = posts_count_pair[1]; 
 
-    const is_right = (posts_count - page_size * (page_number + 1)) < 0
+    const is_right = (posts_count - page_size * (page_number + 1)) <= 0
     const is_left = page_number === 0;
     
     // console.log(is_left);
@@ -99,6 +99,7 @@ const main_get = async (req, res) => {
         is_left,
         is_right,
         page_number: page_number + 1,
+        link: "",
       }
     });
 }
@@ -109,7 +110,7 @@ const waiting_room_get = async (req, res) => {
     const posts = posts_count_pair[0];
     const posts_count = posts_count_pair[1]; 
 
-    const is_right = (posts_count - page_size * (page_number + 1)) < 0
+    const is_right = (posts_count - page_size * (page_number + 1)) <= 0
     const is_left = page_number === 0;
     
     // console.log(is_left);
@@ -122,6 +123,7 @@ const waiting_room_get = async (req, res) => {
         is_left,
         is_right,
         page_number: page_number + 1,
+        link: "/waiting_room",
       }
     });
 }
@@ -132,7 +134,7 @@ const hall_of_fame_get = async (req, res) => {
     const posts = posts_count_pair[0];
     const posts_count = posts_count_pair[1]; 
 
-    const is_right = (posts_count - page_size * (page_number + 1)) < 0
+    const is_right = (posts_count - page_size * (page_number + 1)) <= 0
     const is_left = page_number === 0;
     
     // console.log(is_left);
@@ -145,6 +147,7 @@ const hall_of_fame_get = async (req, res) => {
         is_left,
         is_right,
         page_number: page_number + 1,
+        link: "/hall_of_fame",
       }
     });
 }
