@@ -82,6 +82,24 @@ userSchema.methods.getVotesCount = async function () {
 	return upvotedPosts + downvotedPosts;
 }
 
+userSchema.methods.setNewEmailAndSave = async function (_email){
+	this.email = _email
+	await this.save();
+}
+
+userSchema.methods.setNewPasswordAndSave = async function (_oldPwd, _newPwd, _repPwd){
+	if (await bcrypt.compare(_oldPwd, this.password)) {
+		if(_newPwd === _repPwd){
+			this.password = _newPwd
+			await this.save();
+		} else {
+			throw Error('Passwords do not match');
+		}
+	} else {
+		throw Error('Old password is incorrect');
+	}
+}
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
