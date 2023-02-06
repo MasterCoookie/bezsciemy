@@ -27,12 +27,11 @@ function formListener(formName, path) {
                         }    
                     }
                     else if(path === '/auth/changePassword' || path === '/auth/changeEmail') {
-                        if (response.status === 200) {
-                            document.getElementById('message').innerHTML = response.msg;
-                        }
-                        else {
-                            document.getElementById('message').innerHTML = 'Something went wrong.';
-                        }
+                        console.log(response.status);
+                        const toastUpdate = document.getElementById('updateToast');
+                        const toast = new bootstrap.Toast(toastUpdate)
+                        document.getElementById('update-message').innerHTML = response.msg;
+                        toast.show()
                     }
                 });
 

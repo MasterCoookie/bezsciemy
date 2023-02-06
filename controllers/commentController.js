@@ -12,8 +12,8 @@ const comments_get = async (post_id, page_number) => {
 			fatherID: { $exists: false },
 			postID: post_id,
 		})
-			.skip(paginate)
-			.limit(10); //.sort({ accepted_at: 'desc' });
+			//.skip(paginate)
+			//.limit(10); //.sort({ accepted_at: 'desc' });
 	} catch (err) {
 		console.log(err);
 	}
@@ -44,8 +44,8 @@ const replies_get = async (father_id, page_number) => {
 		replies = await Comment.find({
 			fatherID: father_id,
 		})
-			.skip(paginate)
-			.limit(limit_); //.sort({ accepted_at: 'desc' });
+			//.skip(paginate)
+			//.limit(limit_); //.sort({ accepted_at: 'desc' });
 		//console.log("replies 2" + replies)
 	} catch (err) {
 		console.log(err);
