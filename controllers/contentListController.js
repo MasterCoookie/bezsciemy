@@ -65,7 +65,7 @@ const acquire_posts = async (query_type, page_number)  => {
     }
     // console.log(posts);
     
-    console.log(total_posts_count);
+    // console.log(total_posts_count);
     posts = await modify_users(posts, query_type !== 'waiting_room');
     
     return [posts, total_posts_count];
