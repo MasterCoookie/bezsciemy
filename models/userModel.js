@@ -44,6 +44,7 @@ const userSchema = new Schema({
 userSchema.pre('save', async function(next) {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
+	console.log("slave")
     next();
 })
 
@@ -80,6 +81,24 @@ userSchema.methods.getVotesCount = async function () {
 	const upvotedPosts = await Post.countDocuments({ upVotes: this._id });
 	const downvotedPosts = await Post.countDocuments({ downVotes: this._id });
 	return upvotedPosts + downvotedPosts;
+}
+
+userSchema.methods.setNewEmailAndSave = async function (_email){
+	this.email = _email
+	await this.save();
+}
+
+userSchema.methods.setNewPasswordAndSave = async function (_oldPwd, _newPwd, _repPwd){
+	if (await bcrypt.compare(_oldPwd, this.password)) {
+		if(_newPwd === _repPwd){
+			this.password = _newPwd
+			await this.save();
+		} else {
+			throw Error('Passwords do not match');
+		}
+	} else {
+		throw Error('Old password is incorrect');
+	}
 }
 
 const User = mongoose.model('User', userSchema);
