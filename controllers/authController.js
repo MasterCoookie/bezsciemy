@@ -26,7 +26,7 @@ const login_post = async (req, res) => {
 				if (user) {
 					console.log('OK');
 					req.session.authenticated = true;
-					req.session.user = { username, id: user._id, perm_lvl: user.permLevel };
+					req.session.user = { username, id: user._id, perm_lvl: user.permLevel, email: user.email };
 					res.json(req.session);
 				} else {
 					res.status(403).json({ msg: 'Invalid credentials' });
