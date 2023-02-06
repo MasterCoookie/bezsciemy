@@ -130,7 +130,33 @@ aria-hidden="true">
         </div>
     </div>
 </div>
-<h1 id="message"></h1>
+<!-- <h1 id="message"></h1> -->
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+    <div id="reviewToast" class="toast text-bg-transparent" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header text-bg-secondary">
+          <strong class="me-auto">Apply</strong>
+          <small>just now</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            <p id="message"></p>
+        </div>
+    </div>
+</div>
+<script>
+    const toastTriggerReview = document.getElementById('deny_application')
+    const toastLiveReview = document.getElementById('reviewToast')
+
+    if (toastTriggerReview) {
+        toastTriggerReview.addEventListener('click', () => {
+        const toast = new bootstrap.Toast(toastLiveReview)
+
+        toast.show()
+    })
+    }
+</script>
 
 
 <!-- Button trigger modal -->

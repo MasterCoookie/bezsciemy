@@ -108,7 +108,7 @@ button:hover[class="btn-universal"]{
 	bottom: 60%;
 }
 
-#message {
+.loginMessage {
 	font-family: 'Poppins', sans-serif;
 	font-size: 14px;
 	color: tomato;

@@ -41,10 +41,36 @@
                 <!-- add alert -->
             </div>
         </form>
-        <h1 id="application-message"></h1>
+        <!-- <h1 id="application-message"></h1> -->
 
     </div>
 </div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+    <div id="applicationToast" class="toast text-bg-transparent" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header text-bg-secondary">
+          <strong class="me-auto">Apply</strong>
+          <small>just now</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            <p id="application-message"></p>
+        </div>
+    </div>
+</div>
+<script>
+    const toastTriggerApply = document.getElementById('sendapp')
+    const toastLiveApply = document.getElementById('applicationToast')
+
+    if (toastTriggerApply) {
+        toastTriggerApply.addEventListener('click', () => {
+        const toast = new bootstrap.Toast(toastLiveApply)
+
+        toast.show()
+    })
+    }
+</script>
 </body>
 
 </html>
